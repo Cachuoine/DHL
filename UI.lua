@@ -4,12 +4,40 @@
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
 local Stats = game:GetService("Stats")
 
 ---------------------------------------------------------------------
 --// PLAYER
 ---------------------------------------------------------------------
 local Player = Players.LocalPlayer
+
+---------------------------------------------------------------------
+--// CONFIG
+---------------------------------------------------------------------
+local Config = {
+    ToggleKey = Enum.KeyCode.RightControl, -- Hotkey hiện tại
+    WaitingForHotkey = false,              -- Đang chờ người dùng chọn phím
+    RainbowBorder = true,
+    OpenAnimation = true,
+    Blur = false,
+    MainWidth = 700,
+    MainHeight = 480,
+    MaxWidth = 1000,
+    MaxHeight = 650,
+}
+
+---------------------------------------------------------------------
+--// VARIABLES
+---------------------------------------------------------------------
+local CurrentPage = nil
+local CurrentButton = nil
+local FPS = 60
+local Frames = 0
+local LastTick = tick()
+local StartTime = tick()
+local Maximize = false
+local ChangeKeyButton
 
 ---------------------------------------------------------------------
 --// GUI
@@ -68,8 +96,12 @@ stroke.Color = Color3.fromRGB(0,170,255)
 stroke.Thickness = 1.2
 task.spawn(function()
     local hue = 0
-    while true do
-        stroke.Color = Color3.fromHSV(hue,1,1)
+    while gui.Parent do
+        if Config.RainbowBorder then
+            stroke.Color = Color3.fromHSV(hue,1,1)
+        else
+            stroke.Color = Color3.fromRGB(0,170,255)
+        end
         hue += 0.003
         if hue >= 1 then
             hue = 0
@@ -124,7 +156,11 @@ mainStroke.Thickness = 2
 task.spawn(function()
     local hue = 0
     while gui.Parent do
-        mainStroke.Color = Color3.fromHSV(hue, 1, 1)
+        if Config.RainbowBorder then
+            mainStroke.Color = Color3.fromHSV(hue,1,1)
+        else
+            mainStroke.Color = Color3.fromRGB(0,170,255)
+        end
         hue += 0.003
         if hue >= 1 then
             hue = 0
@@ -522,9 +558,6 @@ OpenSettings = function()
 	title.TextColor3 = Color3.new(1,1,1)
 	title.Text = "Settings"
 	local closeGui = Instance.new("TextButton")
-	closeGui.MouseButton1Click:Connect(function()
-    gui:Destroy()
-	end)
 	closeGui.Parent = pageContainer
 	closeGui.BackgroundTransparency = 1
 	closeGui.Position = UDim2.new(0,20,0,70)
@@ -533,10 +566,37 @@ OpenSettings = function()
 	closeGui.TextSize = 18
 	closeGui.TextXAlignment = Enum.TextXAlignment.Left
 	closeGui.TextColor3 = Color3.fromRGB(220,220,220)
-	closeGui.Text = "• Close GUI"
+	closeGui.Text = "• Please choose the key you want"
+
+	--------------------------------------------------
+	-- Change Hotkey
+	--------------------------------------------------
+	ChangeKeyButton = Instance.new("TextButton")
+	ChangeKeyButton.Parent = pageContainer
+	ChangeKeyButton.BackgroundTransparency = 1
+	ChangeKeyButton.Position = UDim2.new(0,350,0,70)
+	ChangeKeyButton.Size = UDim2.new(0,150,0,30)
+	ChangeKeyButton.Font = Enum.Font.Gotham
+	ChangeKeyButton.TextSize = 18
+	ChangeKeyButton.TextColor3 = Color3.fromRGB(220,220,220)
+	ChangeKeyButton.TextXAlignment = Enum.TextXAlignment.Left
+	ChangeKeyButton.Text =
+    	"["..Config.ToggleKey.Name.."]"
+	ChangeKeyButton.MouseButton1Click:Connect(function()
+    	Config.WaitingForHotkey = true
+    	ChangeKeyButton.Text =
+        "[...]"
+	end)
 end
 SelectButton(HomeBtn)
 OpenHome()
+
+---------------------------------------------------------------------
+--// GUI FUNCTIONS
+---------------------------------------------------------------------
+local function ToggleMain()
+    main.Visible = not main.Visible
+end
 
 ---------------------------------------------------------------------
 --// WINDOW CONTROLS
@@ -544,6 +604,32 @@ OpenHome()
 local btnSize = 28
 local spacing = 8
 local startX = main.Size.X.Offset - 18
+
+---------------------------------------------------------------------
+--// HOTKEY SYSTEM
+---------------------------------------------------------------------
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if input.UserInputType ~= Enum.UserInputType.Keyboard then
+        return
+    end
+    -- Đổi hotkey
+    if Config.WaitingForHotkey then 
+        if input.KeyCode == Enum.KeyCode.Unknown then
+            return
+        end
+        Config.ToggleKey = input.KeyCode
+        Config.WaitingForHotkey = false
+        if ChangeKeyButton then
+            ChangeKeyButton.Text =
+    			"["..Config.ToggleKey.Name.."]"
+        end
+        return
+    end
+    -- Mở / đóng GUI
+    if input.KeyCode == Config.ToggleKey then
+        ToggleMain()
+    end
+end)
 
 --------------------------------------------------
 -- Create Window Button
