@@ -24,18 +24,7 @@ for _, v in ipairs(Games) do
     end
 end
 if not gameScript then
-    local success, info = pcall(function()
-        return MarketplaceService:GetProductInfo(game.PlaceId)
-    end)
-    print("PlaceId:", game.PlaceId)
-    print("Success:", success)
-
-    if success and info then
-        print("Name:", info.Name)
-        gameName = info.Name
-    else
-        warn(info)
-    end
+    gameName = "Unsupported Game"
 end
 
 --------------------------------------------------
@@ -192,15 +181,6 @@ btn.TextSize = 20
 btn.TextColor3 = Color3.new(1,1,1)
 btn.BackgroundColor3 = Color3.fromRGB(0,170,255)
 Instance.new("UICorner",btn).CornerRadius = UDim.new(1,0)
-
---------------------------------------------------
--- Check Game
---------------------------------------------------
-if not gameScript then
-    btn.Text = "Unsupported Game"
-    btn.BackgroundColor3 = Color3.fromRGB(255,50,50)
-    btn.Active = false
-end
 
 --------------------------------------------------
 -- Animation
