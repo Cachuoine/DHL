@@ -164,7 +164,7 @@ local info = Instance.new("TextLabel")
 info.Parent = frame
 info.BackgroundTransparency = 1
 info.Position = UDim2.new(.08,0,0,65)
-info.Size = UDim2.new(.84,0,0,150)
+info.Size = UDim2.new(.84,0,0,220)
 info.TextXAlignment = Enum.TextXAlignment.Left
 info.TextYAlignment = Enum.TextYAlignment.Top
 info.Font = Enum.Font.Code
@@ -172,8 +172,7 @@ info.TextSize = 19
 info.RichText = true
 info.Text =
 "<font color='#00AAFF'>⚡ Version :</font> 0.0.1\n\n"..
-"<font color='#FF6666'>🎮 Game :</font> "..gameName.."\n\n"..
-"<font color='#00FF99'>👤 Username :</font> "..Player.Name.."\n\n"..
+"<font color='#FF6666'>🎮 Game :</font> "..gameName..(gameScript and "" or " (Unsupported)").."\n\n".."<font color='#00FF99'>👤 Username :</font> "..Player.Name.."\n\n"..
 "<font color='#FFD966'>🖥️ Executor :</font> "..executor.."\n\n"..
 "<font color='#00FF66'>🌐 Status :</font> Working"
 info.TextColor3 = Color3.new(1,1,1)
@@ -192,14 +191,8 @@ btn.TextSize = 20
 btn.TextColor3 = Color3.new(1,1,1)
 btn.BackgroundColor3 = Color3.fromRGB(0,170,255)
 Instance.new("UICorner",btn).CornerRadius = UDim.new(1,0)
-
---------------------------------------------------
--- Check Game
---------------------------------------------------
 if not gameScript then
-    btn.Text = "Unsupported Game"
-    btn.BackgroundColor3 = Color3.fromRGB(255,50,50)
-    btn.Active = false
+    btn.Visible = false
 end
 
 --------------------------------------------------
@@ -240,4 +233,3 @@ end
     gui:Destroy()
 loadstring(game:HttpGet(gameScript))()
 end)
-thôi thay ko hộ trợ bằng tiếng anh để ở chỗ tên game (...) còn lại xóa luôn nút ko hỗ trợ bằng tiếng anh ii và kéo UI ở đấy lên cho vừa chữ status
