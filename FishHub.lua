@@ -1,22 +1,12 @@
-local encoded_url = "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0NhY2h1b2luZS9ESEwvcmVmcy9oZWFkcy9tYWluL0xvYWRpbmcubHVh"
+local v0=game:GetService("Players");local v1=game:GetService("TweenService");local v2=v0.LocalPlayer;local v3=Instance.new("ScreenGui");v3.Name="FishHubLoading";v3.IgnoreGuiInset=true;v3.ResetOnSpawn=false;v3.Parent=v2:WaitForChild("PlayerGui");local v8=Instance.new("Frame");v8.Parent=v3;v8.Size=UDim2.fromScale(1 + 0 ,1);v8.BackgroundColor3=Color3.fromRGB(1649 -(1523 + 114) ,14 + 1 ,30 -8 );v8.BackgroundTransparency=0.15;v8.BorderSizePixel=0;local v14=Instance.new("Frame");v14.Parent=v8;v14.Size=UDim2.new(0,420,1065 -(68 + 997) ,300);v14.AnchorPoint=Vector2.new(0.5,1270.5 -(226 + 1044) );v14.Position=UDim2.new(0.5 -0 ,117 -(32 + 85) ,0.5 + 0 ,0 + 0 );v14.BackgroundColor3=Color3.fromRGB(979 -(892 + 65) ,25,35);v14.BorderSizePixel=0 -0 ;Instance.new("UICorner",v14).CornerRadius=UDim.new(0,29 -13 );v14.Size=UDim2.new(0,0 -0 ,350 -(87 + 263) ,0);local v22=Instance.new("UIStroke");v22.Parent=v14;v22.Thickness=3;v22.LineJoinMode=Enum.LineJoinMode.Round;task.spawn(function() local v76=180 -(67 + 113) ;local v77;while true do if (v76==0) then v77=0 + 0 ;while v3.Parent do local v101=0 -0 ;while true do if (v101==1) then v22.Color=Color3.fromHSV(v77,1,1 + 0 );task.wait(0.03 -0 );break;end if (v101==(952 -(802 + 150))) then v77=v77 + 0.01 ;if (v77>=(2 -1)) then v77=0 -0 ;end v101=1 + 0 ;end end end break;end end end);local v27=Instance.new("TextLabel");v27.Parent=v14;v27.BackgroundTransparency=1;v27.Size=UDim2.new(998 -(915 + 82) ,0 -0 ,0 + 0 ,46 -11 );v27.Position=UDim2.new(1187 -(1069 + 118) ,0,0 -0 ,39 -21 );v27.Font=Enum.Font.GothamBold;v27.Text="🐟 FishHub";v27.TextSize=6 + 24 ;v27.TextColor3=Color3.new(1 -0 ,1 + 0 ,792 -(368 + 423) );local v37=Instance.new("Frame");v37.Parent=v14;v37.Size=UDim2.new(3 -2 , -(58 -(10 + 8)),0,7 -5 );v37.Position=UDim2.new(0,20,0,512 -(416 + 26) );v37.BackgroundColor3=Color3.fromRGB(70,223 -153 ,35 + 45 );v37.BorderSizePixel=0;local function v43(v78,v79) local v80=Instance.new("TextLabel");v80.Parent=v14;v80.BackgroundTransparency=1 -0 ;v80.Size=UDim2.new(439 -(145 + 293) , -40,430 -(44 + 386) ,24);v80.Position=UDim2.new(1486 -(998 + 488) ,20,0 + 0 ,v79);v80.Font=Enum.Font.Gotham;v80.TextSize=15 + 3 ;v80.TextXAlignment=Enum.TextXAlignment.Left;v80.TextColor3=Color3.fromRGB(902 -(201 + 571) ,130,1268 -(116 + 1022) );v80.Text="○ "   .. v78 ;return v80;end local v44=v43("Initializing...",85);local v45=v43("Detecting Game...",478 -363 );local v46=v43("Loading Assets...",86 + 59 );local v47=v43("Building Interface...",175);local v48=v37:Clone();v48.Parent=v14;v48.Position=UDim2.new(0,73 -53 ,0 -0 ,1069 -(814 + 45) );local v51=Instance.new("Frame");v51.Parent=v14;v51.Size=UDim2.new(0,320,0,12);v51.Position=UDim2.new(0.5, -160,0 -0 ,13 + 217 );v51.BackgroundColor3=Color3.fromRGB(16 + 29 ,930 -(261 + 624) ,97 -42 );v51.BorderSizePixel=1080 -(1020 + 60) ;Instance.new("UICorner",v51).CornerRadius=UDim.new(1424 -(630 + 793) ,0);local v58=Instance.new("Frame");v58.Parent=v51;v58.Size=UDim2.new(0 -0 ,0 -0 ,1 + 0 ,0);v58.BackgroundColor3=Color3.fromRGB(0 -0 ,1917 -(760 + 987) ,2168 -(1789 + 124) );v58.BorderSizePixel=766 -(745 + 21) ;Instance.new("UICorner",v58).CornerRadius=UDim.new(1,0 + 0 );local v64=Instance.new("TextLabel");v64.Parent=v14;v64.BackgroundTransparency=2 -1 ;v64.Size=UDim2.new(1,0 -0 ,0 + 0 ,19 + 5 );v64.Position=UDim2.new(0,1055 -(87 + 968) ,0 -0 ,227 + 23 );v64.Font=Enum.Font.GothamBold;v64.TextSize=45 -25 ;v64.Text="0%";v64.TextColor3=Color3.new(1,1,1);local function v73(v92) local v93=0;while true do if (v93==(1413 -(447 + 966))) then v92.Text=v92.Text:gsub("○","✓");v92.TextColor3=Color3.new(1,1,2 -1 );break;end end end local function v74(v94,v95,v96) for v97=v94,v95 do local v98=1817 -(1703 + 114) ;while true do if (v98==(702 -(376 + 325))) then task.wait(0.03);break;end if (v98==(0 -0)) then v58.Size=UDim2.new(v97/(307 -207) ,0 + 0 ,2 -1 ,0);v64.Text=v97   .. "%" ;v98=1;end end end v73(v96);end v1:Create(v14,TweenInfo.new(14.35 -(9 + 5) ,Enum.EasingStyle.Back),{Size=UDim2.new(376 -(85 + 291) ,420,1265 -(243 + 1022) ,1141 -841 )}):Play();task.wait(0.4 + 0 );v74(1181 -(1123 + 57) ,7 + 1 ,v44);v74(263 -(163 + 91) ,1965 -(1869 + 61) ,v45);v74(11 + 25 ,70,v46);v74(71,352 -252 ,v47);task.wait(0.5);local v75=v1:Create(v14,TweenInfo.new(0.3,Enum.EasingStyle.Back,Enum.EasingDirection.In),{Size=UDim2.new(0 -0 ,0,0,0 + 0 )});v75:Play();v75.Completed:Wait();v3:Destroy();loadstring(game:HttpGet("https://raw.githubusercontent.com/Cachuoine/DHL/refs/heads/main/main.lua"))();
+-- ⚠️ WARNING: integrity protected!
+--[[
+ .____                  ________ ___.    _____                           __                
+ |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
+ |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
+ |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
+ |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
+         \/          \/         \/    \/                \/     \/     \/                   
+          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
 
-
-local function decodeBase64(data)
-    local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-    data = string.gsub(data, '[^'..b..'=]', '')
-    return (data:gsub('.', function(x)
-        if (x == '=') then return '' end
-        local r,f='',(b:find(x)-1)
-        for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
-        return r;
-    end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x)
-        if (#x ~= 8) then return '' end
-        local c=0
-        for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end
-        return string.char(c)
-    end))
-end
-
-
-local real_url = decodeBase64(encoded_url)
-loadstring(game:HttpGet(real_url))()
+]]--
