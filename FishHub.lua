@@ -54,5 +54,5 @@ local encryptedAgain = table.concat(chars)
 
 local original = XOR(encryptedAgain, key)
 
-print("Original:")
 print(original)
+print(url)
