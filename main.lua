@@ -2,6 +2,7 @@ local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local Player = Players.LocalPlayer
+local MarketplaceService = game:GetService("MarketplaceService")
 
 --------------------------------------------------
 -- Supported Games
@@ -21,6 +22,11 @@ for _, v in ipairs(Games) do
         gameScript = v.Script
         break
     end
+end
+if not gameScript then
+    pcall(function()
+        gameName = MarketplaceService:GetProductInfo(game.PlaceId).Name
+    end)
 end
 
 --------------------------------------------------
