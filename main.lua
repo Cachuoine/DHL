@@ -27,11 +27,7 @@ if not gameScript then
     local success, info = pcall(function()
         return MarketplaceService:GetProductInfo(game.PlaceId)
     end)
-    print("PlaceId:", game.PlaceId)
-    print("Success:", success)
-
     if success and info then
-        print("Name:", info.Name)
         gameName = info.Name
     else
         warn(info)
