@@ -41,7 +41,7 @@ end
 --------------------------------------------------
 -- Detect Executor
 --------------------------------------------------
-local executor = "Not Supported"
+local executor = "Unknown"
 pcall(function()
     if identifyexecutor then
         executor = identifyexecutor()
