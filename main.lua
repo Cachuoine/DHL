@@ -53,7 +53,6 @@ end)
 --------------------------------------------------
 -- GUI
 --------------------------------------------------
-
 local gui = Instance.new("ScreenGui")
 gui.Name = "FishHubLoader"
 gui.ResetOnSpawn = false
@@ -63,7 +62,6 @@ gui.Parent = Player.PlayerGui
 --------------------------------------------------
 -- Background
 --------------------------------------------------
-
 local bg = Instance.new("Frame")
 bg.Parent = gui
 bg.Size = UDim2.fromScale(1,1)
@@ -100,7 +98,6 @@ end)
 --------------------------------------------------
 -- Title
 --------------------------------------------------
-
 local title = Instance.new("TextLabel")
 title.Parent = frame
 title.BackgroundTransparency = 1
@@ -200,7 +197,7 @@ Instance.new("UICorner",btn).CornerRadius = UDim.new(1,0)
 -- Check Game
 --------------------------------------------------
 if not gameScript then
-    btn.Text = "Wrong Game"
+    btn.Text = "Unsupported Game"
     btn.BackgroundColor3 = Color3.fromRGB(255,50,50)
     btn.Active = false
 end
