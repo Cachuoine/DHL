@@ -176,6 +176,4 @@ local close = TweenService:Create(
 close:Play()
 close.Completed:Wait()
 gui:Destroy()
-loadstring(game:HttpGet(
-    "https://raw.githubusercontent.com/Cachuoine/DHL/refs/heads/main/main.lua"
-))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Cachuoine/DHL/refs/heads/main/main.lua"))()
