@@ -27,7 +27,11 @@ if not gameScript then
     local success, info = pcall(function()
         return MarketplaceService:GetProductInfo(game.PlaceId)
     end)
+    print("PlaceId:", game.PlaceId)
+    print("Success:", success)
+
     if success and info then
+        print("Name:", info.Name)
         gameName = info.Name
     else
         warn(info)
@@ -236,3 +240,4 @@ end
     gui:Destroy()
 loadstring(game:HttpGet(gameScript))()
 end)
+thôi thay ko hộ trợ bằng tiếng anh để ở chỗ tên game (...) còn lại xóa luôn nút ko hỗ trợ bằng tiếng anh ii và kéo UI ở đấy lên cho vừa chữ status
