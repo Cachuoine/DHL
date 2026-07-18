@@ -10,7 +10,7 @@ local Games = {
     {
         Name = "Evomon",
         PlaceId = 134381727982611,
-        Script = "https://raw.githubusercontent.com/FishHubStudio/main/refs/heads/main/UI.lua"
+        Script = "https://raw.githubusercontent.com/Cachuoine/DHL/refs/heads/main/UI.lua"
     }
 }
 local gameName = "Unknown"
