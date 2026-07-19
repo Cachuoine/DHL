@@ -15,12 +15,18 @@ local Player = Players.LocalPlayer
 ---------------------------------------------------------------------
 --// CONFIG
 ---------------------------------------------------------------------
+Config = {
+    ToggleKey = Enum.KeyCode.LeftControl,
+    GUIAnimation = true,
+    RememberSettings = true,
+    RainbowBorder = false,
+    Theme = "Dark",
+    AccentColor = Color3.fromRGB(0,170,255),
+    Transparency = 0.16,
+}
 local Config = {
-    ToggleKey = Enum.KeyCode.RightControl, -- Hotkey hiện tại
+    ToggleKey = Enum.KeyCode.LeftControl, -- Hotkey hiện tại
     WaitingForHotkey = false,              -- Đang chờ người dùng chọn phím
-    RainbowBorder = true,
-    OpenAnimation = true,
-    Blur = false,
     MainWidth = 700,
     MainHeight = 480,
     MaxWidth = 1000,
@@ -40,7 +46,7 @@ local Maximize = false
 local ChangeKeyButton
 
 ---------------------------------------------------------------------
---// GUI
+--// GUI CREATION
 ---------------------------------------------------------------------
 local gui = Instance.new("ScreenGui")
 gui.Name = "FishHubTopBar"
@@ -74,18 +80,32 @@ button.ZIndex = 50
 local logo = Instance.new("ImageLabel")
 logo.Parent = bar
 logo.BackgroundTransparency = 1
-logo.Size = UDim2.new(0,26,0,26)
-logo.Position = UDim2.new(0,8,0.5,-13)
-logo.Image = "rbxassetid://119254006379989"
-bar.Size = UDim2.new(0,520,0,36)
+logo.Size = UDim2.new(0,58,0,58)
+logo.Position = UDim2.new(0,6,0.5,-29)
+logo.Image = "rbxassetid://108115916614299"
+bar.Size = UDim2.new(0,350,0,40)
 bar.AnchorPoint = Vector2.new(0.5,0)
 bar.Position = UDim2.new(0.5,0,0,10)
 bar.BackgroundColor3 = Color3.fromRGB(12,16,30)
-bar.BackgroundTransparency = 1
+bar.BackgroundColor3 = Color3.fromRGB(18,22,35)
+bar.BackgroundTransparency = 0.22
 bar.BorderSizePixel = 0
 local corner = Instance.new("UICorner")
 corner.Parent = bar
 corner.CornerRadius = UDim.new(0,14)
+local barGlow = Instance.new("UIStroke")
+barGlow.Parent = bar
+barGlow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+barGlow.Color = Color3.fromRGB(255,255,255)
+barGlow.Transparency = 0.85
+barGlow.Thickness = 1
+local barGradient = Instance.new("UIGradient")
+barGradient.Parent = bar
+barGradient.Rotation = 90
+barGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0,Color3.fromRGB(40,45,60)),
+    ColorSequenceKeypoint.new(1,Color3.fromRGB(15,18,30))
+}
 
 --------------------------------------------------
 -- Rainbow Border
@@ -122,7 +142,7 @@ gradient.Color = ColorSequence.new{
 local label = Instance.new("TextLabel")
 label.Parent = bar
 label.Size = UDim2.new(1,-44,1,0)
-label.Position = UDim2.new(0,36,0,0)
+label.Position = UDim2.new(0,64,0,0)
 label.BackgroundTransparency = 1
 label.Font = Enum.Font.GothamBold
 label.TextXAlignment = Enum.TextXAlignment.Left
@@ -143,12 +163,26 @@ main.Parent = gui
 main.Size = UDim2.new(0,700,0,480)
 main.Position = UDim2.new(0.5,0,0.5,0)
 main.AnchorPoint = Vector2.new(0.5,0.5)
-main.BackgroundTransparency = 1
+main.BackgroundColor3 = Color3.fromRGB(20,24,36)
+main.BackgroundTransparency = 0.16
 main.BorderSizePixel = 0
 main.Visible = false
 local mainCorner = Instance.new("UICorner")
 mainCorner.Parent = main
 mainCorner.CornerRadius = UDim.new(0,18)
+local glassGradient = Instance.new("UIGradient")
+glassGradient.Parent = main
+glassGradient.Rotation = 90
+glassGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0,Color3.fromRGB(45,50,70)),
+    ColorSequenceKeypoint.new(1,Color3.fromRGB(18,22,35))
+}
+local highlight = Instance.new("UIStroke")
+highlight.Parent = main
+highlight.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+highlight.Color = Color3.fromRGB(255,255,255)
+highlight.Transparency = 0.87
+highlight.Thickness = 1
 local mainStroke = Instance.new("UIStroke")
 mainStroke.Parent = main
 mainStroke.Color = Color3.fromRGB(0,170,255)
@@ -178,6 +212,44 @@ header.Size = UDim2.new(1,0,0,46)
 header.Position = UDim2.new(0,0,0,0)
 header.BackgroundTransparency = 1
 header.BorderSizePixel = 0
+
+--------------------------------------------------
+-- Discord Icon (Main Window)
+--------------------------------------------------
+local discordButton = Instance.new("ImageButton")
+discordButton.Parent = header
+discordButton.BackgroundTransparency = 1
+discordButton.Size = UDim2.new(0,28,0,28)
+discordButton.Position = UDim2.new(0,12,0.5,-14)
+discordButton.Image = "rbxassetid://85459024706035"
+discordButton.ImageColor3 = Color3.fromRGB(88,101,242)
+discordButton.ScaleType = Enum.ScaleType.Fit
+local function OpenDiscord(url)
+    if syn and syn.open_url then
+        syn.open_url(url)
+        return
+    end
+    if open_url then
+        open_url(url)
+        return
+    end
+    if getgenv().open_url then
+        getgenv().open_url(url)
+        return
+    end
+    if setclipboard then
+        setclipboard(url)
+        print("Discord link copied.")
+        return
+    end
+    if toclipboard then
+        toclipboard(url)
+        print("Discord link copied.")
+    end
+end
+discordButton.MouseButton1Click:Connect(function()
+    OpenDiscord("https://discord.gg/2tTJxRk2ct")
+end)
 
 --------------------------------------------------
 -- Header Title
@@ -219,8 +291,10 @@ local content = Instance.new("Frame")
 content.Parent = main
 content.Position = UDim2.new(0,0,0,47)
 content.Size = UDim2.new(1,0,1,-90)
-content.BackgroundColor3 = Color3.fromRGB(15,18,30)
+content.BackgroundColor3 = Color3.fromRGB(18,22,35)
+content.BackgroundTransparency = 0.12
 content.BackgroundTransparency = 0
+content.BackgroundTransparency = 1
 content.BorderSizePixel = 0
 content.ZIndex = 0
 local contentCorner = Instance.new("UICorner")
@@ -231,6 +305,13 @@ content.ZIndex = 0
 local contentCorner = Instance.new("UICorner")
 contentCorner.Parent = content
 contentCorner.CornerRadius = UDim.new(0,18)
+local contentGradient = Instance.new("UIGradient")
+contentGradient.Parent = content
+contentGradient.Rotation = 90
+contentGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0,Color3.fromRGB(38,42,58)),
+    ColorSequenceKeypoint.new(1,Color3.fromRGB(18,22,35))
+}
 
 ---------------------------------------------------------------------
 --// DISCORD BAR
@@ -253,12 +334,10 @@ task.spawn(function()
             ColorSequenceKeypoint.new(0,Color3.fromHSV(h,1,1)),
             ColorSequenceKeypoint.new(1,Color3.fromHSV(h+0.3,1,1))
         }
-
         h += 0.01
         if h >= 1 then
             h = 0
         end
-
         RunService.RenderStepped:Wait()
     end
 end)
@@ -286,10 +365,7 @@ discordText.Font = Enum.Font.GothamBold
 discordText.TextScaled = true
 discordText.RichText = true
 discordText.TextXAlignment = Enum.TextXAlignment.Left
-discordText.Text =
-"<font color='#B45CFF'>My Discord: </font>"..
-"<font color='#4C9AFF'>https://discord.gg/2tTJxRk2ct</font>"..
-"<font color='#B45CFF'> ┆ CRE: DaoHuyLam</font>"
+discordText.RichText = true
 discordText.AutoButtonColor = false
 discordText.MouseButton1Click:Connect(function()
     if syn and syn.open_url then
@@ -334,19 +410,77 @@ end)
 --------------------------------------------------
 local sidebar = Instance.new("Frame")
 sidebar.Parent = content
+
+--------------------------------------------------
+-- Sidebar Border (Blue)
+--------------------------------------------------
+local sidebarBorder = Instance.new("Frame")
+sidebarBorder.Parent = content
+sidebarBorder.Position = UDim2.new(0,5,0,5)
+sidebarBorder.Size = UDim2.new(0,165,1,-10)
+sidebarBorder.BackgroundTransparency = 1
+sidebarBorder.ZIndex = 0
+local sideCorner = Instance.new("UICorner")
+sideCorner.Parent = sidebarBorder
+sideCorner.CornerRadius = UDim.new(0,15)
+local sideStroke = Instance.new("UIStroke")
+sideStroke.Parent = sidebarBorder
+sideStroke.Color = Color3.fromRGB(60,190,255)
+sideStroke.Thickness = 2.5
+sideStroke.Transparency = 0
 sidebar.Position = UDim2.new(0,0,0,0)
 sidebar.Size = UDim2.new(0,170,1,0)
-sidebar.BackgroundColor3 = Color3.fromRGB(18,18,18)
+local sidebarOriginal = sidebar.Position
+sidebar.Position = sidebarOriginal
+sidebar.BackgroundColor3 = Color3.fromRGB(22,26,40)
 sidebar.BorderSizePixel = 0
 local sidebarCorner = Instance.new("UICorner")
 sidebarCorner.Parent = sidebar
 sidebarCorner.CornerRadius = UDim.new(0,18)
+local sideGradient = Instance.new("UIGradient")
+sideGradient.Parent = sidebar
+sideGradient.Rotation = 90
+sideGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0,Color3.fromRGB(40,44,60)),
+    ColorSequenceKeypoint.new(1,Color3.fromRGB(20,22,32))
+}
+local sideStroke = Instance.new("UIStroke")
+sideStroke.Parent = sidebar
+sideStroke.Color = Color3.fromRGB(0,170,255)
+sideStroke.Transparency = 0.15
+sideStroke.Thickness = 1.5
+sideStroke.Thickness = 1
+local glow = Instance.new("UIStroke")
+glow.Parent = sidebarBorder
+glow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+glow.Color = Color3.fromRGB(0,170,255)
+glow.Thickness = 6
+glow.Transparency = 0.82
 
 ---------------------------------------------------
 -- PAGE CONTAINER (RIGHT SIDE)
 ---------------------------------------------------
 local pageContainer = Instance.new("Frame")
 pageContainer.Parent = content
+
+--------------------------------------------------
+-- Content Border (Purple)
+--------------------------------------------------
+local contentBorder = Instance.new("Frame")
+contentBorder.Parent = content
+contentBorder.Position = UDim2.new(0,175,0,5)
+contentBorder.Size = UDim2.new(1,-180,1,-10)
+contentBorder.BackgroundTransparency = 1
+contentBorder.ZIndex = 0
+local contentCorner = Instance.new("UICorner")
+contentCorner.Parent = contentBorder
+contentCorner.CornerRadius = UDim.new(0,15)
+local contentStroke = Instance.new("UIStroke")
+contentStroke.Parent = contentBorder
+contentStroke.Color = Color3.fromRGB(0,170,255)
+contentStroke.Thickness = 2.5
+contentStroke.Transparency = 0
+contentStroke.Thickness = 2
 pageContainer.Position = UDim2.new(0,175,0,0)
 pageContainer.Size = UDim2.new(1,-175,1,0)
 pageContainer.BackgroundTransparency = 1
@@ -377,7 +511,7 @@ local function CreateSideButton(text, y, image)
     btn.Parent = sidebar
     btn.Size = UDim2.new(1,-20,0,42)
     btn.Position = UDim2.new(0,10,0,y)
-    btn.BackgroundColor3 = Color3.fromRGB(28,28,28)
+    btn.BackgroundColor3 = Color3.fromRGB(30,34,48)
     btn.BorderSizePixel = 0
     btn.Text = ""
     btn.AutoButtonColor = false
@@ -421,10 +555,22 @@ icon.ScaleType = Enum.ScaleType.Fit
     lbl.TextColor3 = Color3.new(1,1,1)
     lbl.TextXAlignment = Enum.TextXAlignment.Left
 	btn.MouseEnter:Connect(function()
-    btn.BackgroundColor3 = Color3.fromRGB(42,42,42)
+    	TweenService:Create(
+        	btn,
+        	TweenInfo.new(0.2),
+        	{
+            	BackgroundColor3 = Color3.fromRGB(55,65,90)
+        	}
+    	):Play()
 	end)
 	btn.MouseLeave:Connect(function()
-    btn.BackgroundColor3 = Color3.fromRGB(28,28,28)
+    	TweenService:Create(
+        	btn,
+        	TweenInfo.new(0.2),
+        	{
+            	BackgroundColor3 = Color3.fromRGB(30,34,48)
+        	}
+    	):Play()
 	end)
     return btn
 end
@@ -547,55 +693,230 @@ end
 --------------------------------------------------
 OpenSettings = function()
 	ClearContent()
-	local title = Instance.new("TextLabel")
-	title.Parent = pageContainer
-	title.BackgroundTransparency = 1
-	title.Position = UDim2.new(0,20,0,20)
-	title.Size = UDim2.new(1,-40,0,35)
-	title.Font = Enum.Font.GothamBold
-	title.TextSize = 24
-	title.TextXAlignment = Enum.TextXAlignment.Left
-	title.TextColor3 = Color3.new(1,1,1)
-	title.Text = "Settings"
-	local closeGui = Instance.new("TextButton")
-	closeGui.Parent = pageContainer
-	closeGui.BackgroundTransparency = 1
-	closeGui.Position = UDim2.new(0,20,0,70)
-	closeGui.Size = UDim2.new(1,-40,0,30)
-	closeGui.Font = Enum.Font.Gotham
-	closeGui.TextSize = 18
-	closeGui.TextXAlignment = Enum.TextXAlignment.Left
-	closeGui.TextColor3 = Color3.fromRGB(220,220,220)
-	closeGui.Text = "• Please choose the key you want"
+	-- 1. ScrollingFrame
+	local Scroll = Instance.new("ScrollingFrame")
+	Scroll.Parent = pageContainer
+	Scroll.Position = UDim2.new(0,0,0,0)
+	Scroll.Size = UDim2.new(1,0,1,0)
+	Scroll.BackgroundTransparency = 1
+	Scroll.BorderSizePixel = 0
+	Scroll.CanvasSize = UDim2.new(0,0,0,950)
+	Scroll.ScrollBarThickness = 6
+	Scroll.AutomaticCanvasSize = Enum.AutomaticSize.None
+	local Layout = Instance.new("UIListLayout")
+	Layout.Parent = Scroll
+	Layout.Padding = UDim.new(0,16)
+	Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	Layout.SortOrder = Enum.SortOrder.LayoutOrder
+	-- 2. CreateSection()
+	local function CreateSection(text)
+    	local title = Instance.new("TextLabel")
+    	title.Parent = Scroll
+    	title.Size = UDim2.new(1,-40,0,32)
+    	title.BackgroundTransparency = 1
+    	title.Font = Enum.Font.GothamBold
+    	title.TextSize = 22
+    	title.TextXAlignment = Enum.TextXAlignment.Left
+    	title.TextColor3 = Color3.fromRGB(255,255,255)
+    	title.Text = text
+    	-- Line
+    	local line = Instance.new("Frame")
+    	line.Parent = Scroll
+    	line.Size = UDim2.new(1,-40,0,2)
+    	line.BackgroundColor3 = Color3.fromRGB(0,170,255)
+    	line.BorderSizePixel = 0
+    	Instance.new("UICorner",line).CornerRadius = UDim.new(1,0)
+    	local gradient = Instance.new("UIGradient")
+    	gradient.Parent = line
+    	gradient.Color = ColorSequence.new{
+        	ColorSequenceKeypoint.new(0,Color3.fromRGB(0,170,255)),
+        	ColorSequenceKeypoint.new(1,Color3.fromRGB(180,80,255))
+    	}
+    	local padding = Instance.new("Frame")
+    	padding.Parent = Scroll
+    	padding.Size = UDim2.new(1,-40,0,6)
+    	padding.BackgroundTransparency = 1
+	end
+	-- 3. CreateRow()
+	local function CreateRow(Name)
+    	local row = Instance.new("Frame")
+    	row.Parent = Scroll
+    	-- kích thước ô
+    	row.Size = UDim2.new(1,-50,0,38)
+    	-- màu nền ô
+    	row.BackgroundColor3 = Color3.fromRGB(30,35,50)
+    	row.BorderSizePixel = 0
+    	-- bo góc
+    	local corner = Instance.new("UICorner")
+    	corner.Parent = row
+    	corner.CornerRadius = UDim.new(0,10)
+    	-- viền
+    	local stroke = Instance.new("UIStroke")
+    	stroke.Parent = row
+    	stroke.Color = Color3.fromRGB(70,90,130)
+    	stroke.Transparency = 0.5
+    	stroke.Thickness = 1
+    	-- chữ bên trái
+    	local txt = Instance.new("TextLabel")
+    	txt.Parent = row
+    	txt.Size = UDim2.new(0.6,0,1,0)
+    	txt.Position = UDim2.new(0,15,0,0)
+    	txt.BackgroundTransparency = 1
+    	txt.Font = Enum.Font.GothamBold
+    	txt.TextSize = 16
+    	txt.TextXAlignment = Enum.TextXAlignment.Left
+    	txt.TextColor3 = Color3.fromRGB(240,240,240)
+    	txt.Text = Name
+   	 	return row
+	end
+		-- 4. CreateToggle()
+		local function CreateToggle(row,state,callback)
+    		local btn = Instance.new("TextButton")
+    		btn.Parent = row
+    		btn.Size = UDim2.new(0,60,0,24)
+			btn.AnchorPoint = Vector2.new(1,0.5)
+			btn.Position = UDim2.new(1,-15,0.5,0)
+    		btn.Text = state and "ON" or "OFF"
+    		btn.Font = Enum.Font.GothamBold
+    		btn.TextSize = 14
+    		btn.TextColor3 = Color3.new(1,1,1)
+    		btn.BorderSizePixel = 0
+			local btnCorner = Instance.new("UICorner")
+			btnCorner.Parent = btn
+			btnCorner.CornerRadius = UDim.new(0,8)
+			local btnStroke = Instance.new("UIStroke")
+			btnStroke.Parent = btn
+			btnStroke.Color = Color3.fromRGB(0,170,255)
+			btnStroke.Transparency = 0.5
+			btnStroke.Thickness = 1
+    		local function Refresh()
+				if state then
+    				btn.BackgroundTransparency = 1
+    				btn.TextColor3 = Color3.fromRGB(0,255,120)
+    				btn.Text = "◉ ON"
+				else
+    				btn.BackgroundTransparency = 1
+    				btn.TextColor3 = Color3.fromRGB(170,170,170)
+    				btn.Text = "◉ OFF"
+				end
+    		end
+    		Refresh()
+            btn.MouseButton1Click:Connect(function()
+                state = not state
+                Refresh()
 
-	--------------------------------------------------
-	-- Change Hotkey
-	--------------------------------------------------
-	ChangeKeyButton = Instance.new("TextButton")
-	ChangeKeyButton.Parent = pageContainer
-	ChangeKeyButton.BackgroundTransparency = 1
-	ChangeKeyButton.Position = UDim2.new(0,350,0,70)
-	ChangeKeyButton.Size = UDim2.new(0,150,0,30)
-	ChangeKeyButton.Font = Enum.Font.Gotham
-	ChangeKeyButton.TextSize = 18
-	ChangeKeyButton.TextColor3 = Color3.fromRGB(220,220,220)
-	ChangeKeyButton.TextXAlignment = Enum.TextXAlignment.Left
-	ChangeKeyButton.Text =
-    	"["..Config.ToggleKey.Name.."]"
+                if callback then
+                    callback(state)
+                end
+            end)
+        end
+	-- 5. CreateButton()
+	local function CreateButton(row,text)
+    	local btn=Instance.new("TextButton")
+    	btn.Parent=row
+    	btn.Size=UDim2.new(0,130,0,28)
+		btn.AnchorPoint = Vector2.new(1,0.5)
+		btn.Position = UDim2.new(1,-15,0.5,0)
+    	btn.BackgroundColor3=Color3.fromRGB(40,40,45)
+    	btn.Text=text
+    	btn.TextColor3=Color3.new(1,1,1)
+    	btn.Font=Enum.Font.GothamBold
+    	btn.TextSize=15
+    	Instance.new("UICorner",btn)
+    	return btn
+	end
+    -- 6. Bắt đầu tạo giao diện
+    CreateSection("⚙ General")
+	local row=CreateRow("Toggle Key")
+	ChangeKeyButton=CreateButton(row,"["..Config.ToggleKey.Name.."]")
 	ChangeKeyButton.MouseButton1Click:Connect(function()
     	Config.WaitingForHotkey = true
-    	ChangeKeyButton.Text =
-        "[...]"
+    	ChangeKeyButton.Text = "[ ... ]"
 	end)
+    row = CreateRow("GUI Animation")
+    CreateToggle(
+        row,
+        Config.GUIAnimation,
+        function(value)
+            Config.GUIAnimation = value
+        end
+    )
+	CreateSection("🎨 Appearance")
+	row=CreateRow("Rainbow Border")
+	CreateToggle(row,false)
+	row=CreateRow("Theme")
+	CreateButton(row,"Dark ▼")
+	row=CreateRow("Accent Color")
+	CreateButton(row,"Blue ▼")
 end
 SelectButton(HomeBtn)
 OpenHome()
 
 ---------------------------------------------------------------------
---// GUI FUNCTIONS
+--// GUI ANIMATION SYSTEM
 ---------------------------------------------------------------------
+local UIAnimating = false
+local function OpenGUI()
+    if UIAnimating then 
+        return 
+    end
+    if not Config.GUIAnimation then
+        main.Visible = true
+        main.Size = UDim2.new(0,700,0,480)
+        main.BackgroundTransparency = 0.16
+        return
+    end
+    UIAnimating = true
+    main.Visible = true
+    main.Size = UDim2.new(0,560,0,380)
+    main.BackgroundTransparency = 1
+    TweenService:Create(
+        main,
+        TweenInfo.new(
+            0.45,
+            Enum.EasingStyle.Quint,
+            Enum.EasingDirection.Out
+        ),
+        {
+            Size = UDim2.new(0,700,0,480),
+            BackgroundTransparency = 0.16
+        }
+    ):Play()
+    UIAnimating = false
+end
+local function CloseGUI()
+    if UIAnimating then 
+        return 
+    end
+    if not Config.GUIAnimation then
+        main.Visible = false
+        return
+    end
+    UIAnimating = true
+    local tween = TweenService:Create(
+        main,
+        TweenInfo.new(
+            0.35,
+            Enum.EasingStyle.Quint,
+            Enum.EasingDirection.In
+        ),
+        {
+            Size = UDim2.new(0,560,0,380),
+            BackgroundTransparency = 1
+        }
+    )
+    tween:Play()
+    tween.Completed:Wait()
+    main.Visible = false
+    main.Size = UDim2.new(0,700,0,480)
+    UIAnimating = false
+end
 local function ToggleMain()
-    main.Visible = not main.Visible
+    if main.Visible then
+        CloseGUI()
+    else
+        OpenGUI()
+    end
 end
 
 ---------------------------------------------------------------------
@@ -727,7 +1048,7 @@ noCorner.CornerRadius = UDim.new(1,0)
 -- Events
 --------------------------------------------------
 button.MouseButton1Click:Connect(function()
-    main.Visible = not main.Visible
+    ToggleMain()
 end)
 closeBtn.MouseButton1Click:Connect(function()
     confirm.Visible = true
@@ -739,7 +1060,7 @@ no.MouseButton1Click:Connect(function()
     confirm.Visible = false
 end)
 hideBtn.MouseButton1Click:Connect(function()
-    main.Visible = false
+    CloseGUI()
 end)
 
 ---------------------------------------------------------------------
@@ -756,6 +1077,9 @@ RunService.RenderStepped:Connect(function()
         lastTick = tick()
     end
 end)
+local executor = identifyexecutor and identifyexecutor() or "Unknown"
+local username = Player.Name
+local version = "v1.0.0"
 
 ---------------------------------------------------------------------
 --// UPDATE LOOP
@@ -788,11 +1112,20 @@ local hex = string.format(
     color.B * 255
 )
 label.Text = string.format(
-    "<font color='%s'>FishHub</font> | FPS: %d | Ping: %sms | Time: %s",
+    "<font color='%s'>FishHub</font> | FPS: %d | Ping: %sms  Time: %s",
     hex,
     fps,
     tostring(ping),
     timeString
+)
+discordText.Text = string.format(
+    "<font color='#4C9AFF'>◆ USER:</font> %s" ..
+    "<font color='#B45CFF'> ┆ ◆ EXECUTOR:</font> %s" ..
+    "<font color='#4C9AFF'> ┆ ◆ VERSION:</font> %s" ..
+    "<font color='#B45CFF'> ┆ ◆ CRE:</font> DaoHuyLam",
+    username,
+    executor,
+    version
 )
     task.wait(0.2)
 end
