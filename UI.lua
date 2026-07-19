@@ -20,7 +20,7 @@ local Config = {
     WaitingForHotkey = false,
     GUIAnimation = true,
     RememberSettings = true,
-    RainbowBorder = false,
+    RainbowBorder = true,
     Theme = "Dark",
     AccentColor = Color3.fromRGB(0,170,255),
     Transparency = 0.16,
@@ -34,11 +34,6 @@ local Config = {
 --// VARIABLES
 ---------------------------------------------------------------------
 local CurrentPage = nil
-local CurrentButton = nil
-local FPS = 60
-local Frames = 0
-local LastTick = tick()
-local StartTime = tick()
 local Maximize = false
 local ChangeKeyButton
 
@@ -83,7 +78,6 @@ logo.Image = "rbxassetid://108115916614299"
 bar.Size = UDim2.new(0,350,0,40)
 bar.AnchorPoint = Vector2.new(0.5,0)
 bar.Position = UDim2.new(0.5,0,0,10)
-bar.BackgroundColor3 = Color3.fromRGB(12,16,30)
 bar.BackgroundColor3 = Color3.fromRGB(18,22,35)
 bar.BackgroundTransparency = 0.22
 bar.BorderSizePixel = 0
@@ -289,14 +283,7 @@ content.Parent = main
 content.Position = UDim2.new(0,0,0,47)
 content.Size = UDim2.new(1,0,1,-90)
 content.BackgroundColor3 = Color3.fromRGB(18,22,35)
-content.BackgroundTransparency = 0.12
-content.BackgroundTransparency = 0
 content.BackgroundTransparency = 1
-content.BorderSizePixel = 0
-content.ZIndex = 0
-local contentCorner = Instance.new("UICorner")
-contentCorner.Parent = content
-contentCorner.CornerRadius = UDim.new(0,18)
 content.BorderSizePixel = 0
 content.ZIndex = 0
 local contentCorner = Instance.new("UICorner")
@@ -362,7 +349,6 @@ discordText.Font = Enum.Font.GothamBold
 discordText.TextScaled = true
 discordText.RichText = true
 discordText.TextXAlignment = Enum.TextXAlignment.Left
-discordText.RichText = true
 discordText.AutoButtonColor = false
 discordText.MouseButton1Click:Connect(function()
     if syn and syn.open_url then
@@ -427,8 +413,6 @@ sideStroke.Thickness = 2.5
 sideStroke.Transparency = 0
 sidebar.Position = UDim2.new(0,0,0,0)
 sidebar.Size = UDim2.new(0,170,1,0)
-local sidebarOriginal = sidebar.Position
-sidebar.Position = sidebarOriginal
 sidebar.BackgroundColor3 = Color3.fromRGB(22,26,40)
 sidebar.BorderSizePixel = 0
 local sidebarCorner = Instance.new("UICorner")
@@ -441,11 +425,22 @@ sideGradient.Color = ColorSequence.new{
     ColorSequenceKeypoint.new(0,Color3.fromRGB(40,44,60)),
     ColorSequenceKeypoint.new(1,Color3.fromRGB(20,22,32))
 }
-local sideStroke = Instance.new("UIStroke")
-sideStroke.Parent = sidebar
-sideStroke.Color = Color3.fromRGB(0,170,255)
+task.spawn(function()
+    local hue = 0
+    while sidebar.Parent do
+        if Config.RainbowBorder then
+            sideStroke.Color = Color3.fromHSV(hue,1,1)
+        else
+            sideStroke.Color = Color3.fromRGB(0,170,255) -- Xanh dương
+        end
+        hue += 0.003
+        if hue >= 1 then
+            hue = 0
+        end
+        RunService.RenderStepped:Wait()
+    end
+end)
 sideStroke.Transparency = 0.15
-sideStroke.Thickness = 1.5
 sideStroke.Thickness = 1
 local glow = Instance.new("UIStroke")
 glow.Parent = sidebarBorder
@@ -475,9 +470,8 @@ contentCorner.CornerRadius = UDim.new(0,15)
 local contentStroke = Instance.new("UIStroke")
 contentStroke.Parent = contentBorder
 contentStroke.Color = Color3.fromRGB(0,170,255)
-contentStroke.Thickness = 2.5
 contentStroke.Transparency = 0
-contentStroke.Thickness = 2
+contentStroke.Thickness = 2.5
 pageContainer.Position = UDim2.new(0,175,0,0)
 pageContainer.Size = UDim2.new(1,-175,1,0)
 pageContainer.BackgroundTransparency = 1
@@ -839,15 +833,19 @@ OpenSettings = function()
         end
     )
 	CreateSection("🎨 Appearance")
-	row=CreateRow("Rainbow Border")
-	CreateToggle(row,false)
+	row = CreateRow("Rainbow Border")
+	CreateToggle(
+	    row,
+	    Config.RainbowBorder,
+	    function(value)
+			Config.RainbowBorder = value
+	    end
+	)
 	row=CreateRow("Theme")
 	CreateButton(row,"Dark ▼")
 	row=CreateRow("Accent Color")
 	CreateButton(row,"Blue ▼")
 end
-SelectButton(HomeBtn)
-OpenHome()
 
 
 ---------------------------------------------------------------------
