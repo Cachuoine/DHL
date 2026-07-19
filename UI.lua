@@ -15,18 +15,15 @@ local Player = Players.LocalPlayer
 ---------------------------------------------------------------------
 --// CONFIG
 ---------------------------------------------------------------------
-Config = {
+local Config = {
     ToggleKey = Enum.KeyCode.LeftControl,
+    WaitingForHotkey = false,
     GUIAnimation = true,
     RememberSettings = true,
     RainbowBorder = false,
     Theme = "Dark",
     AccentColor = Color3.fromRGB(0,170,255),
     Transparency = 0.16,
-}
-local Config = {
-    ToggleKey = Enum.KeyCode.LeftControl, -- Hotkey hiện tại
-    WaitingForHotkey = false,              -- Đang chờ người dùng chọn phím
     MainWidth = 700,
     MainHeight = 480,
     MaxWidth = 1000,
@@ -852,6 +849,7 @@ end
 SelectButton(HomeBtn)
 OpenHome()
 
+
 ---------------------------------------------------------------------
 --// GUI ANIMATION SYSTEM
 ---------------------------------------------------------------------
@@ -918,6 +916,8 @@ local function ToggleMain()
         OpenGUI()
     end
 end
+SelectButton(HomeBtn)
+OpenHome()
 
 ---------------------------------------------------------------------
 --// WINDOW CONTROLS
