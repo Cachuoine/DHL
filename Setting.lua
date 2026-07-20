@@ -104,6 +104,8 @@ return function(container)
         Instance.new("UICorner", circle).CornerRadius = UDim.new(1, 0)
 
         local state = initialState
+        
+        -- Xử lý sự kiện click để đổi trạng thái nút gạt
         toggleBtn.MouseButton1Click:Connect(function()
             state = not state
             local ts = game:GetService("TweenService")
