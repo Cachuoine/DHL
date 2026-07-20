@@ -223,13 +223,13 @@ Update()
 callback(state)
 end)
 end
-CreateSetting("🌈 Rainbow Border", "Animated rainbow outline", 90, function(value)
+CreateSetting("🌈 Rainbow Border", "Animated rainbow outline", 175, function(value)
 FishHub.Config.RainbowBorder = value
 end, FishHub.Config.RainbowBorder)
-CreateSetting("✨ GUI Animation", "Open and close animation", 175, function(value)
+CreateSetting("✨ GUI Animation", "Open and close animation", 260, function(value)
 FishHub.Config.GUIAnimation = value
 end, FishHub.Config.GUIAnimation)
-CreateSetting("🔵 Border Glow", "Enable neon border effect", 260, function(value)
+CreateSetting("🔵 Border Glow", "Enable neon border effect", 345, function(value)
 FishHub.Config.BorderGlow = value
 end, FishHub.Config.BorderGlow)
 --------------------------------------------------
@@ -238,8 +238,8 @@ end, FishHub.Config.BorderGlow)
 local function CreateHotkeySetting()
 local card = Instance.new("Frame")
 card.Parent = page
-card.Position = UDim2.new(0,20,0,345)
-card.Size = UDim2.new(1,-40,0,75)
+card.Position = UDim2.new(0,20,0,90)
+    card.Size = UDim2.new(1,-40,0,75)
 card.BackgroundColor3 = Color3.fromRGB(25,30,45)
 card.BorderSizePixel = 0
 local corner = Instance.new("UICorner")
