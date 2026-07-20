@@ -1,12 +1,15 @@
 local TweenService =
 game:GetService("TweenService")
+
 local FishHub = getgenv().FishHub
 
-local page = FishHub.pageContainer
 
-if not page then
-    return
+if not FishHub.Config then
+    FishHub.Config = {}
 end
+
+
+local page = FishHub.pageContainer
 
 
 --------------------------------------------------
@@ -370,6 +373,38 @@ end)
 
 
 end
+
+CreateSetting(
+"🌈 Rainbow Border",
+"Animated rainbow outline",
+90,
+
+function(value)
+
+FishHub.Config.RainbowBorder =
+value
+
+end,
+
+FishHub.Config.RainbowBorder
+)
+
+
+
+CreateSetting(
+"✨ GUI Animation",
+"Open and close animation",
+175,
+
+function(value)
+
+FishHub.Config.GUIAnimation =
+value
+
+end,
+
+FishHub.Config.GUIAnimation
+)
 
 CreateSetting(
 "🔵 Border Glow",
