@@ -11,6 +11,9 @@ local Stats = game:GetService("Stats")
 --// PLAYER
 ---------------------------------------------------------------------
 local Player = Players.LocalPlayer
+getgenv().FishHub = {
+    Config = Config
+}
 
 ---------------------------------------------------------------------
 --// CONFIG
@@ -408,6 +411,7 @@ glow.Transparency = 0.82
 -- PAGE CONTAINER (RIGHT SIDE)
 ---------------------------------------------------
 local pageContainer = Instance.new("Frame")
+getgenv().FishHub.pageContainer = pageContainer
 pageContainer.Parent = content
 
 --------------------------------------------------
@@ -634,6 +638,7 @@ local function ClearContent()
         v:Destroy()
     end
 end
+getgenv().FishHub.ClearContent = ClearContent
 
 --------------------------------------------------
 -- Home Page
@@ -730,6 +735,7 @@ local function CreateDropdown(parent, button, options, callback)
     )
     CurrentDropdown = dropdown
 end
+getgenv().FishHub.CreateDropdown = CreateDropdown
 
 --------------------------------------------------
 -- THEME SYSTEM
@@ -805,6 +811,7 @@ local function ApplyTheme(theme)
         contentGradient.Enabled = false
     end
 end
+getgenv().FishHub.ApplyTheme = ApplyTheme
 
 ---------------------------------------------------------------------
 --// GUI ANIMATION SYSTEM
