@@ -44,108 +44,10 @@ local ChangeKeyButton
 --// GUI CREATION
 ---------------------------------------------------------------------
 local gui = Instance.new("ScreenGui")
-gui.Name = "FishHubTopBar"
+gui.Name = "FishHub"
 gui.ResetOnSpawn = false
 gui.IgnoreGuiInset = true
 gui.Parent = Player:WaitForChild("PlayerGui")
-
----------------------------------------------------------------------
---// TOP BAR
----------------------------------------------------------------------
---------------------------------------------------
--- Background
---------------------------------------------------
-local bar = Instance.new("Frame")
-bar.Parent = gui
-
---------------------------------------------------
--- Click Area
---------------------------------------------------
-local button = Instance.new("TextButton")
-button.Parent = bar
-button.Size = UDim2.fromScale(1,1)
-button.BackgroundTransparency = 1
-button.Text = ""
-button.AutoButtonColor = false
-button.ZIndex = 50
-
---------------------------------------------------
--- Logo
---------------------------------------------------
-local logo = Instance.new("ImageLabel")
-logo.Parent = bar
-logo.BackgroundTransparency = 1
-logo.Size = UDim2.new(0,58,0,58)
-logo.Position = UDim2.new(0,6,0.5,-29)
-logo.Image = "rbxassetid://108115916614299"
-bar.Size = UDim2.new(0,350,0,40)
-bar.AnchorPoint = Vector2.new(0.5,0)
-bar.Position = UDim2.new(0.5,0,0,10)
-bar.BackgroundColor3 = Color3.fromRGB(18,22,35)
-bar.BackgroundTransparency = 0.22
-bar.BorderSizePixel = 0
-local corner = Instance.new("UICorner")
-corner.Parent = bar
-corner.CornerRadius = UDim.new(0,14)
-local barGlow = Instance.new("UIStroke")
-barGlow.Parent = bar
-barGlow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-barGlow.Color = Color3.fromRGB(255,255,255)
-barGlow.Transparency = 0.85
-barGlow.Thickness = 1
-local barGradient = Instance.new("UIGradient")
-barGradient.Parent = bar
-barGradient.Rotation = 90
-barGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0,Color3.fromRGB(40,45,60)),
-    ColorSequenceKeypoint.new(1,Color3.fromRGB(15,18,30))
-}
-
---------------------------------------------------
--- Rainbow Border
---------------------------------------------------
-local stroke = Instance.new("UIStroke")
-stroke.Parent = bar
-stroke.Color = Color3.fromRGB(0,170,255)
-stroke.Thickness = 1.2
-task.spawn(function()
-    local hue = 0
-    while gui.Parent do
-        if Config.RainbowBorder then
-            stroke.Color = Color3.fromHSV(hue,1,1)
-        else
-            stroke.Color = Color3.fromRGB(0,170,255)
-        end
-        hue += 0.003
-        if hue >= 1 then
-            hue = 0
-        end
-        RunService.RenderStepped:Wait()
-    end
-end)
-
---------------------------------------------------
--- Gradient
---------------------------------------------------
-local gradient = Instance.new("UIGradient")
-gradient.Parent = bar
-gradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0,Color3.fromRGB(8,10,22)),
-    ColorSequenceKeypoint.new(1,Color3.fromRGB(18,25,45))
-}
-local label = Instance.new("TextLabel")
-label.Parent = bar
-label.Size = UDim2.new(1,-44,1,0)
-label.Position = UDim2.new(0,64,0,0)
-label.BackgroundTransparency = 1
-label.Font = Enum.Font.GothamBold
-label.TextXAlignment = Enum.TextXAlignment.Left
-label.TextScaled = true
-label.RichText = true
-label.TextColor3 = Color3.fromRGB(180,80,255)
-label.Text =
-"<font color='#B45CFF'>FishHub</font> <font color='#4C9AFF'>┆ Script Collection</font>"
-bar.Visible = false
 
 ---------------------------------------------------------------------
 --// OPEN LINE
@@ -162,8 +64,7 @@ lineCorner.Parent = openLine
 lineCorner.CornerRadius = UDim.new(1,0)
 local lineStroke = Instance.new("UIStroke")
 lineStroke.Parent = openLine
-lineStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-lineStroke.Thickness = 1.5
+lineStroke.Thickness = 2
 task.spawn(function()
     local hue = 0
     while openLine.Parent do
@@ -172,13 +73,10 @@ task.spawn(function()
         else
             lineStroke.Color = Color3.fromRGB(0,170,255)
         end
-
-        hue += 0.003
-
+        hue += Config.RainbowSpeed
         if hue >= 1 then
             hue = 0
         end
-
         RunService.RenderStepped:Wait()
     end
 end)
@@ -674,11 +572,18 @@ local OpenSupport
 local OpenSettings
 
 --------------------------------------------------
--- External Settings Loader
+-- LOAD SETTINGS SCRIPT
 --------------------------------------------------
-local SettingsLoader = loadstring(game:HttpGet(
-    "URL_SCRIPT_SETTING_CUA_BAN"
-))()
+OpenSettings = function()
+    ClearContent()
+    local SettingsURL = "https://raw.githubusercontent.com/Cachuoine/DHL/refs/heads/main/Setting.lua"
+    local success, result = pcall(function()
+        loadstring(game:HttpGet(SettingsURL))()
+    end)
+    if not success then
+        warn("Cannot load Settings:", result)
+    end
+end
 
 --------------------------------------------------
 -- Navigation
@@ -898,16 +803,6 @@ local function ApplyTheme(theme)
     end
     if contentGradient then
         contentGradient.Enabled = false
-    end
-end
-
----------------------------------------------------------------------
---// SETTINGS PAGE (External)
----------------------------------------------------------------------
-local SettingsLoader
-OpenSettings = function()
-    if SettingsLoader then
-        SettingsLoader(pageContainer, Config, ThemeObjects)
     end
 end
 
@@ -1171,13 +1066,6 @@ local hex = string.format(
     color.R * 255,
     color.G * 255,
     color.B * 255
-)
-label.Text = string.format(
-    "<font color='%s'>FishHub</font> | FPS: %d | Ping: %sms  Time: %s",
-    hex,
-    fps,
-    tostring(ping),
-    timeString
 )
 discordText.Text = string.format(
     "<font color='#4C9AFF'>◆ USER:</font> %s" ..
