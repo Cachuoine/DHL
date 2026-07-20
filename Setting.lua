@@ -12,32 +12,23 @@ local FishHub = getgenv().FishHub
 if not FishHub.Config then
     FishHub.Config = {}
 end
-
 ---------------------------------------------------------------------
 --// HOTKEY CONFIG
 ---------------------------------------------------------------------
-local HotkeyConfig = FishHub.HotkeyConfig
-
-if not HotkeyConfig then
-    HotkeyConfig = {
-        Key = Enum.KeyCode.LeftControl
-    }
-    FishHub.HotkeyConfig = HotkeyConfig
-end
+local HotkeyConfig = {
+    Key = Enum.KeyCode.LeftControl
+}
 FishHub.HotkeyConfig = HotkeyConfig
-
 ---------------------------------------------------------------------
 --// PAGE
 ---------------------------------------------------------------------
 local page = FishHub.pageContainer
-
 ---------------------------------------------------------------------
 --// CLEAR OLD CONTENT
 ---------------------------------------------------------------------
 for _,v in pairs(page:GetChildren()) do
     v:Destroy()
 end
-
 ---------------------------------------------------------------------
 --// TITLE
 ---------------------------------------------------------------------
@@ -51,7 +42,6 @@ title.Font = Enum.Font.GothamBold
 title.TextSize = 26
 title.TextColor3 = Color3.fromRGB(255,255,255)
 title.TextXAlignment = Enum.TextXAlignment.Left
-
 local subtitle = Instance.new("TextLabel")
 subtitle.Parent = page
 subtitle.BackgroundTransparency = 1
@@ -62,7 +52,6 @@ subtitle.Font = Enum.Font.Gotham
 subtitle.TextSize = 14
 subtitle.TextColor3 = Color3.fromRGB(160,160,180)
 subtitle.TextXAlignment = Enum.TextXAlignment.Left
-
 ---------------------------------------------------------------------
 --// CREATE SETTING CARD
 ---------------------------------------------------------------------
@@ -73,17 +62,14 @@ local function CreateSetting(name, description, y, callback, state)
     card.Size = UDim2.new(1,-40,0,75)
     card.BackgroundColor3 = Color3.fromRGB(25,30,45)
     card.BorderSizePixel = 0
-    
     local corner = Instance.new("UICorner")
     corner.Parent = card
     corner.CornerRadius = UDim.new(0,14)
-    
     local stroke = Instance.new("UIStroke")
     stroke.Parent = card
     stroke.Color = Color3.fromRGB(0,170,255)
     stroke.Transparency = 0.65
     stroke.Thickness = 1
-    
     ---------------------------------------------------------------------
     --// TITLE
     ---------------------------------------------------------------------
@@ -97,7 +83,6 @@ local function CreateSetting(name, description, y, callback, state)
     cardTitle.TextSize = 17
     cardTitle.TextColor3 = Color3.new(1,1,1)
     cardTitle.TextXAlignment = Enum.TextXAlignment.Left
-    
     ---------------------------------------------------------------------
     --// DESCRIPTION
     ---------------------------------------------------------------------
@@ -111,7 +96,6 @@ local function CreateSetting(name, description, y, callback, state)
     desc.TextSize = 13
     desc.TextColor3 = Color3.fromRGB(150,150,170)
     desc.TextXAlignment = Enum.TextXAlignment.Left
-    
     ---------------------------------------------------------------------
     --// SWITCH BACKGROUND
     ---------------------------------------------------------------------
@@ -119,11 +103,9 @@ local function CreateSetting(name, description, y, callback, state)
     switch.Parent = card
     switch.Size = UDim2.new(0,55,0,28)
     switch.Position = UDim2.new(1,-75,0.5,-14)
-    
     local switchCorner = Instance.new("UICorner")
     switchCorner.Parent = switch
     switchCorner.CornerRadius = UDim.new(1,0)
-    
     ---------------------------------------------------------------------
     --// CIRCLE
     ---------------------------------------------------------------------
@@ -131,12 +113,10 @@ local function CreateSetting(name, description, y, callback, state)
     circle.Parent = switch
     circle.Size = UDim2.new(0,22,0,22)
     circle.Position = UDim2.new(0,3,0.5,-11)
-    
     local circleCorner = Instance.new("UICorner")
     circleCorner.Parent = circle
     circleCorner.CornerRadius = UDim.new(1,0)
     circle.BackgroundColor3 = Color3.fromRGB(240,240,240)
-    
     ---------------------------------------------------------------------
     --// UPDATE
     ---------------------------------------------------------------------
@@ -149,9 +129,7 @@ local function CreateSetting(name, description, y, callback, state)
             TweenService:Create(circle, TweenInfo.new(.25), {Position = UDim2.new(0,3,0.5,-11)}):Play()
         end
     end
-    
     Update()
-    
     ---------------------------------------------------------------------
     --// CLICK
     ---------------------------------------------------------------------
@@ -160,26 +138,21 @@ local function CreateSetting(name, description, y, callback, state)
     click.BackgroundTransparency = 1
     click.Size = UDim2.new(1,0,1,0)
     click.Text = ""
-    
     click.MouseButton1Click:Connect(function()
         state = not state
         Update()
         callback(state)
     end)
 end
-
 CreateSetting("🌈 Rainbow Border", "Animated rainbow outline", 175, function(value)
     FishHub.Config.RainbowBorder = value
 end, FishHub.Config.RainbowBorder)
-
 CreateSetting("✨ GUI Animation", "Open and close animation", 260, function(value)
     FishHub.Config.GUIAnimation = value
 end, FishHub.Config.GUIAnimation)
-
 CreateSetting("🔵 Border Glow", "Enable neon border effect", 345, function(value)
     FishHub.Config.BorderGlow = value
 end, FishHub.Config.BorderGlow)
-
 ---------------------------------------------------------------------
 --// HOTKEY CARD
 ---------------------------------------------------------------------
@@ -190,16 +163,13 @@ local function CreateHotkeySetting()
     card.Size = UDim2.new(1,-40,0,75)
     card.BackgroundColor3 = Color3.fromRGB(25,30,45)
     card.BorderSizePixel = 0
-    
     local corner = Instance.new("UICorner")
     corner.Parent = card
     corner.CornerRadius = UDim.new(0,14)
-    
     local stroke = Instance.new("UIStroke")
     stroke.Parent = card
     stroke.Color = Color3.fromRGB(0,170,255)
     stroke.Transparency = .65
-    
     ---------------------------------------------------------------------
     --// TEXT
     ---------------------------------------------------------------------
@@ -213,7 +183,6 @@ local function CreateHotkeySetting()
     text.TextSize = 17
     text.TextColor3 = Color3.new(1,1,1)
     text.TextXAlignment = Enum.TextXAlignment.Left
-    
     local desc = Instance.new("TextLabel")
     desc.Parent = card
     desc.BackgroundTransparency = 1
@@ -224,7 +193,6 @@ local function CreateHotkeySetting()
     desc.TextSize = 13
     desc.TextColor3 = Color3.fromRGB(150,150,170)
     desc.TextXAlignment = Enum.TextXAlignment.Left
-    
     ---------------------------------------------------------------------
     --// KEY BUTTON
     ---------------------------------------------------------------------
@@ -236,35 +204,15 @@ local function CreateHotkeySetting()
     keyButton.TextColor3 = Color3.new(1,1,1)
     keyButton.Font = Enum.Font.GothamBold
     keyButton.TextSize = 14
-    keyButton.Text = "["..HotkeyConfig.Key.Name:upper().."]"
-    
+    keyButton.Text = "[LEFTCONTROL]"
     local keyCorner = Instance.new("UICorner")
     keyCorner.Parent = keyButton
     keyCorner.CornerRadius = UDim.new(0,10)
-    
     ---------------------------------------------------------------------
     --// CHANGE KEY
     ---------------------------------------------------------------------
-    local waiting = false
-    
-    keyButton.MouseButton1Click:Connect(function()
-        waiting = true
-        keyButton.Text = "[PRESS KEY]"
-    end)
-    
-    UserInputService.InputBegan:Connect(function(input, gameProcessed)
-
-    if gameProcessed then
-        return
-    end
-        if waiting then
-            if input.KeyCode ~= Enum.KeyCode.Unknown then
-                HotkeyConfig.Key = input.KeyCode
-                keyButton.Text = "["..input.KeyCode.Name:upper().."]"
-                waiting = false
-            end
-        end
-    end)
+	keyButton.MouseButton1Click:Connect(function()
+	    keyButton.Text = "[LEFTCONTROL]"
+	end)
 end
-
 CreateHotkeySetting()
