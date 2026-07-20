@@ -1,6 +1,11 @@
-local gui = game.Players.LocalPlayer.PlayerGui:WaitForChild("FishHub")
-OpenSettings = function()
-	ClearContent()
+local FH = getgenv().FishHub
+local Config = FH.Config
+local ClearContent = FH.ClearContent
+local pageContainer = FH.pageContainer
+local CreateDropdown = FH.CreateDropdown
+local ApplyTheme = FH.ApplyTheme
+local function OpenSettings = LoadSettingsPage
+	OpenSettings()
 	-- 1. ScrollingFrame
 	local Scroll = Instance.new("ScrollingFrame")
 	Scroll.Parent = pageContainer
@@ -222,3 +227,4 @@ OpenSettings = function()
    		end
 	)	
 end
+LoadSettingsPage()
