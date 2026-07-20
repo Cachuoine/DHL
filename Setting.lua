@@ -17,36 +17,7 @@ end
 --// HOTKEY CONFIG
 ---------------------------------------------------------------------
 local HotkeyConfig = FishHub.HotkeyConfig
-
-if not HotkeyConfig then
-    HotkeyConfig = {
-        Key = Enum.KeyCode.RightShift
-    }
-end
-
 FishHub.HotkeyConfig = HotkeyConfig
-
----------------------------------------------------------------------
---// HOTKEY SYSTEM
----------------------------------------------------------------------
-UserInputService.InputBegan:Connect(function(input)
-
-    if waiting then
-
-        if input.UserInputType == Enum.UserInputType.Keyboard then
-
-            if input.KeyCode ~= Enum.KeyCode.Unknown then
-
-                HotkeyConfig.Key = input.KeyCode
-
-                keyButton.Text = "["..input.KeyCode.Name:upper().."]"
-
-                waiting = false
-
-            end
-        end
-    end
-end)
 
 ---------------------------------------------------------------------
 --// PAGE
