@@ -4,6 +4,7 @@
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
+
 ---------------------------------------------------------------------
 --// FISHHUB
 ---------------------------------------------------------------------
@@ -14,10 +15,7 @@ end
 ---------------------------------------------------------------------
 --// HOTKEY CONFIG
 ---------------------------------------------------------------------
-local HotkeyConfig = {
-    Key = Enum.KeyCode.LeftControl
-}
-FishHub.HotkeyConfig = HotkeyConfig
+local HotkeyConfig = FishHub.HotkeyConfig
 ---------------------------------------------------------------------
 --// PAGE
 ---------------------------------------------------------------------
@@ -210,8 +208,25 @@ local function CreateHotkeySetting()
     ---------------------------------------------------------------------
     --// CHANGE KEY
     ---------------------------------------------------------------------
+	local waiting = false
 	keyButton.MouseButton1Click:Connect(function()
-	    keyButton.Text = "[LEFTCONTROL]"
+	    if waiting then
+	        return
+	    end
+	    waiting = true
+	    keyButton.Text = "[PRESS KEY]"
+	    local connection
+	    connection = UserInputService.InputBegan:Connect(function(input, gp)
+	        if gp then
+	            return
+	        end
+        	if input.UserInputType == Enum.UserInputType.Keyboard then
+	            HotkeyConfig.Key = input.KeyCode
+	            keyButton.Text = "[" .. input.KeyCode.Name:upper() .. "]"
+	            waiting = false
+	            connection:Disconnect()
+	        end
+	    end)
 	end)
 end
 CreateHotkeySetting()
