@@ -25,17 +25,23 @@ FishHub.HotkeyConfig = HotkeyConfig
 --// HOTKEY SYSTEM
 ---------------------------------------------------------------------
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if gameProcessed then
+
+    if input.UserInputType ~= Enum.UserInputType.Keyboard then
         return
     end
+
     if input.KeyCode == HotkeyConfig.Key then
+        
         local gui = Players.LocalPlayer.PlayerGui:FindFirstChild("FishHub")
+
         if gui then
             local main = gui:FindFirstChild("MainWindow")
+
             if main then
                 main.Visible = not main.Visible
             end
         end
+
     end
 end)
 
@@ -265,7 +271,11 @@ local function CreateHotkeySetting()
         keyButton.Text = "[PRESS KEY]"
     end)
     
-    UserInputService.InputBegan:Connect(function(input)
+    UserInputService.InputBegan:Connect(function(input, gameProcessed)
+
+    if gameProcessed then
+        return
+    end
         if waiting then
             if input.KeyCode ~= Enum.KeyCode.Unknown then
                 HotkeyConfig.Key = input.KeyCode
