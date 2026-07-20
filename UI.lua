@@ -19,11 +19,14 @@ local Config = {
     ToggleKey = Enum.KeyCode.LeftControl,
     WaitingForHotkey = false,
     GUIAnimation = true,
-    RememberSettings = true,
     RainbowBorder = true,
+    ShowFPS = true,
+    ShowPing = true,
+    ShowRuntime = true,
     Theme = "Dark",
-    AccentColor = Color3.fromRGB(0,170,255),
     Transparency = 0.16,
+    AnimationSpeed = 0.45,
+    RainbowSpeed = 0.003,
     MainWidth = 700,
     MainHeight = 480,
     MaxWidth = 1000,
@@ -142,6 +145,49 @@ label.RichText = true
 label.TextColor3 = Color3.fromRGB(180,80,255)
 label.Text =
 "<font color='#B45CFF'>FishHub</font> <font color='#4C9AFF'>┆ Script Collection</font>"
+bar.Visible = false
+
+---------------------------------------------------------------------
+--// OPEN LINE
+---------------------------------------------------------------------
+local openLine = Instance.new("Frame")
+openLine.Parent = gui
+openLine.Size = UDim2.new(0,550,0,6)
+openLine.Position = UDim2.new(0.5,0,0,3)
+openLine.AnchorPoint = Vector2.new(0.5,0)
+openLine.BackgroundColor3 = Color3.fromRGB(255,255,255)
+openLine.BorderSizePixel = 0
+local lineCorner = Instance.new("UICorner")
+lineCorner.Parent = openLine
+lineCorner.CornerRadius = UDim.new(1,0)
+local lineStroke = Instance.new("UIStroke")
+lineStroke.Parent = openLine
+lineStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+lineStroke.Thickness = 1.5
+task.spawn(function()
+    local hue = 0
+    while openLine.Parent do
+        if Config.RainbowBorder then
+            lineStroke.Color = Color3.fromHSV(hue,1,1)
+        else
+            lineStroke.Color = Color3.fromRGB(0,170,255)
+        end
+
+        hue += 0.003
+
+        if hue >= 1 then
+            hue = 0
+        end
+
+        RunService.RenderStepped:Wait()
+    end
+end)
+local lineButton = Instance.new("TextButton")
+lineButton.Parent = openLine
+lineButton.Size = UDim2.fromScale(1,1)
+lineButton.BackgroundTransparency = 1
+lineButton.Text = ""
+lineButton.AutoButtonColor = false
 
 ---------------------------------------------------------------------
 --// MAIN WINDOW
@@ -336,6 +382,19 @@ discordBox.Size = UDim2.new(1,-20,0,35)
 discordBox.BackgroundTransparency = 1
 discordBox.ClipsDescendants = true
 discordBox.ZIndex = 20
+local avatar = Instance.new("ImageLabel")
+avatar.Parent = discordBox
+avatar.Size = UDim2.new(0,28,0,28)
+avatar.Position = UDim2.new(0,6,0.5,-14)
+avatar.BackgroundTransparency = 1
+avatar.ScaleType = Enum.ScaleType.Fit
+avatar.ZIndex = 21
+local thumb = Players:GetUserThumbnailAsync(
+	Player.UserId,
+	Enum.ThumbnailType.HeadShot,
+	Enum.ThumbnailSize.Size100x100
+)
+avatar.Image = thumb
 
 --------------------------------------------------
 -- Scrolling Text
@@ -343,7 +402,7 @@ discordBox.ZIndex = 20
 local discordText = Instance.new("TextButton")
 discordText.Parent = discordBox
 discordText.Size = UDim2.new(0,900,1,0)
-discordText.Position = UDim2.new(1,0,0,0)
+discordText.Position = UDim2.new(0,42,0,0)
 discordText.BackgroundTransparency = 1
 discordText.Font = Enum.Font.GothamBold
 discordText.TextScaled = true
@@ -361,8 +420,7 @@ discordText.MouseButton1Click:Connect(function()
 end)
 task.spawn(function()
     while true do
-        discordText.Position =
-            UDim2.new(1,0,0,0)
+        discordText.Position = UDim2.new(1,42,0,0)
         local tween = TweenService:Create(
             discordText,
             TweenInfo.new(
@@ -370,10 +428,9 @@ task.spawn(function()
                 Enum.EasingStyle.Linear
             ),
             {
-                Position =
-                UDim2.new(
+                Position = UDim2.new(
                     0,
-                    -900,
+                    -950,
                     0,
                     0
                 )
@@ -456,6 +513,17 @@ local pageContainer = Instance.new("Frame")
 pageContainer.Parent = content
 
 --------------------------------------------------
+-- THEME OBJECT STORAGE
+--------------------------------------------------
+local ThemeObjects = {
+    Main = main,
+    Sidebar = sidebar,
+    SidebarBorder = sidebarBorder,
+    Content = content,
+    Buttons = {},
+}
+
+--------------------------------------------------
 -- Content Border (Purple)
 --------------------------------------------------
 local contentBorder = Instance.new("Frame")
@@ -534,7 +602,7 @@ end)
 	icon.BackgroundTransparency = 1
 	icon.Image = image
 	icon.ImageColor3 = Color3.fromRGB(255,255,255)
-icon.ScaleType = Enum.ScaleType.Fit
+	icon.ScaleType = Enum.ScaleType.Fit
     local lbl = Instance.new("TextLabel")
     lbl.Parent = btn
     lbl.BackgroundTransparency = 1
@@ -555,15 +623,23 @@ icon.ScaleType = Enum.ScaleType.Fit
     	):Play()
 	end)
 	btn.MouseLeave:Connect(function()
-    	TweenService:Create(
-        	btn,
-        	TweenInfo.new(0.2),
-        	{
-            	BackgroundColor3 = Color3.fromRGB(30,34,48)
-        	}
-    	):Play()
+	    TweenService:Create(
+	        btn,
+	        TweenInfo.new(0.2),
+	        {
+	            BackgroundColor3 =
+    				Config.Theme == "Light"
+    				and Color3.fromRGB(220,220,220)
+					or Color3.fromRGB(30,34,48)
+	        }
+	    ):Play()
 	end)
-    return btn
+	-- Lưu button để đổi theme
+	table.insert(
+	    ThemeObjects.Buttons,
+	    btn
+	)
+	return btn
 end
 
 --------------------------------------------------
@@ -596,6 +672,13 @@ local CurrentButton
 local OpenHome
 local OpenSupport
 local OpenSettings
+
+--------------------------------------------------
+-- External Settings Loader
+--------------------------------------------------
+local SettingsLoader = loadstring(game:HttpGet(
+    "URL_SCRIPT_SETTING_CUA_BAN"
+))()
 
 --------------------------------------------------
 -- Navigation
@@ -679,174 +762,154 @@ OpenSupport = function()
     title.TextColor3 = Color3.new(1,1,1)
 end
 
---------------------------------------------------
--- Settings Page
---------------------------------------------------
-OpenSettings = function()
-	ClearContent()
-	-- 1. ScrollingFrame
-	local Scroll = Instance.new("ScrollingFrame")
-	Scroll.Parent = pageContainer
-	Scroll.Position = UDim2.new(0,0,0,0)
-	Scroll.Size = UDim2.new(1,0,1,0)
-	Scroll.BackgroundTransparency = 1
-	Scroll.BorderSizePixel = 0
-	Scroll.CanvasSize = UDim2.new(0,0,0,950)
-	Scroll.ScrollBarThickness = 6
-	Scroll.AutomaticCanvasSize = Enum.AutomaticSize.None
-	local Layout = Instance.new("UIListLayout")
-	Layout.Parent = Scroll
-	Layout.Padding = UDim.new(0,16)
-	Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-	Layout.SortOrder = Enum.SortOrder.LayoutOrder
-	-- 2. CreateSection()
-	local function CreateSection(text)
-    	local title = Instance.new("TextLabel")
-    	title.Parent = Scroll
-    	title.Size = UDim2.new(1,-40,0,32)
-    	title.BackgroundTransparency = 1
-    	title.Font = Enum.Font.GothamBold
-    	title.TextSize = 22
-    	title.TextXAlignment = Enum.TextXAlignment.Left
-    	title.TextColor3 = Color3.fromRGB(255,255,255)
-    	title.Text = text
-    	-- Line
-    	local line = Instance.new("Frame")
-    	line.Parent = Scroll
-    	line.Size = UDim2.new(1,-40,0,2)
-    	line.BackgroundColor3 = Color3.fromRGB(0,170,255)
-    	line.BorderSizePixel = 0
-    	Instance.new("UICorner",line).CornerRadius = UDim.new(1,0)
-    	local gradient = Instance.new("UIGradient")
-    	gradient.Parent = line
-    	gradient.Color = ColorSequence.new{
-        	ColorSequenceKeypoint.new(0,Color3.fromRGB(0,170,255)),
-        	ColorSequenceKeypoint.new(1,Color3.fromRGB(180,80,255))
-    	}
-    	local padding = Instance.new("Frame")
-    	padding.Parent = Scroll
-    	padding.Size = UDim2.new(1,-40,0,6)
-    	padding.BackgroundTransparency = 1
-	end
-	-- 3. CreateRow()
-	local function CreateRow(Name)
-    	local row = Instance.new("Frame")
-    	row.Parent = Scroll
-    	-- kích thước ô
-    	row.Size = UDim2.new(1,-50,0,38)
-    	-- màu nền ô
-    	row.BackgroundColor3 = Color3.fromRGB(30,35,50)
-    	row.BorderSizePixel = 0
-    	-- bo góc
-    	local corner = Instance.new("UICorner")
-    	corner.Parent = row
-    	corner.CornerRadius = UDim.new(0,10)
-    	-- viền
-    	local stroke = Instance.new("UIStroke")
-    	stroke.Parent = row
-    	stroke.Color = Color3.fromRGB(70,90,130)
-    	stroke.Transparency = 0.5
-    	stroke.Thickness = 1
-    	-- chữ bên trái
-    	local txt = Instance.new("TextLabel")
-    	txt.Parent = row
-    	txt.Size = UDim2.new(0.6,0,1,0)
-    	txt.Position = UDim2.new(0,15,0,0)
-    	txt.BackgroundTransparency = 1
-    	txt.Font = Enum.Font.GothamBold
-    	txt.TextSize = 16
-    	txt.TextXAlignment = Enum.TextXAlignment.Left
-    	txt.TextColor3 = Color3.fromRGB(240,240,240)
-    	txt.Text = Name
-   	 	return row
-	end
-		-- 4. CreateToggle()
-		local function CreateToggle(row,state,callback)
-    		local btn = Instance.new("TextButton")
-    		btn.Parent = row
-    		btn.Size = UDim2.new(0,60,0,24)
-			btn.AnchorPoint = Vector2.new(1,0.5)
-			btn.Position = UDim2.new(1,-15,0.5,0)
-    		btn.Text = state and "ON" or "OFF"
-    		btn.Font = Enum.Font.GothamBold
-    		btn.TextSize = 14
-    		btn.TextColor3 = Color3.new(1,1,1)
-    		btn.BorderSizePixel = 0
-			local btnCorner = Instance.new("UICorner")
-			btnCorner.Parent = btn
-			btnCorner.CornerRadius = UDim.new(0,8)
-			local btnStroke = Instance.new("UIStroke")
-			btnStroke.Parent = btn
-			btnStroke.Color = Color3.fromRGB(0,170,255)
-			btnStroke.Transparency = 0.5
-			btnStroke.Thickness = 1
-    		local function Refresh()
-				if state then
-    				btn.BackgroundTransparency = 1
-    				btn.TextColor3 = Color3.fromRGB(0,255,120)
-    				btn.Text = "◉ ON"
-				else
-    				btn.BackgroundTransparency = 1
-    				btn.TextColor3 = Color3.fromRGB(170,170,170)
-    				btn.Text = "◉ OFF"
-				end
-    		end
-    		Refresh()
-            btn.MouseButton1Click:Connect(function()
-                state = not state
-                Refresh()
-
-                if callback then
-                    callback(state)
-                end
-            end)
-        end
-	-- 5. CreateButton()
-	local function CreateButton(row,text)
-    	local btn=Instance.new("TextButton")
-    	btn.Parent=row
-    	btn.Size=UDim2.new(0,130,0,28)
-		btn.AnchorPoint = Vector2.new(1,0.5)
-		btn.Position = UDim2.new(1,-15,0.5,0)
-    	btn.BackgroundColor3=Color3.fromRGB(40,40,45)
-    	btn.Text=text
-    	btn.TextColor3=Color3.new(1,1,1)
-    	btn.Font=Enum.Font.GothamBold
-    	btn.TextSize=15
-    	Instance.new("UICorner",btn)
-    	return btn
-	end
-    -- 6. Bắt đầu tạo giao diện
-    CreateSection("⚙ General")
-	local row=CreateRow("Toggle Key")
-	ChangeKeyButton=CreateButton(row,"["..Config.ToggleKey.Name.."]")
-	ChangeKeyButton.MouseButton1Click:Connect(function()
-    	Config.WaitingForHotkey = true
-    	ChangeKeyButton.Text = "[ ... ]"
-	end)
-    row = CreateRow("GUI Animation")
-    CreateToggle(
-        row,
-        Config.GUIAnimation,
-        function(value)
-            Config.GUIAnimation = value
-        end
+---------------------------------------------------------------------
+--// DROPDOWN SYSTEM
+---------------------------------------------------------------------
+local CurrentDropdown
+local function CreateDropdown(parent, button, options, callback)
+    if CurrentDropdown then
+        CurrentDropdown:Destroy()
+    end
+    local dropdown = Instance.new("Frame")
+    dropdown.Parent = parent
+    dropdown.Size = UDim2.new(0,130,0,0)
+    dropdown.BackgroundColor3 = Color3.fromRGB(25,30,45)
+    dropdown.BorderSizePixel = 0
+    dropdown.ZIndex = 100
+    local abs = button.AbsolutePosition
+    local size = button.AbsoluteSize
+    dropdown.Position = UDim2.new(
+        0,
+        abs.X - parent.AbsolutePosition.X,
+        0,
+        abs.Y - parent.AbsolutePosition.Y + size.Y + 5
     )
-	CreateSection("🎨 Appearance")
-	row = CreateRow("Rainbow Border")
-	CreateToggle(
-	    row,
-	    Config.RainbowBorder,
-	    function(value)
-			Config.RainbowBorder = value
-	    end
-	)
-	row=CreateRow("Theme")
-	CreateButton(row,"Dark ▼")
-	row=CreateRow("Accent Color")
-	CreateButton(row,"Blue ▼")
+    local corner = Instance.new("UICorner")
+    corner.Parent = dropdown
+    corner.CornerRadius = UDim.new(0,10)
+    local stroke = Instance.new("UIStroke")
+    stroke.Parent = dropdown
+    stroke.Color = Color3.fromRGB(0,170,255)
+    stroke.Thickness = 1.5
+    local layout = Instance.new("UIListLayout")
+    layout.Parent = dropdown
+    layout.Padding = UDim.new(0,5)
+    layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    for _,name in ipairs(options) do
+        local option = Instance.new("TextButton")
+        option.Parent = dropdown
+        option.Size = UDim2.new(1,-10,0,28)
+        option.BackgroundColor3 = Color3.fromRGB(40,45,60)
+        option.Text = name
+        option.TextColor3 = Color3.new(1,1,1)
+        option.Font = Enum.Font.GothamBold
+        option.TextSize = 14
+        option.ZIndex = 101
+        local c = Instance.new("UICorner")
+        c.Parent = option
+        c.CornerRadius = UDim.new(0,8)
+        option.MouseButton1Click:Connect(function()
+            button.Text = name.." ▼"
+            if callback then
+                callback(name)
+            end
+            dropdown:Destroy()
+            CurrentDropdown=nil
+        end)
+    end
+    dropdown.Size = UDim2.new(
+        0,
+        130,
+        0,
+        (#options * 33)
+    )
+    CurrentDropdown = dropdown
 end
 
+--------------------------------------------------
+-- THEME SYSTEM
+--------------------------------------------------
+local function ApplyTheme(theme)
+    Config.Theme = theme
+    local colors = {}
+    if theme == "Dark" then
+        colors.Main = Color3.fromRGB(20,24,36)
+        colors.Sidebar = Color3.fromRGB(22,26,40)
+        colors.Content = Color3.fromRGB(18,22,35)
+        colors.Button = Color3.fromRGB(30,34,48)
+    	colors.Text = Color3.fromRGB(255,255,255)
+    elseif theme == "Light" then
+        colors.Main = Color3.fromRGB(245,245,245)
+        colors.Sidebar = Color3.fromRGB(230,230,230)
+        colors.Content = Color3.fromRGB(240,240,240)
+        colors.Button = Color3.fromRGB(220,220,220)
+        colors.Text = Color3.fromRGB(20,20,20)
+    elseif theme == "Midnight" then
+        colors.Main = Color3.fromRGB(10,12,20)
+        colors.Sidebar = Color3.fromRGB(15,18,30)
+        colors.Content = Color3.fromRGB(8,10,18)
+        colors.Button = Color3.fromRGB(25,30,45)
+        colors.Text = Color3.fromRGB(255,255,255)
+    elseif theme == "Purple" then
+        colors.Main = Color3.fromRGB(55,35,75)
+        colors.Sidebar = Color3.fromRGB(45,25,65)
+        colors.Content = Color3.fromRGB(40,20,55)
+        colors.Button = Color3.fromRGB(70,40,90)
+        colors.Text = Color3.fromRGB(255,255,255)
+	elseif theme == "Ocean" then
+    	colors.Main = Color3.fromRGB(16,26,42)
+    	colors.Sidebar = Color3.fromRGB(20,34,54)
+    	colors.Content = Color3.fromRGB(14,24,40)
+    	colors.Button = Color3.fromRGB(30,55,85)
+    	colors.Text = Color3.fromRGB(255,255,255)
+	elseif theme == "Purple Neon" then
+    	colors.Main = Color3.fromRGB(34,22,52)
+    	colors.Sidebar = Color3.fromRGB(44,28,68)
+    	colors.Content = Color3.fromRGB(28,18,42)
+    	colors.Button = Color3.fromRGB(72,42,110)
+    	colors.Text = Color3.fromRGB(255,255,255)
+	elseif theme == "Emerald" then
+    	colors.Main = Color3.fromRGB(18,34,28)
+    	colors.Sidebar = Color3.fromRGB(22,44,36)
+    	colors.Content = Color3.fromRGB(16,28,24)
+    	colors.Button = Color3.fromRGB(32,70,55)
+    	colors.Text = Color3.fromRGB(255,255,255)
+    end
+    -- Main
+    main.BackgroundColor3 = colors.Main
+    -- Sidebar
+    sidebar.BackgroundColor3 = colors.Sidebar
+    -- Content
+    content.BackgroundColor3 = colors.Content
+    -- Sidebar buttons
+    for _,btn in pairs(ThemeObjects.Buttons) do
+        btn.BackgroundColor3 = colors.Button
+        local text = btn:FindFirstChildWhichIsA("TextLabel")
+        if text then
+            text.TextColor3 = colors.Text
+        end
+    end
+    -- Gradient tắt khi đổi theme
+    if glassGradient then
+        glassGradient.Enabled = false
+    end
+    if sideGradient then
+        sideGradient.Enabled = false
+    end
+    if contentGradient then
+        contentGradient.Enabled = false
+    end
+end
+
+---------------------------------------------------------------------
+--// SETTINGS PAGE (External)
+---------------------------------------------------------------------
+local SettingsLoader
+OpenSettings = function()
+    if SettingsLoader then
+        SettingsLoader(pageContainer, Config, ThemeObjects)
+    end
+end
 
 ---------------------------------------------------------------------
 --// GUI ANIMATION SYSTEM
@@ -1045,7 +1108,7 @@ noCorner.CornerRadius = UDim.new(1,0)
 --------------------------------------------------
 -- Events
 --------------------------------------------------
-button.MouseButton1Click:Connect(function()
+lineButton.MouseButton1Click:Connect(function()
     ToggleMain()
 end)
 closeBtn.MouseButton1Click:Connect(function()
