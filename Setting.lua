@@ -1,3 +1,5 @@
+local TweenService =
+game:GetService("TweenService")
 local FishHub = getgenv().FishHub
 
 local page = FishHub.pageContainer
@@ -80,101 +82,62 @@ local function CreateSetting(
     state
 )
 
+
 local card = Instance.new("Frame")
-
 card.Parent = page
-
-card.Position =
-UDim2.new(
-    0,
-    20,
-    0,
-    y
-)
-
-card.Size =
-UDim2.new(
-    1,
-    -40,
-    0,
-    70
-)
-
+card.Position = UDim2.new(0,20,0,y)
+card.Size = UDim2.new(1,-40,0,75)
 
 card.BackgroundColor3 =
-Color3.fromRGB(30,35,50)
+Color3.fromRGB(25,30,45)
 
 card.BorderSizePixel = 0
 
 
-local corner =
-Instance.new("UICorner")
-
+local corner = Instance.new("UICorner")
 corner.Parent = card
-
-corner.CornerRadius =
-UDim.new(0,12)
+corner.CornerRadius = UDim.new(0,14)
 
 
 
-local stroke =
-Instance.new("UIStroke")
-
+local stroke = Instance.new("UIStroke")
 stroke.Parent = card
-
 stroke.Color =
 Color3.fromRGB(0,170,255)
 
-stroke.Transparency =
-0.5
+stroke.Transparency = 0.65
+stroke.Thickness = 1
 
 
 
 --------------------------------------------------
--- NAME
+-- TITLE
 --------------------------------------------------
 
-local txt =
-Instance.new("TextLabel")
+local title = Instance.new("TextLabel")
 
-txt.Parent = card
+title.Parent = card
 
-txt.BackgroundTransparency = 1
+title.BackgroundTransparency = 1
 
-txt.Position =
-UDim2.new(
-0,
-15,
-0,
-8
-)
+title.Position =
+UDim2.new(0,18,0,10)
 
-txt.Size =
-UDim2.new(
-0.6,
-0,
-0,
-25
-)
+title.Size =
+UDim2.new(.6,0,0,25)
 
 
-txt.Text =
-name
+title.Text = name
 
-
-txt.Font =
+title.Font =
 Enum.Font.GothamBold
 
+title.TextSize = 17
 
-txt.TextSize =
-17
-
-
-txt.TextColor3 =
+title.TextColor3 =
 Color3.new(1,1,1)
 
-
-txt.TextXAlignment =
+title.TextXAlignment =
 Enum.TextXAlignment.Left
 
 
@@ -183,28 +146,17 @@ Enum.TextXAlignment.Left
 -- DESCRIPTION
 --------------------------------------------------
 
-local desc =
-Instance.new("TextLabel")
+local desc = Instance.new("TextLabel")
 
 desc.Parent = card
 
 desc.BackgroundTransparency = 1
 
 desc.Position =
-UDim2.new(
-0,
-15,
-0,
-34
-)
+UDim2.new(0,18,0,38)
 
 desc.Size =
-UDim2.new(
-0.7,
-0,
-0,
-20
-)
+UDim2.new(.7,0,0,20)
 
 
 desc.Text =
@@ -214,18 +166,14 @@ description
 desc.Font =
 Enum.Font.Gotham
 
-
-desc.TextSize =
-13
-
+desc.TextSize = 13
 
 desc.TextColor3 =
 Color3.fromRGB(
-160,
-160,
-180
+150,
+150,
+170
 )
-
 
 desc.TextXAlignment =
 Enum.TextXAlignment.Left
@@ -233,82 +181,159 @@ Enum.TextXAlignment.Left
 
 
 --------------------------------------------------
--- TOGGLE
+-- SWITCH BACKGROUND
 --------------------------------------------------
 
-local toggle =
-Instance.new("TextButton")
+local switch =
+Instance.new("Frame")
 
+switch.Parent = card
 
-toggle.Parent = card
-
-
-toggle.Size =
+switch.Size =
 UDim2.new(
 0,
-60,
+55,
 0,
-30
+28
 )
 
-
-toggle.Position =
+switch.Position =
 UDim2.new(
 1,
 -75,
 0.5,
--15
+-14
 )
 
 
-toggle.Font =
-Enum.Font.GothamBold
+local switchCorner =
+Instance.new("UICorner")
+
+switchCorner.Parent = switch
+
+switchCorner.CornerRadius =
+UDim.new(1,0)
 
 
-toggle.TextSize =
-14
+
+--------------------------------------------------
+-- CIRCLE
+--------------------------------------------------
+
+local circle =
+Instance.new("Frame")
+
+circle.Parent = switch
+
+circle.Size =
+UDim2.new(
+0,
+22,
+0,
+22
+)
+
+circle.Position =
+UDim2.new(
+0,
+3,
+0.5,
+-11
+)
 
 
-toggle.TextColor3 =
-Color3.new(1,1,1)
+local circleCorner =
+Instance.new("UICorner")
 
+circleCorner.Parent=circle
+
+circleCorner.CornerRadius =
+UDim.new(1,0)
+
+
+circle.BackgroundColor3 =
+Color3.fromRGB(
+240,
+240,
+240
+)
+
+
+
+--------------------------------------------------
+-- UPDATE
+--------------------------------------------------
 
 local function Update()
 
 if state then
 
-toggle.Text="ON"
 
-toggle.BackgroundColor3 =
+TweenService:Create(
+switch,
+TweenInfo.new(.25),
+{
+BackgroundColor3 =
 Color3.fromRGB(
 0,
 170,
-90
+100
 )
+}
+):Play()
+
+
+TweenService:Create(
+circle,
+TweenInfo.new(.25),
+{
+Position =
+UDim2.new(
+1,
+-25,
+0.5,
+-11
+)
+}
+):Play()
+
+
 
 else
 
-toggle.Text="OFF"
 
-toggle.BackgroundColor3 =
+TweenService:Create(
+switch,
+TweenInfo.new(.25),
+{
+BackgroundColor3 =
 Color3.fromRGB(
-180,
-60,
-60
+70,
+70,
+80
 )
+}
+):Play()
+
+
+TweenService:Create(
+circle,
+TweenInfo.new(.25),
+{
+Position =
+UDim2.new(
+0,
+3,
+0.5,
+-11
+)
+}
+):Play()
+
 
 end
 
 end
-
-
-local tc =
-Instance.new("UICorner")
-
-tc.Parent=toggle
-
-tc.CornerRadius =
-UDim.new(1,0)
 
 
 
@@ -316,14 +341,28 @@ Update()
 
 
 
-toggle.MouseButton1Click:Connect(function()
+--------------------------------------------------
+-- CLICK
+--------------------------------------------------
 
-state =
-not state
+local click =
+Instance.new("TextButton")
 
+click.Parent = card
+
+click.BackgroundTransparency = 1
+
+click.Size =
+UDim2.new(1,0,1,0)
+
+click.Text = ""
+
+
+click.MouseButton1Click:Connect(function()
+
+state = not state
 
 Update()
-
 
 callback(state)
 
@@ -331,47 +370,6 @@ end)
 
 
 end
-
-
-
---------------------------------------------------
--- SETTINGS LIST
---------------------------------------------------
-
-
-CreateSetting(
-"🌈 Rainbow Border",
-"Animated rainbow outline",
-90,
-
-function(value)
-
-FishHub.Config.RainbowBorder =
-value
-
-end,
-
-FishHub.Config.RainbowBorder
-)
-
-
-
-CreateSetting(
-"✨ GUI Animation",
-"Open and close animation",
-175,
-
-function(value)
-
-FishHub.Config.GUIAnimation =
-value
-
-end,
-
-FishHub.Config.GUIAnimation
-)
-
-
 
 CreateSetting(
 "🔵 Border Glow",
@@ -385,5 +383,5 @@ value
 
 end,
 
-true
+FishHub.Config.BorderGlow
 )
