@@ -1,5 +1,6 @@
 return function(container)
-    local Config = getgenv().FishHub and getgenv().FishHub.Config or {}
+    local FishHub = getgenv().FishHub or {}
+    local Config = FishHub.Config or {}
 
     -- Tiêu đề trang Setting
     local titleLbl = Instance.new("TextLabel")
@@ -41,7 +42,7 @@ return function(container)
     uiList.SortOrder = Enum.SortOrder.LayoutOrder
     uiList.Padding = UDim.new(0, 10)
 
-    -- Hàm tạo tiêu đề nhóm (Category Header)
+    -- Hàm tạo tiêu đề nhóm
     local function CreateSectionHeader(text)
         local lbl = Instance.new("TextLabel")
         lbl.Size = UDim2.new(1, 0, 0, 25)
@@ -54,7 +55,7 @@ return function(container)
         return lbl
     end
 
-    -- Hàm tạo thành phần Toggle Option cao cấp
+    -- Hàm tạo thành phần Toggle Option đồng bộ trực tiếp
     local function CreateToggleOption(name, desc, initialState, callback)
         local card = Instance.new("Frame")
         card.Size = UDim2.new(1, 0, 0, 56)
@@ -124,28 +125,23 @@ return function(container)
         return card
     end
 
-    -- Thêm các phần nhóm nội dung và tùy chọn
+    -- Thêm các tùy chọn cài đặt và liên kết trực tiếp vào Config chính
     CreateSectionHeader("Visual Effects").Parent = scroll
 
-    local opt1 = CreateToggleOption("Rainbow Border", "Enable dynamic RGB color animation for window borders", Config.RainbowBorder, function(val)
+    local opt1 = CreateToggleOption("Rainbow Border", "Enable dynamic RGB color animation for window borders", Config.RainbowBorder or false, function(val)
         Config.RainbowBorder = val
     end)
     opt1.Parent = scroll
 
-    local opt2 = CreateToggleOption("Border Glow", "Adds a soft neon glow background effect to the main frame", Config.BorderGlow, function(val)
+    local opt2 = CreateToggleOption("Border Glow", "Adds a soft neon glow background effect to the main frame", Config.BorderGlow or false, function(val)
         Config.BorderGlow = val
     end)
     opt2.Parent = scroll
 
     CreateSectionHeader("Interface & Performance").Parent = scroll
 
-    local opt3 = CreateToggleOption("GUI Animation", "Smooth opening and closing transition animations", Config.GUIAnimation, function(val)
+    local opt3 = CreateToggleOption("GUI Animation", "Smooth opening and closing transition animations", Config.GUIAnimation or false, function(val)
         Config.GUIAnimation = val
     end)
     opt3.Parent = scroll
-    
-    local opt4 = CreateToggleOption("Hardware Acceleration", "Optimizes rendering performance for low-end devices", false, function(val)
-        -- Tùy chỉnh tính năng thêm tại đây nếu muốn
-    end)
-    opt4.Parent = scroll
 end
