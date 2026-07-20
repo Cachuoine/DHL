@@ -4,7 +4,6 @@
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
-
 ---------------------------------------------------------------------
 --// FISHHUB
 ---------------------------------------------------------------------
@@ -209,23 +208,27 @@ local function CreateHotkeySetting()
     --// CHANGE KEY
     ---------------------------------------------------------------------
 	local waiting = false
+	keyButton.Text = "[" .. HotkeyConfig.Key.Name:upper() .. "]"
 	keyButton.MouseButton1Click:Connect(function()
 	    if waiting then
 	        return
 	    end
 	    waiting = true
+	    getgenv().FishHub.IsChangingKey = true
 	    keyButton.Text = "[PRESS KEY]"
 	    local connection
 	    connection = UserInputService.InputBegan:Connect(function(input, gp)
 	        if gp then
 	            return
 	        end
-        	if input.UserInputType == Enum.UserInputType.Keyboard then
-	            HotkeyConfig.Key = input.KeyCode
-	            keyButton.Text = "[" .. input.KeyCode.Name:upper() .. "]"
-	            waiting = false
-	            connection:Disconnect()
+	        if input.UserInputType ~= Enum.UserInputType.Keyboard then
+	            return
 	        end
+	        HotkeyConfig.Key = input.KeyCode
+	        keyButton.Text = "[" .. input.KeyCode.Name:upper() .. "]"
+	        waiting = false
+	        getgenv().FishHub.IsChangingKey = false
+	        connection:Disconnect()
 	    end)
 	end)
 end
