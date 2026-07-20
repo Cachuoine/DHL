@@ -5,12 +5,35 @@ local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
-local Stats = game:GetService("Stats")
 ---------------------------------------------------------------------
 --// PLAYER
 ---------------------------------------------------------------------
 local Player = Players.LocalPlayer
-getgenv().FishHub = {}
+getgenv().FishHub = getgenv().FishHub or {}
+---------------------------------------------------------------------
+--// HOTKEY SYSTEM
+---------------------------------------------------------------------
+local HotkeyConfig = {
+    Key = Enum.KeyCode.LeftControl
+}
+getgenv().FishHub.HotkeyConfig = HotkeyConfig
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then
+        return
+    end
+    if input.UserInputType ~= Enum.UserInputType.Keyboard then
+        return
+    end
+    if input.KeyCode == Enum.KeyCode.LeftControl then
+        local gui = Player.PlayerGui:FindFirstChild("FishHub")
+        if gui then
+            local main = gui:FindFirstChild("MainWindow")
+            if main then
+                main.Visible = not main.Visible
+            end
+        end
+    end
+end)
 ---------------------------------------------------------------------
 --// CONFIG
 ---------------------------------------------------------------------
@@ -25,18 +48,13 @@ local Config = {
     BorderGlow = true,
     Theme = "Dark"
 }
-getgenv().FishHub.Config = Config
+getgenv().FishHub.Config = getgenv().FishHub.Config or Config
 ---------------------------------------------------------------------
 --// VARIABLES
 ---------------------------------------------------------------------
-local CurrentPage = nil
-local Maximize = false
-local ChangeKeyButton
 local CurrentButton
 local OpenHome
 local OpenSupport
-local OpenSettings
-local CurrentDropdown
 ---------------------------------------------------------------------
 --// GUI CREATION
 ---------------------------------------------------------------------
@@ -95,9 +113,7 @@ main.BackgroundColor3 = Color3.fromRGB(20,24,36)
 main.BackgroundTransparency = 0.16
 main.BorderSizePixel = 0
 main.Visible = false
-local mainCorner = Instance.new("UICorner")
-mainCorner.Parent = main
-mainCorner.CornerRadius = UDim.new(0,18)
+Instance.new("UICorner", main).CornerRadius = UDim.new(0,18)
 local glassGradient = Instance.new("UIGradient")
 glassGradient.Parent = main
 glassGradient.Rotation = 90
@@ -130,9 +146,9 @@ task.spawn(function()
         RunService.RenderStepped:Wait()
     end
 end)
---------------------------------------------------
--- Header
---------------------------------------------------
+---------------------------------------------------------------------
+--// HEADER
+---------------------------------------------------------------------
 local header = Instance.new("Frame")
 header.Parent = main
 header.Size = UDim2.new(1,0,0,46)
@@ -337,9 +353,9 @@ task.spawn(function()
         RunService.RenderStepped:Wait()
     end
 end)
----------------------------------------------------
--- PAGE CONTAINER (RIGHT SIDE)
----------------------------------------------------
+---------------------------------------------------------------------
+--// PAGE CONTAINER
+---------------------------------------------------------------------
 local pageContainer = Instance.new("Frame")
 getgenv().FishHub.pageContainer = pageContainer
 pageContainer.Parent = content
@@ -418,7 +434,7 @@ local function OpenSettings()
     end)
 end
 local function CreateSideButton(text, y, image)
-	local btn = Instance.new("TextButton")
+    local btn = Instance.new("TextButton")
     btn.Parent = sidebar
     btn.Size = UDim2.new(1,-20,0,42)
     btn.Position = UDim2.new(0,10,0,y)
@@ -427,16 +443,16 @@ local function CreateSideButton(text, y, image)
     btn.Text = ""
     btn.AutoButtonColor = false
     Instance.new("UICorner",btn).CornerRadius = UDim.new(0,10)
-	local dot = Instance.new("Frame")
-	dot.Parent = btn
-	dot.Size = UDim2.new(0,8,0,8)
-	dot.Position = UDim2.new(0,10,0.5,-4)
-	dot.BackgroundColor3 = Color3.fromRGB(0,170,255)
-	dot.BorderSizePixel = 0
-	local dotCorner = Instance.new("UICorner")
-	dotCorner.Parent = dot
-	dotCorner.CornerRadius = UDim.new(1,0)
-	task.spawn(function()
+    local dot = Instance.new("Frame")
+    dot.Parent = btn
+    dot.Size = UDim2.new(0,8,0,8)
+    dot.Position = UDim2.new(0,10,0.5,-4)
+    dot.BackgroundColor3 = Color3.fromRGB(0,170,255)
+    dot.BorderSizePixel = 0
+    local dotCorner = Instance.new("UICorner")
+    dotCorner.Parent = dot
+    dotCorner.CornerRadius = UDim.new(1,0)
+    task.spawn(function()
         local hue = 0
         while btn.Parent do
             dot.BackgroundColor3 = Color3.fromHSV(hue,1,1)
@@ -448,13 +464,13 @@ local function CreateSideButton(text, y, image)
         end
     end)
     local icon = Instance.new("ImageLabel")
-	icon.Parent = btn
-	icon.Size = UDim2.new(0,22,0,22)
-	icon.Position = UDim2.new(0,24,0.5,-11)
-	icon.BackgroundTransparency = 1
-	icon.Image = image
-	icon.ImageColor3 = Color3.fromRGB(255,255,255)
-	icon.ScaleType = Enum.ScaleType.Fit
+    icon.Parent = btn
+    icon.Size = UDim2.new(0,22,0,22)
+    icon.Position = UDim2.new(0,24,0.5,-11)
+    icon.BackgroundTransparency = 1
+    icon.Image = image
+    icon.ImageColor3 = Color3.fromRGB(255,255,255)
+    icon.ScaleType = Enum.ScaleType.Fit
     local lbl = Instance.new("TextLabel")
     lbl.Parent = btn
     lbl.BackgroundTransparency = 1
@@ -465,15 +481,15 @@ local function CreateSideButton(text, y, image)
     lbl.TextSize = 17
     lbl.TextColor3 = Color3.new(1,1,1)
     lbl.TextXAlignment = Enum.TextXAlignment.Left
-	btn.MouseEnter:Connect(function()
-    	TweenService:Create(btn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(55,65,90)}):Play()
-	end)
-	btn.MouseLeave:Connect(function()
-	    TweenService:Create(btn, TweenInfo.new(0.2), {
-	        BackgroundColor3 = Config.Theme == "Light" and Color3.fromRGB(220,220,220) or Color3.fromRGB(30,34,48)
-	    }):Play()
-	end)
-	return btn
+    btn.MouseEnter:Connect(function()
+        TweenService:Create(btn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(55,65,90)}):Play()
+    end)
+    btn.MouseLeave:Connect(function()
+        TweenService:Create(btn, TweenInfo.new(0.2), {
+            BackgroundColor3 = Config.Theme == "Light" and Color3.fromRGB(220,220,220) or Color3.fromRGB(30,34,48)
+        }):Play()
+    end)
+    return btn
 end
 local HomeBtn = CreateSideButton("Home", 18, "rbxassetid://108029482244357")
 local SupportBtn = CreateSideButton("Support", 70, "rbxassetid://86514728032684")
@@ -497,59 +513,6 @@ SettingBtn.MouseButton1Click:Connect(function()
     SelectButton(SettingBtn)
     OpenSettings()
 end)
----------------------------------------------------------------------
---// DROPDOWN SYSTEM
----------------------------------------------------------------------
-local function CreateDropdown(parent, button, options, callback)
-    if CurrentDropdown then
-        CurrentDropdown:Destroy()
-    end
-    local dropdown = Instance.new("Frame")
-    dropdown.Parent = parent
-    dropdown.Size = UDim2.new(0,130,0,0)
-    dropdown.BackgroundColor3 = Color3.fromRGB(25,30,45)
-    dropdown.BorderSizePixel = 0
-    dropdown.ZIndex = 100
-    local abs = button.AbsolutePosition
-    local size = button.AbsoluteSize
-    dropdown.Position = UDim2.new(0, abs.X - parent.AbsolutePosition.X, 0, abs.Y - parent.AbsolutePosition.Y + size.Y + 5)
-    local corner = Instance.new("UICorner")
-    corner.Parent = dropdown
-    corner.CornerRadius = UDim.new(0,10)
-    local stroke = Instance.new("UIStroke")
-    stroke.Parent = dropdown
-    stroke.Color = Color3.fromRGB(0,170,255)
-    stroke.Thickness = 1.5
-    local layout = Instance.new("UIListLayout")
-    layout.Parent = dropdown
-    layout.Padding = UDim.new(0,5)
-    layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    for _,name in ipairs(options) do
-        local option = Instance.new("TextButton")
-        option.Parent = dropdown
-        option.Size = UDim2.new(1,-10,0,28)
-        option.BackgroundColor3 = Color3.fromRGB(40,45,60)
-        option.Text = name
-        option.TextColor3 = Color3.new(1,1,1)
-        option.Font = Enum.Font.GothamBold
-        option.TextSize = 14
-        option.ZIndex = 101
-        local c = Instance.new("UICorner")
-        c.Parent = option
-        c.CornerRadius = UDim.new(0,8)
-        option.MouseButton1Click:Connect(function()
-            button.Text = name.." ▼"
-            if callback then
-                callback(name)
-            end
-            dropdown:Destroy()
-            CurrentDropdown = nil
-        end)
-    end
-    dropdown.Size = UDim2.new(0, 130, 0, (#options * 33))
-    CurrentDropdown = dropdown
-end
-getgenv().FishHub.CreateDropdown = CreateDropdown
 ---------------------------------------------------------------------
 --// GUI ANIMATION SYSTEM
 ---------------------------------------------------------------------
@@ -607,7 +570,7 @@ local function CreateCircleButton(text, xOffset)
     btn.Text = text
     btn.Font = Enum.Font.Legacy
     btn.TextSize = 12
-	btn.TextYAlignment = Enum.TextYAlignment.Center
+    btn.TextYAlignment = Enum.TextYAlignment.Center
     btn.TextColor3 = Color3.fromRGB(240,240,240)
     local corner = Instance.new("UICorner")
     corner.Parent = btn
@@ -631,7 +594,6 @@ local normalSize = UDim2.new(0, 700, 0, 480)
 local maxSize = UDim2.new(0, 1000, 0, 650)
 local isMaximized = false
 sizeBtn.MouseButton1Click:Connect(function()
-    isMaximized = not isMaximized
     if isMaximized then
         main.Size = maxSize
     else
@@ -700,15 +662,7 @@ local version = "v1.0.0"
 ---------------------------------------------------------------------
 --// UPDATE LOOP
 ---------------------------------------------------------------------
-local blue = 0
 while true do
-    local ping = "?"
-    pcall(function()
-        ping = math.floor(Stats.Network.ServerStatsItem["Data Ping"]:GetValue())
-    end)
-    blue += 0.05
-    local brightness = (math.sin(blue) + 1) / 2
-    local color = Color3.fromRGB(0, math.floor(120 + brightness * 135), 255)
     discordText.Text = string.format("<font color='#4C9AFF'>◆ USER:</font> %s<font color='#B45CFF'> ┆ ◆ EXECUTOR:</font> %s<font color='#4C9AFF'> ┆ ◆ VERSION:</font> %s<font color='#B45CFF'> ┆ ◆ CRE:</font> DaoHuyLam", username, executor, version)
     task.wait(0.2)
 end
