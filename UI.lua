@@ -11,30 +11,21 @@ local Stats = game:GetService("Stats")
 --// PLAYER
 ---------------------------------------------------------------------
 local Player = Players.LocalPlayer
-getgenv().FishHub = {
-    Config = Config
-}
+getgenv().FishHub = {}
 
 ---------------------------------------------------------------------
 --// CONFIG
 ---------------------------------------------------------------------
 local Config = {
-    ToggleKey = Enum.KeyCode.LeftControl,
-    WaitingForHotkey = false,
-    GUIAnimation = true,
-    RainbowBorder = true,
-    ShowFPS = true,
-    ShowPing = true,
-    ShowRuntime = true,
-    Theme = "Dark",
-    Transparency = 0.16,
-    AnimationSpeed = 0.45,
-    RainbowSpeed = 0.003,
     MainWidth = 700,
     MainHeight = 480,
     MaxWidth = 1000,
     MaxHeight = 650,
+	RainbowBorder = true,
+    RainbowSpeed = 0.003,
+    GUIAnimation = true,
 }
+getgenv().FishHub.Config = Config
 
 ---------------------------------------------------------------------
 --// VARIABLES
@@ -177,12 +168,10 @@ local function OpenDiscord(url)
     end
     if setclipboard then
         setclipboard(url)
-        print("Discord link copied.")
         return
     end
     if toclipboard then
         toclipboard(url)
-        print("Discord link copied.")
     end
 end
 discordButton.MouseButton1Click:Connect(function()
@@ -300,7 +289,7 @@ avatar.Image = thumb
 --------------------------------------------------
 -- Scrolling Text
 --------------------------------------------------
-local discordText = Instance.new("TextButton")
+local discordText = Instance.new("TextLabel")
 discordText.Parent = discordBox
 discordText.Size = UDim2.new(0,900,1,0)
 discordText.Position = UDim2.new(0,42,0,0)
@@ -309,14 +298,16 @@ discordText.Font = Enum.Font.GothamBold
 discordText.TextScaled = true
 discordText.RichText = true
 discordText.TextXAlignment = Enum.TextXAlignment.Left
-discordText.AutoButtonColor = false
-discordText.MouseButton1Click:Connect(function()
+discordButton.MouseButton1Click:Connect(function()
+    local url = "https://discord.gg/2tTJxRk2ct"
     if syn and syn.open_url then
-        syn.open_url("https://discord.gg/2tTJxRk2ct")
+        syn.open_url(url)
     elseif getgenv().open_url then
-        getgenv().open_url("https://discord.gg/2tTJxRk2ct")
-    else
-        setclipboard("https://discord.gg/2tTJxRk2ct")
+        getgenv().open_url(url)
+    elseif setclipboard then
+        setclipboard(url)
+    elseif toclipboard then
+        toclipboard(url)
     end
 end)
 task.spawn(function()
@@ -413,17 +404,6 @@ glow.Transparency = 0.82
 local pageContainer = Instance.new("Frame")
 getgenv().FishHub.pageContainer = pageContainer
 pageContainer.Parent = content
-
---------------------------------------------------
--- THEME OBJECT STORAGE
---------------------------------------------------
-local ThemeObjects = {
-    Main = main,
-    Sidebar = sidebar,
-    SidebarBorder = sidebarBorder,
-    Content = content,
-    Buttons = {},
-}
 
 --------------------------------------------------
 -- Content Border (Purple)
@@ -536,11 +516,6 @@ end)
 	        }
 	    ):Play()
 	end)
-	-- Lưu button để đổi theme
-	table.insert(
-	    ThemeObjects.Buttons,
-	    btn
-	)
 	return btn
 end
 
@@ -576,13 +551,25 @@ local OpenSupport
 local OpenSettings
 
 --------------------------------------------------
+-- Clear Current Page
+--------------------------------------------------
+local function ClearContent()
+    for _,v in ipairs(pageContainer:GetChildren()) do
+        v:Destroy()
+    end
+end
+getgenv().FishHub.ClearContent = ClearContent
+
+--------------------------------------------------
 -- LOAD SETTINGS SCRIPT
 --------------------------------------------------
 OpenSettings = function()
     ClearContent()
-    local SettingsURL = "https://raw.githubusercontent.com/Cachuoine/DHL/refs/heads/main/Setting.lua"
+    local SettingsURL = 
+    "https://raw.githubusercontent.com/Cachuoine/DHL/refs/heads/main/Setting.lua"
     local success, result = pcall(function()
-        loadstring(game:HttpGet(SettingsURL))()
+        local script = game:HttpGet(SettingsURL)
+        loadstring(script)()
     end)
     if not success then
         warn("Cannot load Settings:", result)
@@ -630,16 +617,6 @@ end)
 ---------------------------------------------------------------------
 --// PAGE SYSTEM
 ---------------------------------------------------------------------
---------------------------------------------------
--- Clear Current Page
---------------------------------------------------
-local function ClearContent()
-    for _,v in ipairs(pageContainer:GetChildren()) do
-        v:Destroy()
-    end
-end
-getgenv().FishHub.ClearContent = ClearContent
-
 --------------------------------------------------
 -- Home Page
 --------------------------------------------------
@@ -737,82 +714,6 @@ local function CreateDropdown(parent, button, options, callback)
 end
 getgenv().FishHub.CreateDropdown = CreateDropdown
 
---------------------------------------------------
--- THEME SYSTEM
---------------------------------------------------
-local function ApplyTheme(theme)
-    Config.Theme = theme
-    local colors = {}
-    if theme == "Dark" then
-        colors.Main = Color3.fromRGB(20,24,36)
-        colors.Sidebar = Color3.fromRGB(22,26,40)
-        colors.Content = Color3.fromRGB(18,22,35)
-        colors.Button = Color3.fromRGB(30,34,48)
-    	colors.Text = Color3.fromRGB(255,255,255)
-    elseif theme == "Light" then
-        colors.Main = Color3.fromRGB(245,245,245)
-        colors.Sidebar = Color3.fromRGB(230,230,230)
-        colors.Content = Color3.fromRGB(240,240,240)
-        colors.Button = Color3.fromRGB(220,220,220)
-        colors.Text = Color3.fromRGB(20,20,20)
-    elseif theme == "Midnight" then
-        colors.Main = Color3.fromRGB(10,12,20)
-        colors.Sidebar = Color3.fromRGB(15,18,30)
-        colors.Content = Color3.fromRGB(8,10,18)
-        colors.Button = Color3.fromRGB(25,30,45)
-        colors.Text = Color3.fromRGB(255,255,255)
-    elseif theme == "Purple" then
-        colors.Main = Color3.fromRGB(55,35,75)
-        colors.Sidebar = Color3.fromRGB(45,25,65)
-        colors.Content = Color3.fromRGB(40,20,55)
-        colors.Button = Color3.fromRGB(70,40,90)
-        colors.Text = Color3.fromRGB(255,255,255)
-	elseif theme == "Ocean" then
-    	colors.Main = Color3.fromRGB(16,26,42)
-    	colors.Sidebar = Color3.fromRGB(20,34,54)
-    	colors.Content = Color3.fromRGB(14,24,40)
-    	colors.Button = Color3.fromRGB(30,55,85)
-    	colors.Text = Color3.fromRGB(255,255,255)
-	elseif theme == "Purple Neon" then
-    	colors.Main = Color3.fromRGB(34,22,52)
-    	colors.Sidebar = Color3.fromRGB(44,28,68)
-    	colors.Content = Color3.fromRGB(28,18,42)
-    	colors.Button = Color3.fromRGB(72,42,110)
-    	colors.Text = Color3.fromRGB(255,255,255)
-	elseif theme == "Emerald" then
-    	colors.Main = Color3.fromRGB(18,34,28)
-    	colors.Sidebar = Color3.fromRGB(22,44,36)
-    	colors.Content = Color3.fromRGB(16,28,24)
-    	colors.Button = Color3.fromRGB(32,70,55)
-    	colors.Text = Color3.fromRGB(255,255,255)
-    end
-    -- Main
-    main.BackgroundColor3 = colors.Main
-    -- Sidebar
-    sidebar.BackgroundColor3 = colors.Sidebar
-    -- Content
-    content.BackgroundColor3 = colors.Content
-    -- Sidebar buttons
-    for _,btn in pairs(ThemeObjects.Buttons) do
-        btn.BackgroundColor3 = colors.Button
-        local text = btn:FindFirstChildWhichIsA("TextLabel")
-        if text then
-            text.TextColor3 = colors.Text
-        end
-    end
-    -- Gradient tắt khi đổi theme
-    if glassGradient then
-        glassGradient.Enabled = false
-    end
-    if sideGradient then
-        sideGradient.Enabled = false
-    end
-    if contentGradient then
-        contentGradient.Enabled = false
-    end
-end
-getgenv().FishHub.ApplyTheme = ApplyTheme
-
 ---------------------------------------------------------------------
 --// GUI ANIMATION SYSTEM
 ---------------------------------------------------------------------
@@ -888,32 +789,6 @@ OpenHome()
 local btnSize = 28
 local spacing = 8
 local startX = main.Size.X.Offset - 18
-
----------------------------------------------------------------------
---// HOTKEY SYSTEM
----------------------------------------------------------------------
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if input.UserInputType ~= Enum.UserInputType.Keyboard then
-        return
-    end
-    -- Đổi hotkey
-    if Config.WaitingForHotkey then 
-        if input.KeyCode == Enum.KeyCode.Unknown then
-            return
-        end
-        Config.ToggleKey = input.KeyCode
-        Config.WaitingForHotkey = false
-        if ChangeKeyButton then
-            ChangeKeyButton.Text =
-    			"["..Config.ToggleKey.Name.."]"
-        end
-        return
-    end
-    -- Mở / đóng GUI
-    if input.KeyCode == Config.ToggleKey then
-        ToggleMain()
-    end
-end)
 
 --------------------------------------------------
 -- Create Window Button
@@ -1026,20 +901,7 @@ hideBtn.MouseButton1Click:Connect(function()
     CloseGUI()
 end)
 
----------------------------------------------------------------------
---// PERFORMANCE
----------------------------------------------------------------------
-local fps = 60
-local frames = 0
-local lastTick = tick()
-RunService.RenderStepped:Connect(function()
-    frames += 1
-    if tick()-lastTick >= 1 then
-        fps = frames
-        frames = 0
-        lastTick = tick()
-    end
-end)
+
 local executor = identifyexecutor and identifyexecutor() or "Unknown"
 local username = Player.Name
 local version = "v1.0.0"
@@ -1056,11 +918,6 @@ while true do
             Stats.Network.ServerStatsItem["Data Ping"]:GetValue()
         )
     end)
-local elapsed = math.floor(tick() - startTime)
-local hours = math.floor(elapsed / 3600)
-local minutes = math.floor((elapsed % 3600) / 60)
-local seconds = elapsed % 60
-local timeString = string.format("%02d:%02d:%02d", hours, minutes, seconds)
 blue += 0.05
 local brightness = (math.sin(blue) + 1) / 2
 local color = Color3.fromRGB(
