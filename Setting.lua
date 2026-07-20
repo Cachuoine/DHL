@@ -16,32 +16,35 @@ end
 ---------------------------------------------------------------------
 --// HOTKEY CONFIG
 ---------------------------------------------------------------------
-local HotkeyConfig = FishHub.HotkeyConfig or {
-    Key = Enum.KeyCode.LeftControl
-}
+local HotkeyConfig = FishHub.HotkeyConfig
+
+if not HotkeyConfig then
+    HotkeyConfig = {
+        Key = Enum.KeyCode.RightShift
+    }
+end
+
 FishHub.HotkeyConfig = HotkeyConfig
 
 ---------------------------------------------------------------------
 --// HOTKEY SYSTEM
 ---------------------------------------------------------------------
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
+UserInputService.InputBegan:Connect(function(input)
 
-    if input.UserInputType ~= Enum.UserInputType.Keyboard then
-        return
-    end
+    if waiting then
 
-    if input.KeyCode == HotkeyConfig.Key then
-        
-        local gui = Players.LocalPlayer.PlayerGui:FindFirstChild("FishHub")
+        if input.UserInputType == Enum.UserInputType.Keyboard then
 
-        if gui then
-            local main = gui:FindFirstChild("MainWindow")
+            if input.KeyCode ~= Enum.KeyCode.Unknown then
 
-            if main then
-                main.Visible = not main.Visible
+                HotkeyConfig.Key = input.KeyCode
+
+                keyButton.Text = "["..input.KeyCode.Name:upper().."]"
+
+                waiting = false
+
             end
         end
-
     end
 end)
 
