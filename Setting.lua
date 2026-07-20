@@ -17,6 +17,13 @@ end
 --// HOTKEY CONFIG
 ---------------------------------------------------------------------
 local HotkeyConfig = FishHub.HotkeyConfig
+
+if not HotkeyConfig then
+    HotkeyConfig = {
+        Key = Enum.KeyCode.LeftControl
+    }
+    FishHub.HotkeyConfig = HotkeyConfig
+end
 FishHub.HotkeyConfig = HotkeyConfig
 
 ---------------------------------------------------------------------
