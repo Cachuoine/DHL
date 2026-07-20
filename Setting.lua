@@ -2,7 +2,6 @@ return function(container)
     local FishHub = getgenv().FishHub or {}
     local Config = FishHub.Config or {}
 
-    -- Tiêu đề trang Setting
     local titleLbl = Instance.new("TextLabel")
     titleLbl.Parent = container
     titleLbl.BackgroundTransparency = 1
@@ -14,7 +13,6 @@ return function(container)
     titleLbl.TextColor3 = Color3.fromRGB(255, 255, 255)
     titleLbl.TextXAlignment = Enum.TextXAlignment.Left
 
-    -- Mô tả phụ
     local descLbl = Instance.new("TextLabel")
     descLbl.Parent = container
     descLbl.BackgroundTransparency = 1
@@ -26,7 +24,6 @@ return function(container)
     descLbl.TextColor3 = Color3.fromRGB(140, 150, 170)
     descLbl.TextXAlignment = Enum.TextXAlignment.Left
 
-    -- Khung cuộn chứa các cài đặt
     local scroll = Instance.new("ScrollingFrame")
     scroll.Parent = container
     scroll.Position = UDim2.new(0, 20, 0, 80)
@@ -42,7 +39,6 @@ return function(container)
     uiList.SortOrder = Enum.SortOrder.LayoutOrder
     uiList.Padding = UDim.new(0, 10)
 
-    -- Hàm tạo tiêu đề nhóm
     local function CreateSectionHeader(text)
         local lbl = Instance.new("TextLabel")
         lbl.Size = UDim2.new(1, 0, 0, 25)
@@ -55,7 +51,6 @@ return function(container)
         return lbl
     end
 
-    -- Hàm tạo thành phần Toggle Option đồng bộ trực tiếp
     local function CreateToggleOption(name, desc, initialState, callback)
         local card = Instance.new("Frame")
         card.Size = UDim2.new(1, 0, 0, 56)
@@ -125,7 +120,6 @@ return function(container)
         return card
     end
 
-    -- Thêm các tùy chọn cài đặt và liên kết trực tiếp vào Config chính
     CreateSectionHeader("Visual Effects").Parent = scroll
 
     local opt1 = CreateToggleOption("Rainbow Border", "Enable dynamic RGB color animation for window borders", Config.RainbowBorder or false, function(val)
