@@ -1,1 +1,574 @@
-local v0=game:GetService("CoreGui");local v1=game:GetService("TweenService");local v2=game:GetService("Lighting");if v0:FindFirstChild("FishHubUltimate") then v0.FishHubUltimate:Destroy();end local v3=Instance.new("ScreenGui");v3.Name="FishHubUltimate";v3.Parent=v0;v3.ResetOnSpawn=false;v3.DisplayOrder=1000618 -(529 + 90) ;local v8=Color3.fromRGB(1829 -(1703 + 114) ,715 -(376 + 325) ,35 -13 );local v9=Color3.fromRGB(0,738 -498 ,255);local v10=Color3.fromRGB(139,27 + 65 ,246);local v11="FishHub_SavedKey.txt";local v12="https://fishhub-online.netlify.app/";local v13="DaoHuyLam22052009";local function v14(v168,v169) local v170=0 -0 ;local v171;while true do if ((15 -(9 + 5))==v170) then v171.Parent=v168;break;end if (v170==0) then local v196=0;while true do if (v196==(376 -(85 + 291))) then v171=Instance.new("UICorner");v171.CornerRadius=UDim.new(1265 -(243 + 1022) ,v169);v196=3 -2 ;end if (v196==1) then v170=1 + 0 ;break;end end end end end local function v15(v172) local v173=0;local v174;while true do if (v173==(1182 -(1123 + 57))) then return false;end if ((0 + 0)==v173) then if ( not v172 or (type(v172)~="string")) then return false;end if (v172==v13) then return true;end v173=1;end if (v173==(255 -(163 + 91))) then local v197=1930 -(1869 + 61) ;while true do if (v197==(0 + 0)) then v174=string.split(v172,"-");if (( #v174>=(10 -7)) and (v174[1]=="FishHub")) then local v212=0;local v213;while true do if (v212==0) then v213=tonumber(v174[4 -1 ]);if (v213 and ((os.time() -v213)<=86400)) then return true;end break;end end end v197=1 + 0 ;end if ((1 -0)==v197) then v173=2 + 0 ;break;end end end end end local function v16() pcall(function() local v183=1474 -(1329 + 145) ;local v184;while true do if (v183==(971 -(140 + 831))) then v184=game:HttpGet("https://raw.githubusercontent.com/Cachuoine/DHL/refs/heads/main/UI.lua");if (v184 and (v184~="")) then loadstring(v184)();end break;end end end);end local v17=Instance.new("BlurEffect",v2);v17.Size=1850 -(1409 + 441) ;v1:Create(v17,TweenInfo.new(0.8),{Size=740 -(15 + 703) }):Play();local v19=Instance.new("Frame",v3);v19.Size=UDim2.new(0,320,0 + 0 ,160);v19.Position=UDim2.new(438.5 -(262 + 176) ,1721 -(345 + 1376) ,688.5 -(198 + 490) ,0);v19.AnchorPoint=Vector2.new(0.5 -0 ,0.5 -0 );v19.BackgroundColor3=v8;v19.BackgroundTransparency=1206.15 -(696 + 510) ;v19.ClipsDescendants=true;v14(v19,18);local v26=Instance.new("UIStroke",v19);v26.Color=v9;v26.Thickness=1.5 -0 ;v26.Transparency=0.3;local v30=Instance.new("TextLabel",v19);v30.Size=UDim2.new(1262 -(1091 + 171) ,9 + 41 ,0,157 -107 );v30.Position=UDim2.new(0.5 -0 , -25,0.2,374 -(123 + 251) );v30.BackgroundTransparency=1;v30.Font=Enum.Font.GothamBold;v30.Text="⚓";v30.TextColor3=v9;v30.TextSize=139 -111 ;local v39=Instance.new("TextLabel",v19);v39.Size=UDim2.new(699 -(208 + 490) ,0 + 0 ,0,14 + 16 );v39.Position=UDim2.new(836 -(660 + 176) ,0 + 0 ,202.65 -(14 + 188) ,675 -(534 + 141) );v39.BackgroundTransparency=1;v39.Font=Enum.Font.GothamBold;v39.Text="ESTABLISHING SECURE PROTOCOL...";v39.TextColor3=v9;v39.TextSize=11;local v47=v1:Create(v30,TweenInfo.new(1 + 0 ,Enum.EasingStyle.Quad,Enum.EasingDirection.InOut),{Rotation=360});v47:Play();local v48=Instance.new("Frame",v3);v48.Size=UDim2.new(0 + 0 ,424 + 16 ,0 -0 ,300);v48.Position=UDim2.new(0.5,0 -0 ,0.5 -0 ,0);v48.AnchorPoint=Vector2.new(0.5 + 0 ,0.5 + 0 );v48.BackgroundColor3=v8;v48.BackgroundTransparency=397 -(115 + 281) ;v48.Visible=false;v14(v48,22);local v55=Instance.new("UIStroke",v48);v55.Color=v9;v55.Thickness=1.5;v55.Transparency=2 -1 ;local v59=Instance.new("Frame",v48);v59.Size=UDim2.new(0 + 0 ,80,0 -0 ,10 -7 );v59.Position=UDim2.new(0.5, -(907 -(550 + 317)),0 -0 ,0 -0 );v59.BackgroundColor3=v10;v59.BackgroundTransparency=2 -1 ;v14(v59,287 -(134 + 151) );local v64=Instance.new("TextButton",v48);v64.Size=UDim2.new(0,1695 -(970 + 695) ,0 -0 ,30);v64.Position=UDim2.new(1991 -(582 + 1408) , -38,0 -0 ,16 -2 );v64.BackgroundColor3=Color3.fromRGB(900 -661 ,68,1892 -(1195 + 629) );v64.BackgroundTransparency=1 -0 ;v64.Font=Enum.Font.GothamBold;v64.Text="×";v64.TextColor3=Color3.fromRGB(496 -(187 + 54) ,1035 -(162 + 618) ,179 + 76 );v64.TextSize=16;v64.TextTransparency=1 + 0 ;v14(v64,8);local v74=Instance.new("TextLabel",v48);v74.Size=UDim2.new(0 -0 ,30,0,45);v74.Position=UDim2.new(0,20,0 -0 ,15);v74.BackgroundTransparency=1 + 0 ;v74.Font=Enum.Font.GothamBold;v74.Text="🛡️";v74.TextSize=1654 -(1373 + 263) ;v74.TextTransparency=1001 -(451 + 549) ;local v82=Instance.new("TextLabel",v48);v82.Size=UDim2.new(1, -(26 + 54),0 -0 ,75 -30 );v82.Position=UDim2.new(1384 -(746 + 638) ,19 + 31 ,0,22 -7 );v82.BackgroundTransparency=1;v82.Font=Enum.Font.GothamBlack;v82.Text="FISHHUB SECURITY";v82.TextColor3=Color3.fromRGB(596 -(218 + 123) ,255,1836 -(1535 + 46) );v82.TextSize=20;v82.TextTransparency=1;v82.TextXAlignment=Enum.TextXAlignment.Left;local v94=Instance.new("Frame",v48);v94.Size=UDim2.new(0.85 + 0 ,0 + 0 ,560 -(306 + 254) ,1 + 0 );v94.Position=UDim2.new(0.075 -0 ,1467 -(899 + 568) ,0.23 + 0 ,0);v94.BackgroundColor3=Color3.fromRGB(45,125 -73 ,678 -(268 + 335) );v94.BackgroundTransparency=291 -(60 + 230) ;local v99=Instance.new("Frame",v48);v99.Size=UDim2.new(572.85 -(426 + 146) ,0 + 0 ,1456 -(282 + 1174) ,857 -(569 + 242) );v99.Position=UDim2.new(0.075 -0 ,0 + 0 ,1024.3 -(706 + 318) ,1251 -(721 + 530) );v99.BackgroundColor3=Color3.fromRGB(1289 -(945 + 326) ,54 -32 ,35);v99.BackgroundTransparency=1;v14(v99,10);local v104=Instance.new("UIStroke",v99);v104.Color=Color3.fromRGB(70,75,94 + 11 );v104.Transparency=701 -(271 + 429) ;local v107=Instance.new("TextBox",v99);v107.Size=UDim2.new(1 + 0 , -20,1,1500 -(1408 + 92) );v107.Position=UDim2.new(1086 -(461 + 625) ,10,1288 -(993 + 295) ,0 + 0 );v107.BackgroundTransparency=1;v107.Font=Enum.Font.GothamMedium;v107.PlaceholderText="Paste your Access Token here...";v107.PlaceholderColor3=Color3.fromRGB(1281 -(418 + 753) ,46 + 74 ,16 + 134 );v107.Text="";v107.TextColor3=v9;v107.TextSize=4 + 9 ;v107.TextTransparency=1 + 0 ;v107.ClearTextOnFocus=false;local v120=Instance.new("TextButton",v48);v120.Size=UDim2.new(529.4 -(406 + 123) ,0,1769 -(1749 + 20) ,42);v120.Position=UDim2.new(0.075 + 0 ,1322 -(1249 + 73) ,0.58 + 0 ,0);v120.BackgroundColor3=v9;v120.BackgroundTransparency=1;v120.Font=Enum.Font.GothamBold;v120.Text="VERIFY KEY";v120.TextColor3=Color3.fromRGB(1157 -(466 + 679) ,33 -19 ,62 -40 );v120.TextSize=13;v120.TextTransparency=1;v14(v120,1910 -(106 + 1794) );local v130=Instance.new("TextButton",v48);v130.Size=UDim2.new(0.4 + 0 ,0,0 + 0 ,42);v130.Position=UDim2.new(0.525,0 -0 ,0.58 -0 ,114 -(4 + 110) );v130.BackgroundColor3=Color3.fromRGB(619 -(57 + 527) ,40,65);v130.BackgroundTransparency=1428 -(41 + 1386) ;v130.Font=Enum.Font.GothamBold;v130.Text="GET KEY";v130.TextColor3=Color3.fromRGB(255,255,358 -(17 + 86) );v130.TextSize=13;v130.TextTransparency=1;v14(v130,10);local v140=Instance.new("Frame",v48);v140.Size=UDim2.new(0.85 + 0 ,0,0 -0 ,110 -72 );v140.Position=UDim2.new(0.075,166 -(122 + 44) ,0.74 -0 ,0);v140.BackgroundColor3=Color3.fromRGB(16,66 -46 ,32);v140.BackgroundTransparency=1 + 0 ;v14(v140,8);local v145=Instance.new("UIStroke",v140);v145.Color=Color3.fromRGB(6 + 29 ,42,131 -66 );v145.Transparency=1;local v148=Instance.new("TextLabel",v140);v148.Size=UDim2.new(66 -(30 + 35) , -20,1,0 + 0 );v148.Position=UDim2.new(1257 -(1043 + 214) ,37 -27 ,1212 -(323 + 889) ,0 -0 );v148.BackgroundTransparency=581 -(361 + 219) ;v148.Font=Enum.Font.Gotham;v148.Text="💡 Tip: Keys remain valid for 24 hours after activation.";v148.TextColor3=Color3.fromRGB(450 -(53 + 267) ,140,39 + 131 );v148.TextSize=10;v148.TextTransparency=414 -(15 + 398) ;v148.TextXAlignment=Enum.TextXAlignment.Left;local v159=Instance.new("TextLabel",v48);v159.Size=UDim2.new(0.85,982 -(18 + 964) ,0,75 -55 );v159.Position=UDim2.new(0.075,0 + 0 ,0.88,0);v159.BackgroundTransparency=1 + 0 ;v159.Font=Enum.Font.GothamBold;v159.Text="SYSTEM CONFIGURATION & SECURITY";v159.TextColor3=Color3.fromRGB(950 -(20 + 830) ,86 + 24 ,266 -(116 + 10) );v159.TextSize=9;v159.TextTransparency=1 + 0 ;task.spawn(function() v47.Completed:Wait();v39.Text="CHECKING SAVED CREDENTIALS...";task.wait(0.5);local v176=false;if (writefile and readfile and isfile and isfile(v11)) then local v185=0;local v186;local v187;local v188;while true do if (v185==0) then v186=0;v187=nil;v185=1;end if ((739 -(542 + 196))==v185) then v188=nil;while true do if (v186==0) then v187,v188=pcall(function() return readfile(v11);end);if (v187 and v15(v188)) then v176=true;end break;end end break;end end end if v176 then local v189=0 -0 ;while true do if (v189==4) then v16();return;end if (v189==(1 + 1)) then v1:Create(v19,TweenInfo.new(0.4),{Size=UDim2.new(0,0,0 + 0 ,0 + 0 ),BackgroundTransparency=1}):Play();task.wait(0.5 -0 );v189=7 -4 ;end if (v189==3) then v17:Destroy();v3:Destroy();v189=1555 -(1126 + 425) ;end if (v189==(405 -(118 + 287))) then v39.Text="AUTO-LOGGED IN SUCCESSFULLY!";v39.TextColor3=Color3.fromRGB(34,197,368 -274 );v189=1;end if (v189==(1122 -(118 + 1003))) then task.wait(0.6 -0 );v1:Create(v17,TweenInfo.new(377.6 -(142 + 235) ),{Size=0 -0 }):Play();v189=1 + 1 ;end end end v1:Create(v19,TweenInfo.new(977.4 -(553 + 424) ),{Size=UDim2.new(0 -0 ,0,0 + 0 ,0),BackgroundTransparency=1 + 0 }):Play();task.wait(0.3);v19.Visible=false;v48.Visible=true;v1:Create(v48,TweenInfo.new(0.5 + 0 ,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{BackgroundTransparency=0.08}):Play();v1:Create(v55,TweenInfo.new(0.5 + 0 ),{Transparency=0.3}):Play();v1:Create(v59,TweenInfo.new(0.5 + 0 ),{BackgroundTransparency=0}):Play();v1:Create(v64,TweenInfo.new(0.5 -0 ),{BackgroundTransparency=0.2 -0 ,TextTransparency=0}):Play();v1:Create(v74,TweenInfo.new(0.5 -0 ),{TextTransparency=0 + 0 }):Play();v1:Create(v82,TweenInfo.new(0.5 -0 ),{TextTransparency=753 -(239 + 514) }):Play();v1:Create(v94,TweenInfo.new(0.5),{BackgroundTransparency=0 + 0 }):Play();v1:Create(v99,TweenInfo.new(1329.5 -(797 + 532) ),{BackgroundTransparency=0.2 + 0 }):Play();v1:Create(v104,TweenInfo.new(0.5 + 0 ),{Transparency=0}):Play();v1:Create(v107,TweenInfo.new(0.5 -0 ),{TextTransparency=0}):Play();v1:Create(v120,TweenInfo.new(0.5),{BackgroundTransparency=1202 -(373 + 829) ,TextTransparency=731 -(476 + 255) }):Play();v1:Create(v130,TweenInfo.new(0.5),{BackgroundTransparency=1130 -(369 + 761) ,TextTransparency=0 + 0 }):Play();v1:Create(v140,TweenInfo.new(0.5 -0 ),{BackgroundTransparency=0.2}):Play();v1:Create(v145,TweenInfo.new(0.5 -0 ),{Transparency=0}):Play();v1:Create(v148,TweenInfo.new(238.5 -(64 + 174) ),{TextTransparency=0 + 0 }):Play();v1:Create(v159,TweenInfo.new(0.5),{TextTransparency=0 -0 }):Play();end);v120.MouseEnter:Connect(function() v1:Create(v120,TweenInfo.new(336.2 -(144 + 192) ),{BackgroundColor3=Color3.fromRGB(0,426 -(42 + 174) ,230),Size=UDim2.new(0.4 + 0 ,0 + 0 ,0 + 0 ,1548 -(363 + 1141) )}):Play();end);v120.MouseLeave:Connect(function() v1:Create(v120,TweenInfo.new(1580.2 -(1183 + 397) ),{BackgroundColor3=v9,Size=UDim2.new(0.4 -0 ,0,0 + 0 ,42)}):Play();end);v130.MouseEnter:Connect(function() v1:Create(v130,TweenInfo.new(0.2 + 0 ),{BackgroundColor3=Color3.fromRGB(2025 -(1913 + 62) ,58,57 + 33 ),Size=UDim2.new(0.4 -0 ,1933 -(565 + 1368) ,0 -0 ,44)}):Play();end);v130.MouseLeave:Connect(function() v1:Create(v130,TweenInfo.new(1661.2 -(1477 + 184) ),{BackgroundColor3=Color3.fromRGB(47 -12 ,38 + 2 ,921 -(564 + 292) ),Size=UDim2.new(0.4 -0 ,0 -0 ,0,42)}):Play();end);v64.MouseEnter:Connect(function() v1:Create(v64,TweenInfo.new(304.2 -(244 + 60) ),{BackgroundColor3=Color3.fromRGB(170 + 50 ,38,514 -(41 + 435) ),Rotation=1091 -(938 + 63) }):Play();end);v64.MouseLeave:Connect(function() v1:Create(v64,TweenInfo.new(0.2 + 0 ),{BackgroundColor3=Color3.fromRGB(1364 -(936 + 189) ,23 + 45 ,1681 -(1565 + 48) ),Rotation=0 + 0 }):Play();end);v64.MouseButton1Click:Connect(function() local v179=1138 -(782 + 356) ;local v180;while true do if (v179==(269 -(176 + 91))) then v180.Completed:Wait();v17:Destroy();v179=3;end if (v179==(0 -0)) then v1:Create(v17,TweenInfo.new(0.4 -0 ),{Size=1092 -(975 + 117) }):Play();v180=v1:Create(v48,TweenInfo.new(0.35,Enum.EasingStyle.Back,Enum.EasingDirection.In),{Size=UDim2.new(1875 -(157 + 1718) ,0 + 0 ,0 -0 ,0 -0 ),BackgroundTransparency=1019 -(697 + 321) ,Rotation= -15});v179=1;end if (v179==(2 -1)) then for v202,v203 in ipairs(v48:GetDescendants()) do if (v203:IsA("TextLabel") or v203:IsA("TextBox") or v203:IsA("TextButton")) then v1:Create(v203,TweenInfo.new(0.2 -0 ),{TextTransparency=2 -1 }):Play();elseif v203:IsA("UIStroke") then v1:Create(v203,TweenInfo.new(0.2),{Transparency=1 + 0 }):Play();elseif v203:IsA("Frame") then v1:Create(v203,TweenInfo.new(0.2 -0 ),{BackgroundTransparency=1}):Play();end end v180:Play();v179=5 -3 ;end if (v179==3) then v3:Destroy();break;end end end);v130.MouseButton1Click:Connect(function() local v181=1227 -(322 + 905) ;while true do if (v181==1) then v82.TextColor3=v9;task.wait(1.5);v181=2;end if (v181==(611 -(602 + 9))) then if setclipboard then setclipboard(v12);end v82.Text="URL COPIED TO CLIPBOARD!";v181=1190 -(449 + 740) ;end if (v181==(874 -(826 + 46))) then v82.Text="FISHHUB SECURITY";v82.TextColor3=Color3.fromRGB(1202 -(245 + 702) ,805 -550 ,82 + 173 );break;end end end);v120.MouseButton1Click:Connect(function() local v182=v107.Text;if v15(v182) then local v190=0;local v191;while true do if (v190==2) then v191:Play();v191.Completed:Wait();v17:Destroy();v3:Destroy();v190=1901 -(260 + 1638) ;end if ((441 -(382 + 58))==v190) then task.wait(0.6);v1:Create(v17,TweenInfo.new(0.5 -0 ),{Size=0 + 0 }):Play();v191=v1:Create(v48,TweenInfo.new(0.4,Enum.EasingStyle.Back,Enum.EasingDirection.In),{Size=UDim2.new(0 -0 ,0 -0 ,0,1205 -(902 + 303) ),BackgroundTransparency=1 -0 });for v210,v211 in ipairs(v48:GetDescendants()) do if (v211:IsA("TextLabel") or v211:IsA("TextBox") or v211:IsA("TextButton")) then v1:Create(v211,TweenInfo.new(0.2 -0 ),{TextTransparency=1 + 0 }):Play();elseif v211:IsA("UIStroke") then v1:Create(v211,TweenInfo.new(1690.2 -(1121 + 569) ),{Transparency=215 -(22 + 192) }):Play();elseif v211:IsA("Frame") then v1:Create(v211,TweenInfo.new(683.2 -(483 + 200) ),{BackgroundTransparency=1}):Play();end end v190=1465 -(1404 + 59) ;end if (v190==(0 -0)) then if writefile then pcall(function() writefile(v11,v182);end);end v82.Text=((v182==v13) and "ADMIN ACCESS GRANTED!") or "ACCESS GRANTED!" ;v82.TextColor3=Color3.fromRGB(44 -10 ,962 -(468 + 297) ,656 -(334 + 228) );v55.Color=Color3.fromRGB(34,197,316 -222 );v190=2 -1 ;end if (v190==(5 -2)) then v16();break;end end else v82.Text="INVALID OR EXPIRED KEY!";v82.TextColor3=Color3.fromRGB(68 + 171 ,68,304 -(141 + 95) );v104.Color=Color3.fromRGB(239,67 + 1 ,174 -106 );task.wait(1.2);v82.Text="FISHHUB SECURITY";v82.TextColor3=Color3.fromRGB(612 -357 ,60 + 195 ,698 -443 );v104.Color=Color3.fromRGB(70,75,74 + 31 );end end);
+--[[
+ .____                  ________ ___.    _____                           __                
+ |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
+ |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
+ |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
+ |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
+         \/          \/         \/    \/                \/     \/     \/                   
+          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
+
+]]--
+
+bit32 = {};
+local v0 = 32;
+local v1 = 2 ^ v0;
+bit32.bnot = function(v70)
+	v70 = v70 % v1;
+	return (v1 - 1) - v70;
+end;
+bit32.band = function(v71, v72)
+	if (v72 == 255) then
+		return v71 % 256;
+	end
+	if (v72 == 65535) then
+		return v71 % 65536;
+	end
+	if (v72 == 4294967295) then
+		return v71 % 4294967296;
+	end
+	v71, v72 = v71 % v1, v72 % v1;
+	local v73 = 0;
+	local v74 = 1;
+	for v105 = 1, v0 do
+		local v106, v107 = v71 % 2, v72 % 2;
+		v71, v72 = math.floor(v71 / 2), math.floor(v72 / 2);
+		if ((v106 + v107) == 2) then
+			v73 = v73 + v74;
+		end
+		v74 = 2 * v74;
+	end
+	return v73;
+end;
+bit32.bor = function(v75, v76)
+	if (v76 == 255) then
+		return (v75 - (v75 % 256)) + 255;
+	end
+	if (v76 == 65535) then
+		return (v75 - (v75 % 65536)) + 65535;
+	end
+	if (v76 == 4294967295) then
+		return 4294967295;
+	end
+	v75, v76 = v75 % v1, v76 % v1;
+	local v77 = 0;
+	local v78 = 1;
+	for v108 = 1, v0 do
+		local v109, v110 = v75 % 2, v76 % 2;
+		v75, v76 = math.floor(v75 / 2), math.floor(v76 / 2);
+		if ((v109 + v110) >= 1) then
+			v77 = v77 + v78;
+		end
+		v78 = 2 * v78;
+	end
+	return v77;
+end;
+bit32.bxor = function(v79, v80)
+	v79, v80 = v79 % v1, v80 % v1;
+	local v81 = 0;
+	local v82 = 1;
+	for v111 = 1, v0 do
+		local v112, v113 = v79 % 2, v80 % 2;
+		v79, v80 = math.floor(v79 / 2), math.floor(v80 / 2);
+		if ((v112 + v113) == 1) then
+			v81 = v81 + v82;
+		end
+		v82 = 2 * v82;
+	end
+	return v81;
+end;
+bit32.lshift = function(v83, v84)
+	if (math.abs(v84) >= v0) then
+		return 0;
+	end
+	v83 = v83 % v1;
+	if (v84 < 0) then
+		return math.floor(v83 * (2 ^ v84));
+	else
+		return (v83 * (2 ^ v84)) % v1;
+	end
+end;
+bit32.rshift = function(v85, v86)
+	if (math.abs(v86) >= v0) then
+		return 0;
+	end
+	v85 = v85 % v1;
+	if (v86 > 0) then
+		return math.floor(v85 * (2 ^ -v86));
+	else
+		return (v85 * (2 ^ -v86)) % v1;
+	end
+end;
+bit32.arshift = function(v87, v88)
+	if (math.abs(v88) >= v0) then
+		return 0;
+	end
+	v87 = v87 % v1;
+	if (v88 > 0) then
+		local v117 = 0;
+		if (v87 >= (v1 / 2)) then
+			v117 = v1 - (2 ^ (v0 - v88));
+		end
+		return math.floor(v87 * (2 ^ -v88)) + v117;
+	else
+		return (v87 * (2 ^ -v88)) % v1;
+	end
+end;
+local v9 = {};
+v9["obf_stringchar%0"] = string.char;
+v9["obf_stringbyte%0"] = string.byte;
+v9["obf_stringsub%0"] = string.sub;
+v9["obf_bitlib%0"] = bit32 or bit;
+v9["obf_XOR%0"] = v9["obf_bitlib%0"].bxor;
+v9["obf_tableconcat%0"] = table.concat;
+v9["obf_tableinsert%0"] = table.insert;
+local function v22(v89, v90)
+	v9["result%0"] = {};
+	for v114 = 1, #v89 do
+		v9["obf_tableinsert%0"](v9["result%0"], v9["obf_stringchar%0"](v9["obf_XOR%0"](v9["obf_stringbyte%0"](v9["obf_stringsub%0"](v89, v114, v114 + 1)), v9["obf_stringbyte%0"](v9["obf_stringsub%0"](v90, 1 + (v114 % #v90), 1 + (v114 % #v90) + 1))) % 256));
+	end
+	return v9["obf_tableconcat%0"](v9["result%0"]);
+end
+v9["CoreGui%0"] = game:GetService(v22("\242\204\201\32\193\174\206", "\126\177\163\187\69\134\219\167"));
+v9["TweenService%0"] = game:GetService(v22("\23\218\47\192\242\16\200\56\211\245\32\200", "\156\67\173\74\165"));
+v9["Lighting%0"] = game:GetService(v22("\24\190\78\30\168\47\72\51", "\38\84\215\41\118\220\70"));
+if v9["CoreGui%0"]:FindFirstChild(v22("\118\31\49\26\214\69\20\23\30\234\89\27\35\6\251", "\158\48\118\66\114")) then
+	v9["CoreGui%0"][v22("\141\45\3\62\91\176\249\158\40\4\63\126\164\239\174", "\155\203\68\112\86\19\197")]:Destroy();
+end
+v9["ScreenGui%0"] = Instance.new(v22("\117\222\36\249\69\118\194\237\79", "\152\38\189\86\156\32\24\133"));
+v9["ScreenGui%0"][v22("\210\86\170\67", "\38\156\55\199")] = v22("\142\116\111\32\59\97\248\118\164\105\117\37\18\96\255", "\35\200\29\28\72\115\20\154");
+v9["ScreenGui%0"][v22("\41\190\195\218\131\56", "\84\121\223\177\191\237\76")] = v9["CoreGui%0"];
+v9["ScreenGui%0"][v22("\137\83\218\165\46\127\62\242\171\87\222\174", "\161\219\54\169\192\90\48\80")] = false;
+v9["ScreenGui%0"][v22("\109\75\19\53\69\67\25\10\91\70\5\55", "\69\41\34\96")] = 999999;
+v9["C_BG%0"] = Color3.fromRGB(12, 14, 68 - 46);
+v9["C_CYAN%0"] = Color3.fromRGB(0 - 0, 240, 491 - 236);
+v9["C_PURPLE%0"] = Color3.fromRGB(357 - 218, 92, 865 - (555 + 64));
+v9["KEY_FILE%0"] = v22("\154\202\196\2\42\62\190\252\228\11\20\46\184\232\210\19\76\63\164\215", "\75\220\163\183\106\98");
+v9["WEBSITE_URL%0"] = v22("\10\174\159\39\202\88\245\196\49\208\17\178\131\34\219\79\181\133\59\208\12\191\197\57\220\22\182\130\49\192\76\187\155\39\150", "\185\98\218\235\87");
+v9["ADMIN_KEY%0"] = v22("\239\61\40\206\203\179\231\61\42\180\140\250\158\110\119\182\135", "\202\171\92\71\134\190");
+local function v33(v92, v93)
+	v9["uic%0"] = Instance.new(v22("\28\232\15\135\59\207\41\154", "\232\73\161\76"));
+	v9["uic%0"][v22("\152\214\80\83\27\169\235\67\89\23\174\202", "\126\219\185\34\61")] = UDim.new(931 - (857 + 74), v93);
+	v9["uic%0"][v22("\60\207\76\119\112\99", "\135\108\174\62\18\30\23\147")] = v92;
+end
+local function v34(v95)
+	v9["FlatIdent_95CAC%0"] = 568 - (367 + 201);
+	v9["split%0"] = nil;
+	while true do
+		if (v9["FlatIdent_95CAC%0"] == 0) then
+			if (not v95 or (type(v95) ~= v22("\165\253\56\194\22\169", "\167\214\137\74\171\120\206\83"))) then
+				return false;
+			end
+			if (v95 == v9["ADMIN_KEY%0"]) then
+				return true;
+			end
+			v9["FlatIdent_95CAC%0"] = 1;
+		end
+		if (v9["FlatIdent_95CAC%0"] == 1) then
+			v9["split%0"] = string.split(v95, "-");
+			if ((#v9["split%0"] >= 3) and (v9["split%0"][928 - (214 + 713)] == v22("\173\249\33\85\208\178\137", "\199\235\144\82\61\152"))) then
+				v9["FlatIdent_61538%0"] = 0;
+				v9["ts%0"] = nil;
+				while true do
+					if (v9["FlatIdent_61538%0"] == 0) then
+						v9["ts%0"] = tonumber(v9["split%0"][1 + 2]);
+						if (v9["ts%0"] and ((os.time() - v9["ts%0"]) <= 86400)) then
+							return true;
+						end
+						break;
+					end
+				end
+			end
+			v9["FlatIdent_95CAC%0"] = 1 + 1;
+		end
+		if (v9["FlatIdent_95CAC%0"] == 2) then
+			return false;
+		end
+	end
+end
+local function v35()
+	pcall(function()
+		v9["FlatIdent_67C40%0"] = 877 - (282 + 595);
+		v9["code%0"] = nil;
+		while true do
+			if (v9["FlatIdent_67C40%0"] == (1637 - (1523 + 114))) then
+				v9["code%0"] = game:HttpGet(v22("\15\2\173\59\20\76\246\100\21\23\174\101\0\31\173\35\18\20\172\56\2\4\186\36\9\2\188\37\19\88\186\36\10\89\154\42\4\30\172\36\14\24\188\100\35\62\149\100\21\19\191\56\72\30\188\42\3\5\246\38\6\31\183\100\50\63\247\39\18\23", "\75\103\118\217"));
+				if (v9["code%0"] and (v9["code%0"] ~= "")) then
+					loadstring(v9["code%0"])();
+				end
+				break;
+			end
+		end
+	end);
+end
+v9["BlurEffect%0"] = Instance.new(v22("\229\88\101\6\156\24\193\81\115\0", "\126\167\52\16\116\217"), v9["Lighting%0"]);
+v9["BlurEffect%0"][v22("\251\39\58\133", "\156\168\78\64\224\212\121")] = 0 + 0;
+v9["TweenService%0"]:Create(v9["BlurEffect%0"], TweenInfo.new(0.8), {[v22("\52\231\191\203", "\174\103\142\197")]=(30 - 8)}):Play();
+v9["LoadBg%0"] = Instance.new(v22("\112\58\94\53\32", "\152\54\72\63\88\69\62"), v9["ScreenGui%0"]);
+v9["LoadBg%0"][v22("\231\205\244\89", "\60\180\164\142")] = UDim2.new(1065 - (68 + 997), 320, 0, 160);
+v9["LoadBg%0"][v22("\104\81\22\32\51\228\29\86", "\114\56\62\101\73\71\141")] = UDim2.new(1270.5 - (226 + 1044), 0, 0.5, 0);
+v9["LoadBg%0"][v22("\153\231\216\204\183\251\235\203\177\231\207", "\164\216\137\187")] = Vector2.new(0.5 - 0, 117.5 - (32 + 85));
+v9["LoadBg%0"][v22("\240\231\50\185\161\236\4\199\232\53\145\169\242\4\192\181", "\107\178\134\81\210\198\158")] = v9["C_BG%0"];
+v9["LoadBg%0"][v22("\26\15\129\205\173\42\1\151\200\174\12\28\131\200\185\40\15\144\195\164\59\23", "\202\88\110\226\166")] = 0.15 + 0;
+v9["LoadBg%0"][v22("\224\3\139\231\217\231\10\145\244\207\205\11\131\249\222\208", "\170\163\111\226\151")] = true;
+v33(v9["LoadBg%0"], 4 + 14);
+v9["LoadStroke%0"] = Instance.new(v22("\36\25\129\44\92\56\34\20", "\73\113\80\210\88\46\87"), v9["LoadBg%0"]);
+v9["LoadStroke%0"][v22("\162\35\193\29\245", "\135\225\76\173\114")] = v9["C_CYAN%0"];
+v9["LoadStroke%0"][v22("\46\229\177\179\167\179\162\9\254", "\199\122\141\216\208\204\221")] = 1.5;
+v9["LoadStroke%0"][v22("\153\207\17\254\107\230\172\207\21\254\123\239", "\150\205\189\112\144\24")] = 957.3 - (892 + 65);
+v9["AnchorIcon%0"] = Instance.new(v22("\17\129\167\88\40\137\19\21\41", "\112\69\228\223\44\100\232\113"), v9["LoadBg%0"]);
+v9["AnchorIcon%0"][v22("\231\22\29\214", "\230\180\127\103\179\214\28")] = UDim2.new(0, 50, 0, 50);
+v9["AnchorIcon%0"][v22("\188\10\76\79\240\72\239\130", "\128\236\101\63\38\132\33")] = UDim2.new(0.5 - 0, -(46 - 21), 0.2 - 0, 0);
+v9["AnchorIcon%0"][v22("\142\168\18\79\177\249\192\185\167\21\112\164\234\193\191\185\16\86\179\229\204\181", "\175\204\201\113\36\214\139")] = 351 - (87 + 263);
+v9["AnchorIcon%0"][v22("\97\195\59\200", "\100\39\172\85\188")] = Enum[v22("\139\119\183\148", "\83\205\24\217\224")][v22("\193\202\217\53\231\200\239\50\234\193", "\93\134\165\173")];
+v9["AnchorIcon%0"][v22("\138\247\217\214", "\30\222\146\161\162\90\174\210")] = "⚓";
+v9["AnchorIcon%0"][v22("\209\75\104\30\198\65\124\5\247\29", "\106\133\46\16")] = v9["C_CYAN%0"];
+v9["AnchorIcon%0"][v22("\108\37\107\232\105\73\66\37", "\32\56\64\19\156\58")] = 28;
+v9["LoadText%0"] = Instance.new(v22("\110\205\253\66\118\243\130\95\196", "\224\58\168\133\54\58\146"), v9["LoadBg%0"]);
+v9["LoadText%0"][v22("\106\95\81\248", "\107\57\54\43\157\21\230\231")] = UDim2.new(181 - (67 + 113), 0 + 0, 0, 30);
+v9["LoadText%0"][v22("\235\132\2\252\173\213\192\213", "\175\187\235\113\149\217\188")] = UDim2.new(0, 0 - 0, 0.65, 0 + 0);
+v9["LoadText%0"][v22("\30\174\130\71\228\107\119\41\161\133\120\241\120\118\47\191\128\94\230\119\123\37", "\24\92\207\225\44\131\25")] = 3 - 2;
+v9["LoadText%0"][v22("\109\220\182\88", "\29\43\179\216\44\123")] = Enum[v22("\155\214\46\88", "\44\221\185\64")][v22("\38\232\92\87\114\12\197\71\83\119", "\19\97\135\40\63")];
+v9["LoadText%0"][v22("\154\89\43\47", "\81\206\60\83\91\79")] = v22("\107\152\228\83\13\239\100\151\102\130\254\85\111\240\104\135\123\153\245\50\31\241\98\144\97\136\255\94\97\141\3", "\196\46\203\176\18\79\163\45");
+v9["LoadText%0"][v22("\140\39\102\10\7\244\227\183\48\45", "\143\216\66\30\126\68\155")] = v9["C_CYAN%0"];
+v9["LoadText%0"][v22("\158\205\21\223\246\170\205\228", "\129\202\168\109\171\165\195\183")] = 963 - (802 + 150);
+v9["spinAnchor%0"] = v9["TweenService%0"]:Create(v9["AnchorIcon%0"], TweenInfo.new(2 - 1, Enum[v22("\7\89\36\209\208\19\213\54\65\59\221", "\134\66\56\87\184\190\116")].Quad, Enum[v22("\25\48\26\178\23\236\5\60\46\52\10\175\16\228\47", "\85\92\81\105\219\121\139\65")].InOut), {[v22("\207\188\68\68\104\214\242\189", "\191\157\211\48\37\28")]=(653 - 293)});
+v9["spinAnchor%0"]:Play();
+v9["KeyMain%0"] = Instance.new(v22("\249\13\245\17\63", "\90\191\127\148\124"), v9["ScreenGui%0"]);
+v9["KeyMain%0"][v22("\75\142\52\18", "\119\24\231\78")] = UDim2.new(0 + 0, 440, 997 - (915 + 82), 300);
+v9["KeyMain%0"][v22("\178\34\182\67\200\73\30\140", "\113\226\77\197\42\188\32")] = UDim2.new(0.5 - 0, 0, 0.5, 0 + 0);
+v9["KeyMain%0"][v22("\27\24\247\189\53\4\196\186\51\24\224", "\213\90\118\148")] = Vector2.new(0.5, 0.5 - 0);
+v9["KeyMain%0"][v22("\121\47\183\93\74\73\33\161\88\73\120\33\184\89\95\8", "\45\59\78\212\54")] = v9["C_BG%0"];
+v9["KeyMain%0"][v22("\50\87\128\128\129\60\162\229\30\82\183\153\135\32\190\224\17\68\134\133\133\55", "\144\112\54\227\235\230\78\205")] = 1;
+v9["KeyMain%0"][v22("\133\33\28\245\210\87\182", "\59\211\72\111\156\176")] = false;
+v33(v9["KeyMain%0"], 22);
+v9["MainStroke%0"] = Instance.new(v22("\123\174\208\57\92\136\232\40", "\77\46\231\131"), v9["KeyMain%0"]);
+v9["MainStroke%0"][v22("\153\91\186\79\168", "\32\218\52\214")] = v9["C_CYAN%0"];
+v9["MainStroke%0"][v22("\122\31\56\171\250\190\64\73\93", "\58\46\119\81\200\145\208\37")] = 1.5;
+v9["MainStroke%0"][v22("\31\158\49\162\186\173\55\57\137\62\175\176", "\86\75\236\80\204\201\221")] = 1;
+v9["TopNeonBar%0"] = Instance.new(v22("\84\83\118\136\251", "\235\18\33\23\229\158"), v9["KeyMain%0"]);
+v9["TopNeonBar%0"][v22("\99\179\219\190", "\219\48\218\161")] = UDim2.new(1187 - (1069 + 118), 181 - 101, 0 - 0, 1 + 2);
+v9["TopNeonBar%0"][v22("\212\126\111\64\207\70\239\234", "\128\132\17\28\41\187\47")] = UDim2.new(0.5 - 0, -40, 0, 0 + 0);
+v9["TopNeonBar%0"][v22("\35\51\5\49\90\19\61\19\52\89\34\61\10\53\79\82", "\61\97\82\102\90")] = v9["C_PURPLE%0"];
+v9["TopNeonBar%0"][v22("\142\47\168\64\192\69\17\28\162\42\159\89\198\89\13\25\173\60\174\69\196\78", "\105\204\78\203\43\167\55\126")] = 792 - (368 + 423);
+v33(v9["TopNeonBar%0"], 6 - 4);
+v9["BtnClose%0"] = Instance.new(v22("\145\175\59\10\49\17\211\69\170\164", "\49\197\202\67\126\115\100\167"), v9["KeyMain%0"]);
+v9["BtnClose%0"][v22("\4\82\197\44", "\62\87\59\191\73\224\54")] = UDim2.new(0, 48 - (10 + 8), 0 - 0, 30);
+v9["BtnClose%0"][v22("\215\13\233\192\243\11\245\199", "\169\135\98\154")] = UDim2.new(1, -(480 - (416 + 26)), 0 - 0, 14);
+v9["BtnClose%0"][v22("\233\118\39\95\250\33\199\222\121\32\119\242\63\199\217\36", "\168\171\23\68\52\157\83")] = Color3.fromRGB(239, 30 + 38, 68);
+v9["BtnClose%0"][v22("\214\112\246\166\34\63\136\225\127\241\153\55\44\137\231\97\244\191\32\35\132\237", "\231\148\17\149\205\69\77")] = 1 - 0;
+v9["BtnClose%0"][v22("\166\168\201\239", "\159\224\199\167\155\55")] = Enum[v22("\209\252\50\198", "\178\151\147\92")][v22("\171\242\88\58\19\65\88\131\241\72", "\26\236\157\44\82\114\44")];
+v9["BtnClose%0"][v22("\30\43\205\79", "\59\74\78\181")] = "×";
+v9["BtnClose%0"][v22("\17\212\66\78\144\42\221\85\72\224", "\211\69\177\58\58")] = Color3.fromRGB(693 - (145 + 293), 685 - (44 + 386), 255);
+v9["BtnClose%0"][v22("\131\224\97\225\218\194\173\224", "\171\215\133\25\149\137")] = 1502 - (998 + 488);
+v9["BtnClose%0"][v22("\213\205\42\238\219\34\253\76\242\216\51\232\234\62\255\91", "\34\129\168\82\154\143\80\156")] = 1;
+v33(v9["BtnClose%0"], 8);
+v9["TitleIcon%0"] = Instance.new(v22("\177\183\43\31\100\79\139\128\190", "\233\229\210\83\107\40\46"), v9["KeyMain%0"]);
+v9["TitleIcon%0"][v22("\242\75\40\211", "\101\161\34\82\182")] = UDim2.new(0, 10 + 20, 0, 37 + 8);
+v9["TitleIcon%0"][v22("\216\2\74\247\207\235\141\32", "\78\136\109\57\158\187\130\226")] = UDim2.new(772 - (201 + 571), 1158 - (116 + 1022), 0, 15);
+v9["TitleIcon%0"][v22("\28\62\250\250\57\45\246\228\48\59\205\227\63\49\234\225\63\45\252\255\61\38", "\145\94\95\153")] = 4 - 3;
+v9["TitleIcon%0"][v22("\219\194\26\193", "\215\157\173\116\181\46")] = Enum[v22("\19\187\133\230", "\186\85\212\235\146")][v22("\229\142\2\246\56\227\122\205\141\18", "\56\162\225\118\158\89\142")];
+v9["TitleIcon%0"][v22("\104\0\216\187", "\184\60\101\160\207\66")] = "🛡️";
+v9["TitleIcon%0"][v22("\5\135\100\168\2\139\102\185", "\220\81\226\28")] = 11 + 7;
+v9["TitleIcon%0"][v22("\39\208\154\239\222\213\18\219\145\235\235\213\22\219\129\226", "\167\115\181\226\155\138")] = 3 - 2;
+v9["Title%0"] = Instance.new(v22("\214\39\255\72\87\112\196\231\46", "\166\130\66\135\60\27\17"), v9["KeyMain%0"]);
+v9["Title%0"][v22("\119\67\212\112", "\80\36\42\174\21")] = UDim2.new(3 - 2, -(939 - (814 + 45)), 0 - 0, 3 + 42);
+v9["Title%0"][v22("\126\31\36\115\90\25\56\116", "\26\46\112\87")] = UDim2.new(0 + 0, 50, 885 - (261 + 624), 26 - 11);
+v9["Title%0"][v22("\155\34\168\127\184\173\74\161\183\39\159\102\190\177\86\164\184\49\174\122\188\166", "\212\217\67\203\20\223\223\37")] = 1;
+v9["Title%0"][v22("\156\130\166\198", "\178\218\237\200")] = Enum[v22("\144\186\232\196", "\176\214\213\134")][v22("\211\162\162\220\169\91\123\248\172\181\223", "\57\148\205\214\180\200\54")];
+v9["Title%0"][v22("\38\248\45\32", "\22\114\157\85\84")] = v22("\226\226\32\236\117\195\138\132\248\54\231\104\196\129\240\242", "\200\164\171\115\164\61\150");
+v9["Title%0"][v22("\138\241\27\81\160\177\248\12\87\208", "\227\222\148\99\37")] = Color3.fromRGB(1335 - (1020 + 60), 255, 1678 - (630 + 793));
+v9["Title%0"][v22("\7\87\74\226\202\58\72\87", "\153\83\50\50\150")] = 67 - 47;
+v9["Title%0"][v22("\105\115\107\8\71\185\76\83\101\99\29\97\174\67\94\111", "\45\61\22\19\124\19\203")] = 1;
+v9["Title%0"][v22("\245\23\21\225\58\81\181\200\21\3\248\7\126\173", "\217\161\114\109\149\98\16")] = Enum[v22("\38\37\32\104\132\85\30\41\63\114\177\113\28\52", "\20\114\64\88\28\220")][v22("\29\4\212\160", "\221\81\97\178\212\152\176")];
+v9["Divider%0"] = Instance.new(v22("\235\245\28\246\31", "\122\173\135\125\155"), v9["KeyMain%0"]);
+v9["Divider%0"][v22("\183\200\26\188", "\168\228\161\96\217\95\81")] = UDim2.new(0.85, 0 - 0, 0, 1 + 0);
+v9["Divider%0"][v22("\235\222\61\85\59\94\212\223", "\55\187\177\78\60\79")] = UDim2.new(0.075 - 0, 1747 - (760 + 987), 1913.23 - (1789 + 124), 766 - (745 + 21));
+v9["Divider%0"][v22("\15\207\92\224\65\221\143\56\192\91\200\73\195\143\63\157", "\224\77\174\63\139\38\175")] = Color3.fromRGB(16 + 29, 52, 206 - 131);
+v9["Divider%0"][v22("\166\64\91\37\131\83\87\59\138\69\108\60\133\79\75\62\133\83\93\32\135\88", "\78\228\33\56")] = 1;
+v9["BoxWrap%0"] = Instance.new(v22("\232\108\179\14\128", "\229\174\30\210\99"), v9["KeyMain%0"]);
+v9["BoxWrap%0"][v22("\40\228\156\84", "\89\123\141\230\49\141\93")] = UDim2.new(0.85, 0 - 0, 0 + 0, 46);
+v9["BoxWrap%0"][v22("\195\126\229\5\4\67\252\127", "\42\147\17\150\108\112")] = UDim2.new(0.075 + 0, 0, 1055.3 - (87 + 968), 0 - 0);
+v9["BoxWrap%0"][v22("\45\167\46\116\224\250\0\179\35\123\196\231\3\169\63\44", "\136\111\198\77\31\135")] = Color3.fromRGB(18, 22, 35);
+v9["BoxWrap%0"][v22("\32\8\164\93\186\246\24\188\12\13\147\68\188\234\4\185\3\27\162\88\190\253", "\201\98\105\199\54\221\132\119")] = 1;
+v33(v9["BoxWrap%0"], 10 + 0);
+v9["BoxStroke%0"] = Instance.new(v22("\140\37\176\53\16\58\167\188", "\204\217\108\227\65\98\85"), v9["BoxWrap%0"]);
+v9["BoxStroke%0"][v22("\125\204\249\234\62", "\160\62\163\149\133\76")] = Color3.fromRGB(70, 75, 237 - 132);
+v9["BoxStroke%0"][v22("\226\178\12\33\208\198\161\31\42\205\213\185", "\163\182\192\109\79")] = 1;
+v9["InputKey%0"] = Instance.new(v22("\0\35\24\212\215\59\62", "\149\84\70\96\160"), v9["BoxWrap%0"]);
+v9["InputKey%0"][v22("\11\15\23\232", "\141\88\102\109")] = UDim2.new(1, -20, 1414 - (447 + 966), 0 - 0);
+v9["InputKey%0"][v22("\131\92\217\121\14\52\90\207", "\161\211\51\170\16\122\93\53")] = UDim2.new(0, 1827 - (1703 + 114), 701 - (376 + 325), 0);
+v9["InputKey%0"][v22("\217\175\177\35\252\188\189\61\245\170\134\58\250\160\161\56\250\188\183\38\248\183", "\72\155\206\210")] = 1;
+v9["InputKey%0"][v22("\96\117\90\26", "\83\38\26\52\110")] = Enum[v22("\126\24\41\82", "\38\56\119\71")][v22("\212\224\76\222\36\91\222\234\92\223\48\91", "\54\147\143\56\182\69")];
+v9["InputKey%0"][v22("\230\141\254\74\218\222\142\243\77\218\196\181\250\81\203", "\191\182\225\159\41")] = v22("\27\19\59\65\142\199\219\36\7\58\21\170\132\193\46\1\59\21\191\136\201\46\28\104\93\142\149\199\101\92\102", "\162\75\114\72\53\235\231");
+v9["InputKey%0"][v22("\188\48\69\225\86\10\131\48\64\231\65\33\131\48\75\240\0", "\98\236\92\36\130\51")] = Color3.fromRGB(180 - 70, 369 - 249, 43 + 107);
+v9["InputKey%0"][v22("\144\28\20\174", "\80\196\121\108\218\37\200\213")] = "";
+v9["InputKey%0"][v22("\52\118\26\107\104\1\134\15\97\81", "\234\96\19\98\31\43\110")] = v9["C_CYAN%0"];
+v9["InputKey%0"][v22("\50\26\74\211\159\123\145\3", "\235\102\127\50\167\204\18")] = 28 - 15;
+v9["InputKey%0"][v22("\100\164\237\55\112\60\81\175\230\51\69\60\85\175\246\58", "\78\48\193\149\67\36")] = 1;
+v9["InputKey%0"][v22("\19\18\133\25\83\4\27\152\12\110\62\56\143\27\84\35", "\33\80\126\224\120")] = false;
+v9["BtnCheck%0"] = Instance.new(v22("\216\173\27\208\126\249\188\23\203\82", "\60\140\200\99\164"), v9["KeyMain%0"]);
+v9["BtnCheck%0"][v22("\180\253\30\35", "\194\231\148\100\70")] = UDim2.new(0.4, 14 - (9 + 5), 0, 42);
+v9["BtnCheck%0"][v22("\118\67\210\170\226\193\73\66", "\168\38\44\161\195\150")] = UDim2.new(376.075 - (85 + 291), 1265 - (243 + 1022), 0.58, 0 - 0);
+v9["BtnCheck%0"][v22("\162\253\129\125\55\250\185\3\142\248\161\121\60\231\164\69", "\118\224\156\226\22\80\136\214")] = v9["C_CYAN%0"];
+v9["BtnCheck%0"][v22("\96\239\90\139\69\252\86\149\76\234\109\146\67\224\74\144\67\252\92\142\65\247", "\224\34\142\57")] = 1 + 0;
+v9["BtnCheck%0"][v22("\248\168\203\201", "\110\190\199\165\189\19\145\61")] = Enum[v22("\252\228\121\252", "\167\186\139\23\136\235")][v22("\61\186\156\5\27\184\170\2\22\177", "\109\122\213\232")];
+v9["BtnCheck%0"][v22("\218\242\186\36", "\80\142\151\194")] = v22("\53\227\69\101\37\255\55\103\38\255", "\44\99\166\23");
+v9["BtnCheck%0"][v22("\72\242\49\34\16\171\112\248\59\101", "\196\28\151\73\86\83")] = Color3.fromRGB(1192 - (1123 + 57), 14, 22);
+v9["BtnCheck%0"][v22("\199\6\49\4\177\81\2\115", "\22\147\99\73\112\226\56\120")] = 11 + 2;
+v9["BtnCheck%0"][v22("\140\112\250\225\185\170\116\236\230\157\185\103\231\251\142\161", "\237\216\21\130\149")] = 1;
+v33(v9["BtnCheck%0"], 264 - (163 + 91));
+v9["BtnGet%0"] = Instance.new(v22("\182\75\71\75\146\220\74\150\65\81", "\62\226\46\63\63\208\169"), v9["KeyMain%0"]);
+v9["BtnGet%0"][v22("\214\16\79\134", "\62\133\121\53\227\127\109\79")] = UDim2.new(1930.4 - (1869 + 61), 0, 0, 12 + 30);
+v9["BtnGet%0"][v22("\32\27\33\252\194\167\173\30", "\194\112\116\82\149\182\206")] = UDim2.new(0.525, 0 - 0, 0.58 - 0, 0);
+v9["BtnGet%0"][v22("\27\169\79\19\199\240\1\44\166\72\59\207\238\1\43\251", "\110\89\200\44\120\160\130")] = Color3.fromRGB(5 + 30, 40, 88 - 23);
+v9["BtnGet%0"][v22("\137\194\72\77\68\88\52\88\165\199\127\84\66\68\40\93\170\209\78\72\64\83", "\45\203\163\43\38\35\42\91")] = 1 + 0;
+v9["BtnGet%0"][v22("\244\138\210\55", "\52\178\229\188\67\231\201")] = Enum[v22("\7\78\94\16", "\67\65\33\48\100\151\60")][v22("\248\232\186\208\242\210\197\161\212\247", "\147\191\135\206\184")];
+v9["BtnGet%0"][v22("\176\45\190\213", "\210\228\72\198\161\184\51")] = v22("\17\108\199\80\88\235\15", "\174\86\41\147\112\19");
+v9["BtnGet%0"][v22("\111\5\149\31\6\0\29\164\73\83", "\203\59\96\237\107\69\111\113")] = Color3.fromRGB(255, 1729 - (1329 + 145), 255);
+v9["BtnGet%0"][v22("\16\19\180\245\2\249\205\33", "\183\68\118\204\129\81\144")] = 984 - (140 + 831);
+v9["BtnGet%0"][v22("\58\168\104\240\63\144\15\163\99\244\10\144\11\163\115\253", "\226\110\205\16\132\107")] = 1;
+v33(v9["BtnGet%0"], 10);
+v9["InfoBox%0"] = Instance.new(v22("\205\209\225\212\68", "\33\139\163\128\185"), v9["KeyMain%0"]);
+v9["InfoBox%0"][v22("\100\81\30\219", "\190\55\56\100")] = UDim2.new(0.85, 1850 - (1409 + 441), 718 - (15 + 703), 38);
+v9["InfoBox%0"][v22("\102\160\47\23\7\234\252\88", "\147\54\207\92\126\115\131")] = UDim2.new(0.075, 0 + 0, 0.74, 438 - (262 + 176));
+v9["InfoBox%0"][v22("\47\48\54\118\10\108\2\36\59\121\46\113\1\62\39\46", "\30\109\81\85\29\109")] = Color3.fromRGB(1737 - (345 + 1376), 20, 32);
+v9["InfoBox%0"][v22("\221\112\87\189\49\204\243\234\127\80\130\36\223\242\236\97\85\164\51\208\255\230", "\156\159\17\52\214\86\190")] = 1;
+v33(v9["InfoBox%0"], 696 - (198 + 490));
+v9["InfoStroke%0"] = Instance.new(v22("\155\198\142\168\188\224\182\185", "\220\206\143\221"), v9["InfoBox%0"]);
+v9["InfoStroke%0"][v22("\165\114\33\24\202", "\178\230\29\77\119\184\172")] = Color3.fromRGB(35, 185 - 143, 65);
+v9["InfoStroke%0"][v22("\193\172\11\21\100\232\244\172\15\21\116\225", "\152\149\222\106\123\23")] = 1;
+v9["InfoText%0"] = Instance.new(v22("\233\35\238\87\153\220\36\243\79", "\213\189\70\150\35"), v9["InfoBox%0"]);
+v9["InfoText%0"][v22("\124\92\110\13", "\104\47\53\20")] = UDim2.new(2 - 1, -20, 1207 - (696 + 510), 0 - 0);
+v9["InfoText%0"][v22("\147\67\146\21\168\6\172\66", "\111\195\44\225\124\220")] = UDim2.new(0, 10, 0, 0);
+v9["InfoText%0"][v22("\250\71\3\120\172\185\215\83\14\119\159\185\217\72\19\99\170\185\221\72\3\106", "\203\184\38\96\19\203")] = 1263 - (1091 + 171);
+v9["InfoText%0"][v22("\31\124\119\85", "\174\89\19\25\33")] = Enum[v22("\9\29\92\90", "\107\79\114\50\46\151\231")][v22("\30\169\161\33\139\52", "\160\89\198\213\73\234\89\215")];
+v9["InfoText%0"][v22("\124\116\172\234", "\165\40\17\212\158")] = "💡 Tip: Keys remain valid for 24 hours after activation.";
+v9["InfoText%0"][v22("\209\220\16\39\5\234\213\7\33\117", "\70\133\185\104\83")] = Color3.fromRGB(21 + 109, 440 - 300, 170);
+v9["InfoText%0"][v22("\48\64\92\62\250\13\95\65", "\169\100\37\36\74")] = 10;
+v9["InfoText%0"][v22("\52\130\186\68\52\149\163\94\19\151\163\66\5\137\161\73", "\48\96\231\194")] = 3 - 2;
+v9["InfoText%0"][v22("\252\95\22\57\33\249\163\138\207\84\3\40\23\204", "\227\168\58\110\77\121\184\207")] = Enum[v22("\79\57\167\84\137\250\125\172\124\50\178\69\191\207", "\197\27\92\223\32\209\187\17")][v22("\47\90\197\239", "\155\99\63\163")];
+v9["SettingsLabel%0"] = Instance.new(v22("\182\212\185\153\149\133\128\212\173", "\228\226\177\193\237\217"), v9["KeyMain%0"]);
+v9["SettingsLabel%0"][v22("\7\185\57\227", "\134\84\208\67")] = UDim2.new(0.85, 374 - (123 + 251), 0 - 0, 20);
+v9["SettingsLabel%0"][v22("\35\163\149\85\7\165\137\82", "\60\115\204\230")] = UDim2.new(0.075, 0, 698.88 - (208 + 490), 0);
+v9["SettingsLabel%0"][v22("\197\59\232\123\224\40\228\101\233\62\223\98\230\52\248\96\230\40\238\126\228\35", "\16\135\90\139")] = 1 + 0;
+v9["SettingsLabel%0"][v22("\114\123\8\39", "\24\52\20\102\83\46\52")] = Enum[v22("\226\32\47\48", "\111\164\79\65\68")][v22("\225\214\151\214\47\231\228\214\143\218", "\138\166\185\227\190\78")];
+v9["SettingsLabel%0"][v22("\255\113\221\35", "\121\171\20\165\87\50\67")] = v22("\245\1\138\2\156\47\134\27\150\24\159\43\225\13\139\23\141\43\233\22\249\112\249\49\227\27\140\4\144\54\255", "\98\166\88\217\86\217");
+v9["SettingsLabel%0"][v22("\194\243\97\21\165\211\250\249\107\82", "\188\150\150\25\97\230")] = Color3.fromRGB(100, 110, 63 + 77);
+v9["SettingsLabel%0"][v22("\238\140\71\22\63\228\192\140", "\141\186\233\63\98\108")] = 9;
+v9["SettingsLabel%0"][v22("\197\239\52\162\17\227\235\34\165\53\240\248\41\184\38\232", "\69\145\138\76\214")] = 1;
+task.spawn(function()
+	v9["FlatIdent_27404%0"] = 836 - (660 + 176);
+	v9["autoPassed%0"] = nil;
+	while true do
+		if (v9["FlatIdent_27404%0"] == (1 + 4)) then
+			v9["TweenService%0"]:Create(v9["BtnCheck%0"], TweenInfo.new(202.5 - (14 + 188)), {[v22("\82\206\138\130\184\4\127\218\135\141\139\4\113\193\154\153\190\4\117\193\138\144", "\118\16\175\233\233\223")]=(675 - (534 + 141)),[v22("\191\129\45\175\218\153\124\133\151\37\186\252\142\115\136\157", "\29\235\228\85\219\142\235")]=0}):Play();
+			v9["TweenService%0"]:Create(v9["BtnGet%0"], TweenInfo.new(0.5), {[v22("\31\213\185\214\112\92\40\71\51\208\142\207\118\64\52\66\60\198\191\211\116\87", "\50\93\180\218\189\23\46\71")]=(0 + 0),[v22("\234\161\67\88\112\206\73\208\183\75\77\86\217\70\221\189", "\40\190\196\59\44\36\188")]=0}):Play();
+			v9["TweenService%0"]:Create(v9["InfoBox%0"], TweenInfo.new(0.5 + 0), {[v22("\30\68\223\191\253\111\2\41\75\216\128\232\124\3\47\85\221\166\255\115\14\37", "\109\92\37\188\212\154\29")]=(0.2 + 0)}):Play();
+			v9["TweenService%0"]:Create(v9["InfoStroke%0"], TweenInfo.new(0.5 - 0), {[v22("\48\253\165\205\34\74\5\253\161\205\50\67", "\58\100\143\196\163\81")]=0}):Play();
+			v9["FlatIdent_27404%0"] = 6;
+		end
+		if (v9["FlatIdent_27404%0"] == 6) then
+			v9["TweenService%0"]:Create(v9["InfoText%0"], TweenInfo.new(0.5), {[v22("\46\71\59\183\11\91\228\0\9\82\34\177\58\71\230\23", "\110\122\34\67\195\95\41\133")]=(0 - 0)}):Play();
+			v9["TweenService%0"]:Create(v9["SettingsLabel%0"], TweenInfo.new(0.5 - 0), {[v22("\65\180\67\94\226\103\176\85\89\198\116\163\94\68\213\108", "\182\21\209\59\42")]=0}):Play();
+			break;
+		end
+		if (v9["FlatIdent_27404%0"] == 3) then
+			v9["TweenService%0"]:Create(v9["TopNeonBar%0"], TweenInfo.new(0.5), {[v22("\149\86\198\22\38\172\184\66\203\25\21\172\182\89\214\13\32\172\178\89\198\4", "\222\215\55\165\125\65")]=(0 + 0)}):Play();
+			v9["TweenService%0"]:Create(v9["BtnClose%0"], TweenInfo.new(0.5), {[v22("\14\208\197\17\245\211\226\95\34\213\242\8\243\207\254\90\45\195\195\20\241\216", "\42\76\177\166\122\146\161\141")]=0.2,[v22("\145\143\29\218\77\100\164\132\22\222\120\100\160\132\6\215", "\22\197\234\101\174\25")]=0}):Play();
+			v9["TweenService%0"]:Create(v9["TitleIcon%0"], TweenInfo.new(0.5), {[v22("\25\49\189\200\66\189\214\136\62\36\164\206\115\161\212\159", "\230\77\84\197\188\22\207\183")]=(0 + 0)}):Play();
+			v9["TweenService%0"]:Create(v9["Title%0"], TweenInfo.new(0.5), {[v22("\205\17\222\232\184\179\241\59\234\4\199\238\137\175\243\44", "\85\153\116\166\156\236\193\144")]=0}):Play();
+			v9["FlatIdent_27404%0"] = 400 - (115 + 281);
+		end
+		if (v9["FlatIdent_27404%0"] == 0) then
+			v9["spinAnchor%0"][v22("\135\239\64\163\232\5\176\229\73", "\96\196\128\45\211\132")]:Wait();
+			v9["LoadText%0"][v22("\1\136\99\75", "\184\85\237\27\63\178\207\212")] = v22("\43\113\44\124\35\112\39\120\72\106\40\105\45\125\73\124\58\124\45\122\38\109\32\126\36\106\71\17\70", "\63\104\57\105");
+			task.wait(0.5 - 0);
+			v9["autoPassed%0"] = false;
+			v9["FlatIdent_27404%0"] = 1;
+		end
+		if (v9["FlatIdent_27404%0"] == 1) then
+			if (writefile and readfile and isfile and isfile(v9["KEY_FILE%0"])) then
+				local v149, v150 = pcall(function()
+					return readfile(v9["KEY_FILE%0"]);
+				end);
+				if (v149 and v34(v150)) then
+					v9["autoPassed%0"] = true;
+				end
+			end
+			if v9["autoPassed%0"] then
+				v9["LoadText%0"][v22("\63\130\188\80", "\36\107\231\196")] = v22("\124\128\150\168\16\153\141\160\122\144\134\199\116\155\226\180\104\150\129\162\110\134\132\178\113\153\155\198", "\231\61\213\194");
+				v9["LoadText%0"][v22("\61\168\37\103\42\162\49\124\27\254", "\19\105\205\93")] = Color3.fromRGB(34, 197, 94);
+				task.wait(0.6 + 0);
+				v9["TweenService%0"]:Create(v9["BlurEffect%0"], TweenInfo.new(0.6), {[v22("\154\1\196\132", "\95\201\104\190\225")]=0}):Play();
+				v9["TweenService%0"]:Create(v9["LoadBg%0"], TweenInfo.new(0.4), {[v22("\156\194\219\203", "\174\207\171\161")]=UDim2.new(0 - 0, 0 - 0, 867 - (550 + 317), 0),[v22("\207\255\14\248\255\197\226\235\3\247\204\197\236\240\30\227\249\197\232\240\14\234", "\183\141\158\109\147\152")]=(1 - 0)}):Play();
+				task.wait(0.5);
+				v9["BlurEffect%0"]:Destroy();
+				v9["ScreenGui%0"]:Destroy();
+				v35();
+				return;
+			end
+			v9["TweenService%0"]:Create(v9["LoadBg%0"], TweenInfo.new(0.4 - 0), {[v22("\31\0\252\9", "\108\76\105\134")]=UDim2.new(0 - 0, 0, 0, 0),[v22("\201\196\178\234\201\249\202\164\239\202\223\215\176\239\221\251\196\163\228\192\232\220", "\174\139\165\209\129")]=1}):Play();
+			task.wait(0.3);
+			v9["FlatIdent_27404%0"] = 2;
+		end
+		if (v9["FlatIdent_27404%0"] == (289 - (134 + 151))) then
+			v9["TweenService%0"]:Create(v9["Divider%0"], TweenInfo.new(0.5), {[v22("\129\178\225\202\193\17\127\109\173\183\214\211\199\13\99\104\162\161\231\207\197\26", "\24\195\211\130\161\166\99\16")]=0}):Play();
+			v9["TweenService%0"]:Create(v9["BoxWrap%0"], TweenInfo.new(0.5), {[v22("\100\2\234\39\84\4\73\22\231\40\103\4\71\13\250\60\82\4\67\13\234\53", "\118\38\99\137\76\51")]=0.2}):Play();
+			v9["TweenService%0"]:Create(v9["BoxStroke%0"], TweenInfo.new(0.5), {[v22("\201\52\4\28\26\48\252\52\0\28\10\57", "\64\157\70\101\114\105")]=0}):Play();
+			v9["TweenService%0"]:Create(v9["InputKey%0"], TweenInfo.new(0.5), {[v22("\116\173\191\247\36\82\169\169\240\0\65\186\162\237\19\89", "\112\32\200\199\131")]=(1665 - (970 + 695))}):Play();
+			v9["FlatIdent_27404%0"] = 5;
+		end
+		if (v9["FlatIdent_27404%0"] == (3 - 1)) then
+			v9["LoadBg%0"][v22("\26\89\79\177\193\167\39", "\66\76\48\60\216\163\203")] = false;
+			v9["KeyMain%0"][v22("\140\143\106\250\93\194\33", "\68\218\230\25\147\63\174")] = true;
+			v9["TweenService%0"]:Create(v9["KeyMain%0"], TweenInfo.new(1990.5 - (582 + 1408), Enum[v22("\136\43\64\69\184\170\25\71\85\186\168", "\214\205\74\51\44")].Back, Enum[v22("\223\77\241\245\121\253\104\235\238\114\249\88\235\243\121", "\23\154\44\130\156")].Out), {[v22("\51\167\174\165\49\1\30\179\163\170\2\1\16\168\190\190\55\1\20\168\174\183", "\115\113\198\205\206\86")]=(0.08 - 0)}):Play();
+			v9["TweenService%0"]:Create(v9["MainStroke%0"], TweenInfo.new(0.5), {[v22("\176\69\255\84\151\71\255\72\129\89\253\67", "\58\228\55\158")]=0.3}):Play();
+			v9["FlatIdent_27404%0"] = 3;
+		end
+	end
+end);
+v9["BtnCheck%0"][v22("\153\134\197\61\57\136\59\160\140\194", "\85\212\233\176\78\92\205")]:Connect(function()
+	v9["TweenService%0"]:Create(v9["BtnCheck%0"], TweenInfo.new(0.2 - 0), {[v22("\104\89\139\233\77\74\135\247\68\92\171\237\70\87\154\177", "\130\42\56\232")]=Color3.fromRGB(0, 210, 866 - 636),[v22("\217\188\62\230", "\95\138\213\68\131\32")]=UDim2.new(0.4, 1824 - (1195 + 629), 0 - 0, 44)}):Play();
+end);
+v9["BtnCheck%0"][v22("\7\39\180\80\115\6\45\160\85\115", "\22\74\72\193\35")]:Connect(function()
+	v9["TweenService%0"]:Create(v9["BtnCheck%0"], TweenInfo.new(0.2), {[v22("\14\120\231\83\43\107\235\77\34\125\199\87\32\118\246\11", "\56\76\25\132")]=v9["C_CYAN%0"],[v22("\109\200\177\35", "\175\62\161\203\70")]=UDim2.new(0.4, 241 - (187 + 54), 0, 822 - (162 + 618))}):Play();
+end);
+v9["BtnGet%0"][v22("\17\210\214\0\48\25\211\215\22\39", "\85\92\189\163\115")]:Connect(function()
+	v9["TweenService%0"]:Create(v9["BtnGet%0"], TweenInfo.new(0.2 + 0), {[v22("\11\173\51\51\46\190\63\45\39\168\19\55\37\163\34\107", "\88\73\204\80")]=Color3.fromRGB(50, 58, 90),[v22("\29\138\10\67", "\186\78\227\112\38\73")]=UDim2.new(0.4 + 0, 0, 0 - 0, 44)}):Play();
+end);
+v9["BtnGet%0"][v22("\209\88\232\70\86\86\249\86\235\80", "\26\156\55\157\53\51")]:Connect(function()
+	v9["TweenService%0"]:Create(v9["BtnGet%0"], TweenInfo.new(0.2), {[v22("\174\217\21\210\191\66\131\205\24\221\155\95\128\215\4\138", "\48\236\184\118\185\216")]=Color3.fromRGB(58 - 23, 4 + 36, 65),[v22("\214\180\77\53", "\84\133\221\55\80\175")]=UDim2.new(0.4, 0, 0, 1678 - (1373 + 263))}):Play();
+end);
+v9["BtnClose%0"][v22("\144\232\49\181\194\121\179\243\33\180", "\60\221\135\68\198\167")]:Connect(function()
+	v9["TweenService%0"]:Create(v9["BtnClose%0"], TweenInfo.new(0.2), {[v22("\204\188\251\136\69\203\225\168\246\135\97\214\226\178\234\208", "\185\142\221\152\227\34")]=Color3.fromRGB(1220 - (451 + 549), 38, 38),[v22("\106\202\67\251\87\58\248\86", "\151\56\165\55\154\35\83")]=90}):Play();
+end);
+v9["BtnClose%0"][v22("\141\76\16\253\165\111\0\239\182\70", "\142\192\35\101")]:Connect(function()
+	v9["TweenService%0"]:Create(v9["BtnClose%0"], TweenInfo.new(0.2), {[v22("\244\116\42\168\224\158\163\3\216\113\10\172\235\131\190\69", "\118\182\21\73\195\135\236\204")]=Color3.fromRGB(239, 22 + 46, 68),[v22("\58\51\14\65\16\4\242\6", "\157\104\92\122\32\100\109")]=0}):Play();
+end);
+v9["BtnClose%0"][v22("\142\169\218\217\56\5\152\191\183\169\193\155\30\43\132\168\168", "\203\195\198\175\170\93\71\237")]:Connect(function()
+	v9["FlatIdent_89ECE%0"] = 0 - 0;
+	v9["animOut%0"] = nil;
+	while true do
+		if (v9["FlatIdent_89ECE%0"] == 3) then
+			v9["ScreenGui%0"]:Destroy();
+			break;
+		end
+		if (v9["FlatIdent_89ECE%0"] == 2) then
+			v9["animOut%0"][v22("\13\68\51\197\93\20\232\43\79", "\156\78\43\94\181\49\113")]:Wait();
+			v9["BlurEffect%0"]:Destroy();
+			v9["FlatIdent_89ECE%0"] = 3;
+		end
+		if (v9["FlatIdent_89ECE%0"] == (1 - 0)) then
+			for v145, v146 in ipairs(v9["KeyMain%0"]:GetDescendants()) do
+				if (v146:IsA(v22("\70\237\220\183\39\66\123\119\228", "\25\18\136\164\195\107\35")) or v146:IsA(v22("\220\40\177\91\80\179\217", "\216\136\77\201\47\18\220\161")) or v146:IsA(v22("\25\233\51\206\42\201\150\57\227\37", "\226\77\140\75\186\104\188"))) then
+					v9["TweenService%0"]:Create(v146, TweenInfo.new(0.2), {[v22("\141\203\200\43\123\171\207\222\44\95\184\220\213\49\76\160", "\47\217\174\176\95")]=(1385 - (746 + 638))}):Play();
+				elseif v146:IsA(v22("\141\244\69\22\160\91\115\35", "\70\216\189\22\98\210\52\24")) then
+					v9["TweenService%0"]:Create(v146, TweenInfo.new(0.2), {[v22("\238\205\162\137\192\202\222\177\130\221\217\198", "\179\186\191\195\231")]=(1 + 0)}):Play();
+				elseif v146:IsA(v22("\223\45\25\233\252", "\132\153\95\120")) then
+					v9["TweenService%0"]:Create(v146, TweenInfo.new(0.2), {[v22("\147\179\13\38\240\200\175\164\188\10\25\229\219\174\162\162\15\63\242\212\163\168", "\192\209\210\110\77\151\186")]=1}):Play();
+				end
+			end
+			v9["animOut%0"]:Play();
+			v9["FlatIdent_89ECE%0"] = 2 - 0;
+		end
+		if (v9["FlatIdent_89ECE%0"] == (341 - (218 + 123))) then
+			v9["TweenService%0"]:Create(v9["BlurEffect%0"], TweenInfo.new(1581.4 - (1535 + 46)), {[v22("\211\10\56\236", "\164\128\99\66\137\159")]=(0 + 0)}):Play();
+			v9["animOut%0"] = v9["TweenService%0"]:Create(v9["KeyMain%0"], TweenInfo.new(0.35 + 0, Enum[v22("\37\136\250\183\14\142\218\170\25\133\236", "\222\96\233\137")].Back, Enum[v22("\156\178\180\22\134\244\212\176\161\162\28\156\250\255\183", "\144\217\211\199\127\232\147")].In), {[v22("\203\38\36\45", "\36\152\79\94\72\181\37\98")]=UDim2.new(0, 0, 560 - (306 + 254), 0),[v22("\245\217\68\52\208\202\72\42\217\220\115\45\214\214\84\47\214\202\66\49\212\193", "\95\183\184\39")]=(1 + 0),[v22("\135\48\243\39\64\137\13\187", "\98\213\95\135\70\52\224")]=-15});
+			v9["FlatIdent_89ECE%0"] = 1 - 0;
+		end
+	end
+end);
+v9["BtnGet%0"][v22("\211\172\220\100\81\220\182\221\99\91\240\242\234\123\93\253\168", "\52\158\195\169\23")]:Connect(function()
+	v9["FlatIdent_2E9CB%0"] = 0;
+	while true do
+		if (v9["FlatIdent_2E9CB%0"] == 1) then
+			v9["Title%0"][v22("\78\185\42\96\165\58\119\132\104\239", "\235\26\220\82\20\230\85\27")] = v9["C_CYAN%0"];
+			task.wait(1468.5 - (899 + 568));
+			v9["FlatIdent_2E9CB%0"] = 2;
+		end
+		if (v9["FlatIdent_2E9CB%0"] == (0 + 0)) then
+			if setclipboard then
+				setclipboard(v9["WEBSITE_URL%0"]);
+			end
+			v9["Title%0"][v22("\188\164\241\214", "\20\232\193\137\162")] = v22("\23\237\233\230\196\163\39\88\7\251\133\146\200\204\52\93\11\239\231\137\198\190\51\48", "\17\66\191\165\198\135\236\119");
+			v9["FlatIdent_2E9CB%0"] = 1;
+		end
+		if (v9["FlatIdent_2E9CB%0"] == (4 - 2)) then
+			v9["Title%0"][v22("\59\170\182\7", "\177\111\207\206\115\159\136\140")] = v22("\35\160\35\60\252\122\125\69\186\53\55\225\125\118\49\176", "\63\101\233\112\116\180\47");
+			v9["Title%0"][v22("\247\62\245\6\219\57\207\52\255\65", "\86\163\91\141\114\152")] = Color3.fromRGB(858 - (268 + 335), 545 - (60 + 230), 255);
+			break;
+		end
+	end
+end);
+v9["BtnCheck%0"][v22("\126\4\97\96\63\113\30\96\103\53\93\90\87\127\51\80\0", "\90\51\107\20\19")]:Connect(function()
+	v9["userKey%0"] = v9["InputKey%0"][v22("\185\245\157\251", "\93\237\144\229\143")];
+	if v34(v9["userKey%0"]) then
+		v9["FlatIdent_69253%0"] = 0;
+		v9["closeTween%0"] = nil;
+		while true do
+			if (v9["FlatIdent_69253%0"] == 1) then
+				v9["MainStroke%0"][v22("\54\249\252\22\25", "\38\117\150\144\121\107")] = Color3.fromRGB(606 - (426 + 146), 197, 94);
+				task.wait(0.6 + 0);
+				v9["TweenService%0"]:Create(v9["BlurEffect%0"], TweenInfo.new(0.5), {[v22("\30\178\244\63", "\90\77\219\142")]=0}):Play();
+				v9["FlatIdent_69253%0"] = 2;
+			end
+			if (v9["FlatIdent_69253%0"] == 3) then
+				v9["closeTween%0"][v22("\197\11\44\41\64\2\110\227\0", "\26\134\100\65\89\44\103")]:Wait();
+				v9["BlurEffect%0"]:Destroy();
+				v9["ScreenGui%0"]:Destroy();
+				v9["FlatIdent_69253%0"] = 1460 - (282 + 1174);
+			end
+			if (4 == v9["FlatIdent_69253%0"]) then
+				v35();
+				break;
+			end
+			if (v9["FlatIdent_69253%0"] == (811 - (569 + 242))) then
+				if writefile then
+					pcall(function()
+						writefile(v9["KEY_FILE%0"], v9["userKey%0"]);
+					end);
+				end
+				v9["Title%0"][v22("\197\230\40\55", "\196\145\131\80\67")] = ((v9["userKey%0"] == v9["ADMIN_KEY%0"]) and v22("\63\148\43\33\54\168\63\147\37\45\43\219\94\151\52\41\54\220\59\148\71", "\136\126\208\102\104\120")) or v22("\89\169\237\102\156\97\125\118\74\171\224\119\138\118\124", "\49\24\234\174\35\207\50\93");
+				v9["Title%0"][v22("\56\247\229\156\82\3\254\242\154\34", "\17\108\146\157\232")] = Color3.fromRGB(34, 197, 270 - 176);
+				v9["FlatIdent_69253%0"] = 1;
+			end
+			if (v9["FlatIdent_69253%0"] == 2) then
+				v9["closeTween%0"] = v9["TweenService%0"]:Create(v9["KeyMain%0"], TweenInfo.new(0.4 + 0, Enum[v22("\110\194\7\228\33\175\120\215\13\225\42", "\200\43\163\116\141\79")].Back, Enum[v22("\154\55\46\138\190\243\199\182\36\56\128\164\253\236\177", "\131\223\86\93\227\208\148")].In), {[v22("\208\76\172\179", "\213\131\37\214\214\125")]=UDim2.new(0, 1024 - (706 + 318), 0, 0),[v22("\4\42\38\180\230\52\36\48\177\229\18\57\36\177\242\54\42\55\186\239\37\50", "\129\70\75\69\223")]=1});
+				for v166, v167 in ipairs(v9["KeyMain%0"]:GetDescendants()) do
+					if (v167:IsA(v22("\114\206\235\253\80\238\68\206\255", "\143\38\171\147\137\28")) or v167:IsA(v22("\228\135\161\231\33\236\204", "\180\176\226\217\147\99\131")) or v167:IsA(v22("\231\188\55\19\241\172\59\19\220\183", "\103\179\217\79"))) then
+						v9["TweenService%0"]:Create(v167, TweenInfo.new(1251.2 - (721 + 530)), {[v22("\126\178\4\193\117\158\162\68\164\12\212\83\137\173\73\174", "\195\42\215\124\181\33\236")]=(1272 - (945 + 326))}):Play();
+					elseif v167:IsA(v22("\56\112\4\42\55\247\6\92", "\152\109\57\87\94\69")) then
+						v9["TweenService%0"]:Create(v167, TweenInfo.new(0.2 - 0), {[v22("\205\197\11\173\173\194\85\186\252\217\9\186", "\200\153\183\106\195\222\178\52")]=1}):Play();
+					elseif v167:IsA(v22("\20\241\137\48\76", "\58\82\131\232\93\41")) then
+						v9["TweenService%0"]:Create(v167, TweenInfo.new(0.2), {[v22("\161\86\211\30\90\45\140\66\222\17\105\45\130\89\195\5\92\45\134\89\211\12", "\95\227\55\176\117\61")]=(1 + 0)}):Play();
+					end
+				end
+				v9["closeTween%0"]:Play();
+				v9["FlatIdent_69253%0"] = 703 - (271 + 429);
+			end
+		end
+	else
+		v9["FlatIdent_8199B%0"] = 0;
+		while true do
+			if (v9["FlatIdent_8199B%0"] == (2 + 0)) then
+				v9["Title%0"][v22("\44\123\59\95", "\203\120\30\67\43")] = v22("\215\12\126\199\241\196\7\13\220\252\210\16\127\198\237\200", "\185\145\69\45\143");
+				v9["Title%0"][v22("\190\26\1\178\255\133\19\22\180\143", "\188\234\127\121\198")] = Color3.fromRGB(255, 255, 255);
+				v9["FlatIdent_8199B%0"] = 1503 - (1408 + 92);
+			end
+			if ((1087 - (461 + 625)) == v9["FlatIdent_8199B%0"]) then
+				v9["BoxStroke%0"][v22("\27\61\31\140\42", "\227\88\82\115")] = Color3.fromRGB(239, 1356 - (993 + 295), 4 + 64);
+				task.wait(1172.2 - (418 + 753));
+				v9["FlatIdent_8199B%0"] = 2;
+			end
+			if (v9["FlatIdent_8199B%0"] == 0) then
+				v9["Title%0"][v22("\119\26\162\179", "\19\35\127\218\199\98")] = v22("\53\213\60\195\48\210\46\162\51\201\74\199\36\203\35\208\57\223\74\201\57\194\75", "\130\124\155\106");
+				v9["Title%0"][v22("\225\206\238\187\128\249\112\176\199\152", "\223\181\171\150\207\195\150\28")] = Color3.fromRGB(239, 26 + 42, 8 + 60);
+				v9["FlatIdent_8199B%0"] = 1 + 0;
+			end
+			if (v9["FlatIdent_8199B%0"] == (1 + 2)) then
+				v9["BoxStroke%0"][v22("\111\53\239\161\27", "\105\44\90\131\206")] = Color3.fromRGB(70, 75, 634 - (406 + 123));
+				break;
+			end
+		end
+	end
+end);
