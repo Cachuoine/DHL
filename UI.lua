@@ -525,18 +525,20 @@ task.spawn(function()
     end
 end)
 
+-- ĐÃ TĂNG CHIỀU RỘNG SIDEBAR LÊN 190 ĐỂ KHÔNG BỊ TRÀN CHỮ[cite: 2]
 local sidebar = Instance.new("Frame")
 sidebar.Parent = content
 sidebar.Position = UDim2.new(0, 0, 0, 0)
-sidebar.Size = UDim2.new(0, 170, 1, 0)
+sidebar.Size = UDim2.new(0, 190, 1, 0)
 sidebar.BackgroundColor3 = Config.BgSidebar
 sidebar.BorderSizePixel = 0
 Instance.new("UICorner", sidebar).CornerRadius = UDim.new(0, 14)
 
+-- DỊCH CHUYỂN KHUNG NỘI DUNG SANG PHẢI TƯƠNG ỨNG[cite: 2]
 local pageContainer = Instance.new("Frame")
 pageContainer.Parent = content
-pageContainer.Position = UDim2.new(0, 175, 0, 0)
-pageContainer.Size = UDim2.new(1, -175, 1, 0)
+pageContainer.Position = UDim2.new(0, 195, 0, 0)
+pageContainer.Size = UDim2.new(1, -195, 1, 0)
 pageContainer.BackgroundTransparency = 1
 
 local Indicator = Instance.new("Frame")
@@ -1073,11 +1075,12 @@ end
 
 local SideButtons = {}
 
+-- ĐÃ TỐI ƯU CỠ CHỮ, KHOẢNG CÁCH ICON VÀ VỊ TRÍ ĐỂ VỪA KHÍT VỚI SIDEBAR[cite: 2]
 local function CreateSideButton(textKey, y, image)
     local btn = Instance.new("TextButton")
     btn.Parent = sidebar
-    btn.Size = UDim2.new(1, -20, 0, 42)
-    btn.Position = UDim2.new(0, 10, 0, y)
+    btn.Size = UDim2.new(1, -16, 0, 42)
+    btn.Position = UDim2.new(0, 8, 0, y)
     btn.BackgroundColor3 = Color3.fromRGB(26, 26, 32)
     btn.BorderSizePixel = 0
     btn.Text = ""
@@ -1087,16 +1090,16 @@ local function CreateSideButton(textKey, y, image)
     local dot = Instance.new("Frame")
     dot.Name = "Dot"
     dot.Parent = btn
-    dot.Size = UDim2.new(0, 8, 0, 8)
-    dot.Position = UDim2.new(0, 10, 0.5, -4)
+    dot.Size = UDim2.new(0, 6, 0, 6)
+    dot.Position = UDim2.new(0, 8, 0.5, -3)
     dot.BackgroundColor3 = Config.ThemeColor
     dot.BorderSizePixel = 0
     Instance.new("UICorner", dot).CornerRadius = UDim.new(1, 0)
 
     local icon = Instance.new("ImageLabel")
     icon.Parent = btn
-    icon.Size = UDim2.new(0, 18, 0, 18)
-    icon.Position = UDim2.new(0, 24, 0.5, -9)
+    icon.Size = UDim2.new(0, 16, 0, 16)
+    icon.Position = UDim2.new(0, 18, 0.5, -8)
     icon.BackgroundTransparency = 1
     icon.Image = image
     icon.ImageColor3 = Color3.fromRGB(220, 220, 220)
@@ -1106,11 +1109,11 @@ local function CreateSideButton(textKey, y, image)
     lbl.Parent = btn
     lbl.Name = "Label"
     lbl.BackgroundTransparency = 1
-    lbl.Position = UDim2.new(0, 48, 0, 0)
-    lbl.Size = UDim2.new(1, -48, 1, 0)
+    lbl.Position = UDim2.new(0, 40, 0, 0)
+    lbl.Size = UDim2.new(1, -40, 1, 0)
     lbl.Text = L(textKey)
     lbl.Font = Enum.Font.GothamBold
-    lbl.TextSize = 13
+    lbl.TextSize = 11.5
     lbl.TextColor3 = Color3.fromRGB(240, 240, 240)
     lbl.TextXAlignment = Enum.TextXAlignment.Left
 
