@@ -25,7 +25,7 @@ local SupportedCategories = {
     {
         CategoryName = "⚔️ Anime & RPG",
         Games = {
-            { Name = "Evomon", PlaceIds = {134381727982611}, Icon = "rbxassetid://108029482244357" }, -- Đã cập nhật PlaceId chuẩn của Evomon
+            { Name = "Evomon", PlaceIds = {134381727982611}, Icon = "rbxassetid://108029482244357" },
             { Name = "Blox Fruits", PlaceIds = {2753915549, 4442272183, 7449423635}, Icon = "rbxassetid://108029482244357" },
             { Name = "King Legacy", PlaceIds = {4520749081, 6381829480}, Icon = "rbxassetid://108029482244357" },
             { Name = "Grand Piece Online", PlaceIds = {1730877819}, Icon = "rbxassetid://108029482244357" },
@@ -195,13 +195,14 @@ gui.IgnoreGuiInset = true
 gui.Parent = PlayerGui
 
 ----------------------------------------------------------------------
--- DEBUG OVERLAY
+-- DEBUG OVERLAY (CÓ THỂ KÉO THẢ DI CHUYỂN QUANH MÀN HÌNH)
 ----------------------------------------------------------------------
 local debugFrame = Instance.new("Frame")
 debugFrame.Name = "DebugOverlay"
 debugFrame.Parent = gui
 debugFrame.Size = UDim2.new(0, 215, 0, 78)
-debugFrame.Position = UDim2.new(1, -225, 0, 20)
+debugFrame.Position = UDim2.new(0.5, 0, 0, 15)
+debugFrame.AnchorPoint = Vector2.new(0.5, 0)
 debugFrame.BackgroundColor3 = Config.BgMain
 debugFrame.BackgroundTransparency = 0.15
 debugFrame.BorderSizePixel = 0
@@ -225,6 +226,31 @@ debugText.TextColor3 = Color3.fromRGB(240, 240, 240)
 debugText.TextXAlignment = Enum.TextXAlignment.Left
 debugText.TextYAlignment = Enum.TextYAlignment.Top
 debugText.RichText = true
+
+local debugDragging, debugDragStart, debugStartPos
+debugFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        debugDragging = true
+        debugDragStart = input.Position
+        debugStartPos = debugFrame.AbsolutePosition
+        
+        debugFrame.AnchorPoint = Vector2.new(0, 0)
+        debugFrame.Position = UDim2.new(0, debugStartPos.X, 0, debugStartPos.Y)
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                debugDragging = false
+            end
+        end)
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) and debugDragging then
+        local delta = input.Position - debugDragStart
+        debugFrame.Position = UDim2.new(0, debugStartPos.X + delta.X, 0, debugStartPos.Y + delta.Y)
+    end
+end)
 
 local frameCount = 0
 local lastFpsUpdate = os.clock()
@@ -294,7 +320,7 @@ task.spawn(function()
 end)
 
 ----------------------------------------------------------------------
--- MAIN HUB UI
+-- MAIN HUB UI (ĐÃ CỐ ĐỊNH, KHÔNG KÉO THẢ)
 ----------------------------------------------------------------------
 local openLine = Instance.new("Frame")
 openLine.Parent = gui
@@ -426,27 +452,6 @@ header.Parent = main
 header.Size = UDim2.new(1, 0, 0, 46)
 header.BackgroundTransparency = 1
 
-local dragging, dragStart, startPos
-header.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragging = true
-        dragStart = input.Position
-        startPos = main.Position
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-    if (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) and dragging then
-        local delta = input.Position - dragStart
-        main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    end
-end)
-
 local title = Instance.new("TextLabel")
 title.Parent = header
 title.BackgroundTransparency = 1
@@ -551,7 +556,7 @@ end
 OpenHome = function() ClearContent() end
 
 ----------------------------------------------------------------------
--- PHẦN SUPPORT GAME (EVOMON -> WORKING / XANH NHÁY, CÒN LẠI -> NOT WORKING / ĐỎ NHÁY)
+-- PHẦN SUPPORT GAME
 ----------------------------------------------------------------------
 OpenSupport = function()
     ClearContent()
@@ -628,7 +633,6 @@ OpenSupport = function()
                 end
             end
 
-            -- Kiểm tra xem có phải Evomon hay không
             local isEvomon = (gameData.Name == "Evomon")
 
             local card = Instance.new("Frame")
@@ -680,7 +684,6 @@ OpenSupport = function()
             gameTitle.TextColor3 = isCurrentGame and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(200, 200, 210)
             gameTitle.TextXAlignment = Enum.TextXAlignment.Left
 
-            -- Huy hiệu trạng thái (Evomon = WORKING màu xanh lá nháy, Các game khác = NOT WORKING màu đỏ nháy)
             local badgeWidth = isEvomon and 100 or 112
             local badge = Instance.new("Frame")
             badge.Parent = card
@@ -709,7 +712,6 @@ OpenSupport = function()
             badgeText.TextColor3 = Color3.fromRGB(255, 255, 255)
             badgeText.TextXAlignment = Enum.TextXAlignment.Center
 
-            -- Hiệu ứng nhấp nháy cho vòng tròn trạng thái
             task.spawn(function()
                 while badge and badge.Parent do
                     TweenService:Create(circleGreenRed, TweenInfo.new(0.6), {BackgroundTransparency = 0.2}):Play()
