@@ -195,7 +195,7 @@ gui.IgnoreGuiInset = true
 gui.Parent = PlayerGui
 
 ----------------------------------------------------------------------
--- DEBUG OVERLAY (CÓ THỂ KÉO THẢ DI CHUYỂN QUANH MÀN HÌNH)
+-- DEBUG OVERLAY
 ----------------------------------------------------------------------
 local debugFrame = Instance.new("Frame")
 debugFrame.Name = "DebugOverlay"
@@ -320,7 +320,7 @@ task.spawn(function()
 end)
 
 ----------------------------------------------------------------------
--- MAIN HUB UI (ĐÃ CỐ ĐỊNH, KHÔNG KÉO THẢ)
+-- MAIN HUB UI
 ----------------------------------------------------------------------
 local openLine = Instance.new("Frame")
 openLine.Parent = gui
@@ -528,15 +528,15 @@ end)
 local sidebar = Instance.new("Frame")
 sidebar.Parent = content
 sidebar.Position = UDim2.new(0, 0, 0, 0)
-sidebar.Size = UDim2.new(0, 170, 1, 0)
+sidebar.Size = UDim2.new(0, 190, 1, 0)
 sidebar.BackgroundColor3 = Config.BgSidebar
 sidebar.BorderSizePixel = 0
 Instance.new("UICorner", sidebar).CornerRadius = UDim.new(0, 14)
 
 local pageContainer = Instance.new("Frame")
 pageContainer.Parent = content
-pageContainer.Position = UDim2.new(0, 175, 0, 0)
-pageContainer.Size = UDim2.new(1, -175, 1, 0)
+pageContainer.Position = UDim2.new(0, 195, 0, 0)
+pageContainer.Size = UDim2.new(1, -195, 1, 0)
 pageContainer.BackgroundTransparency = 1
 
 local Indicator = Instance.new("Frame")
@@ -553,7 +553,149 @@ local function ClearContent()
     end
 end
 
-OpenHome = function() ClearContent() end
+----------------------------------------------------------------------
+-- PHẦN TRANG CHỦ (HOME) - TÍCH HỢP HIỆU ỨNG PHÁT SÁNG KHI DI CHUYỂN CHUỘT
+----------------------------------------------------------------------
+OpenHome = function()
+    ClearContent()
+
+    local titleLbl = Instance.new("TextLabel")
+    titleLbl.Parent = pageContainer
+    titleLbl.BackgroundTransparency = 1
+    titleLbl.Position = UDim2.new(0, 15, 0, 10)
+    titleLbl.Size = UDim2.new(1, -30, 0, 25)
+    titleLbl.Font = Enum.Font.GothamBold
+    titleLbl.Text = "⚡ Evomon Script Collection"
+    titleLbl.TextSize = 18
+    titleLbl.TextColor3 = Color3.fromRGB(240, 240, 240)
+    titleLbl.TextXAlignment = Enum.TextXAlignment.Left
+
+    local scrollHolder = Instance.new("ScrollingFrame")
+    scrollHolder.Parent = pageContainer
+    scrollHolder.Position = UDim2.new(0, 15, 0, 40)
+    scrollHolder.Size = UDim2.new(1, -25, 1, -50)
+    scrollHolder.BackgroundTransparency = 1
+    scrollHolder.CanvasSize = UDim2.new(0, 0, 0, 0)
+    scrollHolder.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    scrollHolder.ScrollBarThickness = 3
+    scrollHolder.ScrollBarImageColor3 = Color3.fromRGB(80, 80, 95)
+
+    local uiList = Instance.new("UIListLayout")
+    uiList.Parent = scrollHolder
+    uiList.SortOrder = Enum.SortOrder.LayoutOrder
+    uiList.Padding = UDim.new(0, 10)
+
+    -- Danh sách các script Evomon
+    local scriptList = {
+        { Name = "Poluted Team", Url = "https://api.luarmor.net/files/v4/loaders/349171199feeb2b561597b018bf12e5d.lua" },
+        { Name = "Skull Hub", Url = "https://hungquan99.site/v1/script/6b4c37bd-7fdc-4094-877a-fee2eda3515a" },
+        { Name = "Cyraa Hub", Url = "https://raw.githubusercontent.com/LynX99-9/komtolmmek2script/refs/heads/main/CyraaHub.lua" },
+        { Name = "Vxeze Hub Evomon", Url = "https://gist.githubusercontent.com/angeryy-tvy/9def5e4f9f594da721371d3fcfe76967/raw/Evomon-VxezeHub" },
+        { Name = "Ouroboros", Url = "https://raw.githubusercontent.com/joustingmatch/Ouroboros/main/loader.lua" },
+        { Name = "Nasi Rendang Evomon", Url = "https://raw.githubusercontent.com/JualNasiRendang/nasirendang-evomon/main/nasirendang-evomon.lua" },
+    }
+
+    for index, data in ipairs(scriptList) do
+        local btnCard = Instance.new("TextButton")
+        btnCard.Parent = scrollHolder
+        btnCard.Size = UDim2.new(1, -10, 0, 42)
+        btnCard.BackgroundColor3 = Config.BgCard
+        btnCard.BorderSizePixel = 0
+        btnCard.AutoButtonColor = false
+        btnCard.Text = ""
+        
+        Instance.new("UICorner", btnCard).CornerRadius = UDim.new(0, 8)
+
+        local cardStroke = Instance.new("UIStroke")
+        cardStroke.Parent = btnCard
+        cardStroke.Color = Config.BorderColor
+        cardStroke.Thickness = 1
+
+        local nameLbl = Instance.new("TextLabel")
+        nameLbl.Parent = btnCard
+        nameLbl.Position = UDim2.new(0, 12, 0, 0)
+        nameLbl.Size = UDim2.new(1, -120, 1, 0)
+        nameLbl.BackgroundTransparency = 1
+        nameLbl.Font = Enum.Font.GothamBold
+        nameLbl.Text = data.Name
+        nameLbl.TextSize = 13
+        nameLbl.TextColor3 = Color3.fromRGB(240, 240, 240)
+        nameLbl.TextXAlignment = Enum.TextXAlignment.Left
+
+        -- Badge trạng thái WORKING
+        local badge = Instance.new("Frame")
+        badge.Parent = btnCard
+        badge.Size = UDim2.new(0, 95, 0, 24)
+        badge.Position = UDim2.new(1, -105, 0.5, -12)
+        badge.BackgroundColor3 = Color3.fromRGB(30, 70, 40)
+        badge.BorderSizePixel = 0
+        Instance.new("UICorner", badge).CornerRadius = UDim.new(0, 6)
+
+        local circleGreen = Instance.new("Frame")
+        circleGreen.Parent = badge
+        circleGreen.Size = UDim2.new(0, 8, 0, 8)
+        circleGreen.Position = UDim2.new(0, 8, 0.5, -4)
+        circleGreen.BackgroundColor3 = Color3.fromRGB(50, 230, 80)
+        circleGreen.BorderSizePixel = 0
+        Instance.new("UICorner", circleGreen).CornerRadius = UDim.new(1, 0)
+
+        local badgeText = Instance.new("TextLabel")
+        badgeText.Parent = badge
+        badgeText.Size = UDim2.new(1, -18, 1, 0)
+        badgeText.Position = UDim2.new(0, 16, 0, 0)
+        badgeText.BackgroundTransparency = 1
+        badgeText.Font = Enum.Font.GothamBold
+        badgeText.Text = "WORKING"
+        badgeText.TextSize = 9
+        badgeText.TextColor3 = Color3.fromRGB(255, 255, 255)
+        badgeText.TextXAlignment = Enum.TextXAlignment.Center
+
+        -- Hiệu ứng nháy cho chấm tròn
+        task.spawn(function()
+            while badge and badge.Parent do
+                TweenService:Create(circleGreen, TweenInfo.new(0.6), {BackgroundTransparency = 0.2}):Play()
+                task.wait(0.6)
+                TweenService:Create(circleGreen, TweenInfo.new(0.6), {BackgroundTransparency = 0.8}):Play()
+                task.wait(0.6)
+            end
+        end)
+
+        -- HIỆU ỨNG PHÁT SÁNG KHI DI CHUYỂN CHUỘT (HOVER GLOW EFFECT)
+        btnCard.MouseEnter:Connect(function()
+            TweenService:Create(btnCard, TweenInfo.new(0.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+                BackgroundColor3 = Color3.fromRGB(42, 45, 58)
+            }):Play()
+            TweenService:Create(cardStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+                Color = Config.ThemeColor,
+                Thickness = 2
+            }):Play()
+        end)
+
+        btnCard.MouseLeave:Connect(function()
+            TweenService:Create(btnCard, TweenInfo.new(0.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+                BackgroundColor3 = Config.BgCard
+            }):Play()
+            TweenService:Create(cardStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {
+                Color = Config.BorderColor,
+                Thickness = 1
+            }):Play()
+        end)
+
+        -- Hiệu ứng khi bấm vào chạy script
+        btnCard.MouseButton1Click:Connect(function()
+            TweenService:Create(btnCard, TweenInfo.new(0.1), {BackgroundColor3 = Color3.fromRGB(60, 70, 95)}):Play()
+            task.delay(0.1, function()
+                if btnCard and btnCard.Parent then
+                    TweenService:Create(btnCard, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(42, 45, 58)}):Play()
+                end
+            end)
+
+            pcall(function()
+                loadstring(game:HttpGet(data.Url))()
+            end)
+        end)
+    end
+end
 
 ----------------------------------------------------------------------
 -- PHẦN SUPPORT GAME
@@ -1076,8 +1218,8 @@ local SideButtons = {}
 local function CreateSideButton(textKey, y, image)
     local btn = Instance.new("TextButton")
     btn.Parent = sidebar
-    btn.Size = UDim2.new(1, -20, 0, 42)
-    btn.Position = UDim2.new(0, 10, 0, y)
+    btn.Size = UDim2.new(1, -16, 0, 42)
+    btn.Position = UDim2.new(0, 8, 0, y)
     btn.BackgroundColor3 = Color3.fromRGB(26, 26, 32)
     btn.BorderSizePixel = 0
     btn.Text = ""
@@ -1087,16 +1229,16 @@ local function CreateSideButton(textKey, y, image)
     local dot = Instance.new("Frame")
     dot.Name = "Dot"
     dot.Parent = btn
-    dot.Size = UDim2.new(0, 8, 0, 8)
-    dot.Position = UDim2.new(0, 10, 0.5, -4)
+    dot.Size = UDim2.new(0, 6, 0, 6)
+    dot.Position = UDim2.new(0, 8, 0.5, -3)
     dot.BackgroundColor3 = Config.ThemeColor
     dot.BorderSizePixel = 0
     Instance.new("UICorner", dot).CornerRadius = UDim.new(1, 0)
 
     local icon = Instance.new("ImageLabel")
     icon.Parent = btn
-    icon.Size = UDim2.new(0, 18, 0, 18)
-    icon.Position = UDim2.new(0, 24, 0.5, -9)
+    icon.Size = UDim2.new(0, 16, 0, 16)
+    icon.Position = UDim2.new(0, 18, 0.5, -8)
     icon.BackgroundTransparency = 1
     icon.Image = image
     icon.ImageColor3 = Color3.fromRGB(220, 220, 220)
@@ -1106,11 +1248,11 @@ local function CreateSideButton(textKey, y, image)
     lbl.Parent = btn
     lbl.Name = "Label"
     lbl.BackgroundTransparency = 1
-    lbl.Position = UDim2.new(0, 48, 0, 0)
-    lbl.Size = UDim2.new(1, -48, 1, 0)
+    lbl.Position = UDim2.new(0, 40, 0, 0)
+    lbl.Size = UDim2.new(1, -40, 1, 0)
     lbl.Text = L(textKey)
     lbl.Font = Enum.Font.GothamBold
-    lbl.TextSize = 13
+    lbl.TextSize = 11.5
     lbl.TextColor3 = Color3.fromRGB(240, 240, 240)
     lbl.TextXAlignment = Enum.TextXAlignment.Left
 
