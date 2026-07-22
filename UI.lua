@@ -25,7 +25,7 @@ local SupportedCategories = {
     {
         CategoryName = "⚔️ Anime & RPG",
         Games = {
-            { Name = "Evomon", PlaceIds = {0000000000}, Icon = "rbxassetid://108029482244357" }, -- Thay số này bằng PlaceId thật của Evomon
+            { Name = "Evomon", PlaceIds = {134381727982611}, Icon = "rbxassetid://108029482244357" }, -- Đã cập nhật PlaceId chuẩn của Evomon
             { Name = "Blox Fruits", PlaceIds = {2753915549, 4442272183, 7449423635}, Icon = "rbxassetid://108029482244357" },
             { Name = "King Legacy", PlaceIds = {4520749081, 6381829480}, Icon = "rbxassetid://108029482244357" },
             { Name = "Grand Piece Online", PlaceIds = {1730877819}, Icon = "rbxassetid://108029482244357" },
